@@ -17,4 +17,8 @@ public class Product {
 		this.onSale = onSale;
 		this.salePercent = salePercent;
 	}
+
+	public String toString() {
+		return this.name;
+	}
 }
