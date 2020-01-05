@@ -17,7 +17,7 @@ public class CreditCardList {
 	}
 
 	public String toString() {
-		return "There are " this.cards.size() + " cards in this list.";
+		return "There are " cards.size() + " cards in this list.";
 	}
 
 }

@@ -11,6 +11,42 @@ public class Notification {
 		this.content = content;
 	}
 
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public boolean isIsImportant() {
+		return this.isImportant;
+	}
+
+	public boolean getIsImportant() {
+		return this.isImportant;
+	}
+
+	public void setIsImportant(boolean isImportant) {
+		this.isImportant = isImportant;
+	}
+
+	public Date getTime_created() {
+		return this.time_created;
+	}
+
+	public void setTime_created(Date time_created) {
+		this.time_created = time_created;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String toString() {
 		return this.title;
 	}
