@@ -1,6 +1,5 @@
 public abstract class RecurringAccount {
-	private String retailer;
-	private double rate;
+	private double cost;
 	private Date purchasedDate;
 	private Date expiryDate;
 	private String name;
@@ -10,17 +9,36 @@ public abstract class RecurringAccount {
 
 }
 
-class Subscription extends RecurringAccount {
-	public Subscription(String retailer, double rate, Date purchasedDate, Date expiryDate, String name, int timesRenewed) {
-		this.retailer = retailer;
-		this.rate = rate;
+class Membership extends RecurringAccount {
+	private double discount;
+	private String membershipNumber;
+
+	public Membership(String name, double cost, Date purchasedDate, Date expiryDate, int timesRenewed, double discount, String membershipNumber) {
+		this.name = name;
+		this.cost = cost;
 		this.purchasedDate = purchasedDate;
 		this.expiryDate = expiryDate;
+		this.timesRenewed = timesRenewed;
+		this.discount = discount;
+		this.membershipNumber = membershipNumber;
+	}
+
+	public String toString() {
+		return this.name;
+	}
+
+}
+
+class Subscription extends RecurringAccount {
+	public Subscription(String name, double cost, Date purchasedDate, Date expiryDate, int timesRenewed) {
 		this.name = name;
+		this.cost = cost;
+		this.purchasedDate = purchasedDate;
+		this.expiryDate = expiryDate;
 		this.timesRenewed = timesRenewed;
 	}
 
 	public String toString() {
-		return this.retailer;
+		return this.name;
 	}
 }
