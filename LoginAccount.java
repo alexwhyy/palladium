@@ -3,7 +3,7 @@ public class LoginAccount {
     String password;
     String email;
 
-    public loginAccount(String username, String password, String email){
+    public LoginAccount(String username, String password, String email){
         this.username = username;
         this.password = password;
         this.email = email;
