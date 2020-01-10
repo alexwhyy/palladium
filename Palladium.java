@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 public class Palladium {
 	public static Scanner sc = new Scanner(System.in);
+	public static LoginAccount currentUser = new LoginAccount();
 
-	public static SubscriptionList subscriptionList = new SubscriptionList();
+	// public static SubscriptionList subscriptionList = new SubscriptionList();
 
 	public static void main(String[] args) {
 
@@ -44,24 +45,8 @@ public class Palladium {
 	}
 
 	public static void logInUi() {
-		String username, password;
-
-		System.out.println("");
-		System.out.println("Please enter your username: ");
-		System.out.print("> ");
-		username = Palladium.sc.nextLine();
-		System.out.println();
-		System.out.println("Please enter your password: ");
-		System.out.print("> ");
-		password = Palladium.sc.nextLine();
-
-		// temp:
-		mainMenuUi();
-	}
-
-	public static void signUpUi() {
 		Login login = new Login();
-		String username, password, signupResult;
+		String username, password, email, loginResult;
 
 		do {
 			System.out.println("");
@@ -69,14 +54,71 @@ public class Palladium {
 			System.out.print("> ");
 			username = Palladium.sc.nextLine();
 			System.out.println();
+			System.out.println("Please enter your email: ");
+			System.out.print("> ");
+			email = Palladium.sc.nextLine();
+			System.out.println();
 			System.out.println("Please enter your password: ");
 			System.out.print("> ");
 			password = Palladium.sc.nextLine();
 
-			signupResult = login.register(username, password);
-		} while (!signupResult.equals("success"));
+			loginResult = login.compareLogin(username, password);
 
-		System.out.println(signupResult);
+			if (loginResult == "USER_NOT_FOUND") {
+				System.out.println("\nSorry but we cannot find your account.\n");
+			}
+
+		} while (loginResult == "USER_NOT_FOUND");
+
+		mainMenuUi();
+	}
+
+	public static void signUpUi() {
+		Login login = new Login();
+		String username, password, email, signupResult;
+
+		do {
+			System.out.println("_____________________________________________________");
+			System.out.println("");
+			System.out.println("Please enter your username: ");
+			System.out.print("> ");
+			username = Palladium.sc.nextLine();
+			System.out.println();
+			System.out.println("Please enter your email:");
+			email = Palladium.sc.nextLine();
+			System.out.println();
+			System.out.println("Please enter your password: ");
+			System.out.print("> ");
+			password = Palladium.sc.nextLine();
+			System.out.println("_____________________________________________________");
+
+			signupResult = login.register(username, password, email);
+
+			if (signupResult.equals("WEAK_PASSWORD")) {
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Weak Password!                         |");
+				System.out.println("|                                        |");
+				System.out.println("| Please ensure that your password has:  |");
+				System.out.println("| - More than 8 characters               |");
+				System.out.println("| - Uppercase and lowercase letter       |");
+				System.out.println("| - At least 1 number                    |");
+				System.out.println("| - At least 1 special character         |");
+				System.out.println("|________________________________________|");
+				System.out.println();
+			}
+
+			if (signupResult.equals("USERNAME_TAKEN")) {
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Error, Username Taken!                 |");
+				System.out.println("|________________________________________|");
+				System.out.println();
+			}
+
+		} while (signupResult.equals("WEAK_PASSWORD") || signupResult.equals("USERNAME_TAKEN"));
+
+		System.out.println("You're now logged in as: " + signupResult);
 
 		// temp:
 		mainMenuUi();
@@ -250,15 +292,15 @@ public class Palladium {
 			userChoice = Palladium.sc.nextInt();
 
 			switch (userChoice) {
-				case 0:
-					// do nothing
+			case 0:
+				// do nothing
 				break;
-				case 1:
-					// view all subscriptions
+			case 1:
+				// view all subscriptions
 
 				break;
-				case 2:
-					// add a subscription
+			case 2:
+				// add a subscription
 				break;
 			}
 
@@ -323,9 +365,9 @@ public class Palladium {
 			userChoice = Palladium.sc.nextInt();
 
 			switch (userChoice) {
-				case 0:
+			case 0:
 				break;
-				case 1:
+			case 1:
 				// display all notifications
 				break;
 			}
@@ -349,9 +391,9 @@ public class Palladium {
 			userChoice = Palladium.sc.nextInt();
 
 			switch (userChoice) {
-				case 0:
+			case 0:
 				break;
-				case 1:
+			case 1:
 				break;
 			}
 		} while (userChoice != 0);

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class ShoppingCart extends SavedProducts{
+public class ShoppingCart extends ProductList {
    public ArrayList<Product> shoppingCart = new ArrayList<Product>();
    
    public void addProduct(Product input){
