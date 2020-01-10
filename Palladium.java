@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class Palladium {
 	public static Scanner sc = new Scanner(System.in);
 
+	public static SubscriptionList subscriptionList = new SubscriptionList();
+
 	public static void main(String[] args) {
 
 		// starts the program, welcomeUi() will call all the other methods
@@ -48,6 +50,7 @@ public class Palladium {
 		System.out.println("Please enter your username: ");
 		System.out.print("> ");
 		username = Palladium.sc.nextLine();
+		System.out.println();
 		System.out.println("Please enter your password: ");
 		System.out.print("> ");
 		password = Palladium.sc.nextLine();
@@ -65,6 +68,7 @@ public class Palladium {
 			System.out.println("Please enter your username: ");
 			System.out.print("> ");
 			username = Palladium.sc.nextLine();
+			System.out.println();
 			System.out.println("Please enter your password: ");
 			System.out.print("> ");
 			password = Palladium.sc.nextLine();
@@ -94,6 +98,7 @@ public class Palladium {
 			System.out.println("| Notifications                     (5)  |");
 			System.out.println("| Search                            (6)  |");
 			System.out.println("|________________________________________|");
+			System.out.println();
 
 			System.out.print("> ");
 			userMenuChoice = Palladium.sc.nextInt();
@@ -157,7 +162,7 @@ public class Palladium {
 			System.out.println("|                                        |");
 			System.out.println("| Shopping                               |");
 			System.out.println("|                                        |");
-			System.out.println("| Go Back                           (0)  |")
+			System.out.println("| Go Back                           (0)  |");
 			System.out.println("| Shopping Cart                     (1)  |");
 			System.out.println("| Wishlist                          (2)  |");
 			System.out.println("|________________________________________|");
@@ -236,8 +241,8 @@ public class Palladium {
 			System.out.println("| Subscriptions                          |");
 			System.out.println("|                                        |");
 			System.out.println("| Go Back                           (0)  |");
-			System.out.println("| View All                          (1)  |");
-			System.out.println("| Gift Cards                        (2)  |");
+			System.out.println("| List all Subscription             (1)  |");
+			System.out.println("| Add Subscription                  (2)  |");
 			System.out.println("|________________________________________|");
 			System.out.println();
 
@@ -246,13 +251,14 @@ public class Palladium {
 
 			switch (userChoice) {
 				case 0:
+					// do nothing
 				break;
 				case 1:
-				// view all subscriptions
+					// view all subscriptions
+
 				break;
 				case 2:
-				// add a subscription
-
+					// add a subscription
 				break;
 			}
 
@@ -293,9 +299,9 @@ public class Palladium {
 	}
 
 	public static void couponsUi() {
-		.out.println("coupons ui");
+		System.out.println("coupons ui");
 	}
-System
+
 	public static void giftCardUi() {
 		System.out.println("gift card ui");
 	}
