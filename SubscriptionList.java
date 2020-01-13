@@ -5,25 +5,50 @@ public class SubscriptionList {
 	final private String SUBSCRIPTION_LIST_FILE = "Database/SubscriptionList.txt";
 
 	private ArrayList<Subscription> subscriptions;
+	public int length = 0;
+
 	private double totalSpent;
 	private double annualCost;
 	private double montlyCost;
 
 	public SubscriptionList (ArrayList<Subscription> subscriptions) {
+		this.length = subscriptions.size();
 		this.subscriptions = subscriptions;
 	}
 
 	public SubscriptionList() {
+		this.subscriptions = new ArrayList<Subscription>();
 	}
 
-	public boolean addSubscription(Subscription new_subscription) {
+	public boolean addSubscription(Subscription newSubscription) {
 		try {
-			this.subscriptions.add(new_subscription);
+			subscriptions.add(newSubscription);
+			length++;
 			return true;
 		} catch (Exception e) {
+			System.out.println(e);
 			return false;
 		}
 	}
+
+	public boolean removeSubscription(int index) {
+		try {
+			subscriptions.remove(index);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	public Subscription getSubscriptionIndex(int index) {
+		if (index > this.subscriptions.size() - 1) {
+			return null;
+		} else {
+			return this.subscriptions.get(index);
+		}
+	}
+	
 
 	public boolean saveToFile() {
 		return true;
@@ -52,7 +77,7 @@ public class SubscriptionList {
 				parsedTimesRenewed = Integer.parseInt(in.readLine());
 
 				parsedSubscription = new Subscription(parsedName, parsedCost, parsedExpiryDate, parsedPurchasedDate, parsedTimesRenewed);
-				this.subscriptions.addSubscription(parsedSubscription);
+				this.subscriptions.add(parsedSubscription);
 			}
 			in.close();
 		} catch (IOException iox) {

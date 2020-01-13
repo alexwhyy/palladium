@@ -11,7 +11,6 @@ public class Palladium {
 
 	final static int QUIT_KEY = 0;
 	public static SubscriptionList subscriptionList = new SubscriptionList();
-	SubscriptionList = 
 
 	public static void main(String[] args) {
 
@@ -78,6 +77,10 @@ public class Palladium {
 
 		} while (loginResult == "USER_NOT_FOUND");
 
+		System.out.println(" ________________________________________");
+		System.out.println("|                                        |");
+		System.out.println("| Login is successful                    |");
+		System.out.println("|________________________________________|");
 		mainMenuUi();
 	}
 
@@ -353,8 +356,9 @@ public class Palladium {
 			System.out.println("| Please select an option:               |");
 			System.out.println("|________________________________________|");
 			System.out.println("| Go Back                           (0)  |");
-			System.out.println("| List all Subscription             (1)  |");
+			System.out.println("| List all Subscriptions            (1)  |");
 			System.out.println("| Add Subscription                  (2)  |");
+			System.out.println("| Remove a Subscription             (3)  |");
 			System.out.println("|________________________________________|");
 			System.out.println();
 
@@ -367,10 +371,121 @@ public class Palladium {
 				break;
 			case 1:
 				// view all subscriptions
+				if (Palladium.subscriptionList.length == 0) {
+					// empty subscription list
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Subscriptions Found                 |");
+					System.out.println("|________________________________________|");
+				}
 
+				for (int i = 0; i < Palladium.subscriptionList.length; i++) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out.println("  Subscription (" + Palladium.subscriptionList.getSubscriptionIndex(i).name
+							+ ") #" + (i + 1));
+					System.out.println("");
+					System.out
+							.println("  Name:              " + Palladium.subscriptionList.getSubscriptionIndex(i).name);
+					System.out
+							.println("  Cost:              " + Palladium.subscriptionList.getSubscriptionIndex(i).cost);
+					System.out.println("  Purchased Date:    "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).purchasedDate.toString());
+					System.out.println("  Expiry Date:       "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).expiryDate.toString());
+					System.out.println(
+							"  Times Renewed:     " + Palladium.subscriptionList.getSubscriptionIndex(i).timesRenewed);
+					System.out.println("_________________________________________");
+				}
 				break;
 			case 2:
 				// add a subscription
+				String name;
+				double cost;
+				Date purchasedDate, expiryDate;
+				int timesRenewed;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Add a new subscription                 |");
+				System.out.println("|________________________________________|");
+				System.out.println("\nPlease enter your details below\n");
+
+				System.out.println("Please enter the name:");
+				System.out.print("> ");
+				Palladium.sc.nextLine();
+				name = Palladium.sc.nextLine();
+
+				System.out.println("Please enter the cost of the subscription per month:");
+				System.out.print("> ");
+				cost = Palladium.sc.nextDouble();
+				Palladium.sc.nextLine();
+
+				System.out.println("Please enter the date when you purchased the subscription:");
+				System.out.print("> ");
+				purchasedDate = new Date(Palladium.sc.nextLine());
+
+				System.out.println("Please enter when your subscription renews:");
+				System.out.print("> ");
+				expiryDate = new Date(Palladium.sc.nextLine());
+
+				System.out.println("Please enter how many times you renewed this subscription:");
+				System.out.print("> ");
+				timesRenewed = Palladium.sc.nextInt();
+				Palladium.sc.nextLine();
+
+				Subscription newSubscription = new Subscription(name, cost, purchasedDate, expiryDate, timesRenewed);
+
+				boolean validAdd = Palladium.subscriptionList.addSubscription(newSubscription);
+
+				if (validAdd) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Subscription has been added            |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Error adding subscription, please      |");
+					System.out.println("| try again.                             |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				}
+				break;
+
+			case 3:
+				int indexToRemove;
+				boolean validRemove;
+			
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Remove a subscription                  |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				System.out.println("Please enter an index to remove:");
+				System.out.print("> ");
+				indexToRemove = Palladium.sc.nextInt();
+				Palladium.sc.nextLine();
+
+				validRemove = Palladium.subscriptionList.removeSubscription(indexToRemove);
+
+				if (validRemove) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Successful removal of subscription     |");
+					System.out.println("|________________________________________|");
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Removal failed, please try again.      |");
+					System.out.println("| Please check the index you entered.    |");
+					System.out.println("|________________________________________|");
+				}
+
 				break;
 			}
 
