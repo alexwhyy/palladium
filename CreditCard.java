@@ -1,4 +1,4 @@
-public class CreditCard {
+public class CreditCard extends Card {
 	String name;
 	int number;
 	int pin;

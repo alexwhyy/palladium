@@ -1,49 +1,24 @@
 public abstract class Card {
-	private String name;
-	private int number;
-	private int pin;
-	private Date expiryDate;
+	protected String name;
+	protected int number;
+	protected int pin;
+	protected Date expiryDate;
+	protected int cardId;
 
-	abstract public Card compareTo();
+	public Card(String nick, int numb, int pin, Date expiry, int ID){
+		this.name = nick;
+		this.number = numb;
+		this.pin = pin;
+		this.expiryDate = expiry;
+		this.cardId = ID;
+	}
+
+	abstract public Card compareTo(Card other);
 	abstract public String toString();
-
-}
-
-class GiftCard extends Card {
-	public GiftCard(String name, int number, int pin, Date expiryDate) {
-		this.name = name;
-		this.number = number;
-		this.pin = pin;
-		this.expiryDate = expiryDate;
-
-
-	}
-
-	public Card compareTo(Card other) {
-		return this
-	}
-
-	public String toString() {
-		return this.name;
-	}
-}
-
-class CreditCard extends Card {
-	String name;
-	int number;
-	int pin;
-	Date expiryDate;
-	int cardId;
-
-	public CreditCard(String name, int number, int pin, Date expiryDate, int cardId) {
-		this.name = name;
-		this.number = number;
-		this.pin = pin;
-		this.expiryDate = expiryDate;
-		this.cardId = cardId;
-	}
-
-	public String toString() {
-		return this.name;
-	}
+	abstract public boolean editCard(int option);
+	//option 1: name
+	//option 2: number
+	//option 3: pin
+	//option 4: expiryDate
+	
 }

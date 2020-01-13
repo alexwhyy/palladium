@@ -1,18 +1,14 @@
-public class GiftCard {
-	String name;
-	int number;
-	double balance;
-	int pin;
-	Date expiryDate;
-	int cardId;
+public class GiftCard extends Card {
+	private String name;
+	private int number;
+	private double balance;
+	private int pin;
+	private Date expiryDate;
+	private int cardId;
 
 	public GiftCard(String name, int number, double balance, int pin, Date expiryDate, int cardId) {
-		this.name = name;
-		this.number = number;
+		super(name, number, pin, expiryDate, cardId);
 		this.balance = balance;
-		this.pin = pin;
-		this.expiryDate = expiryDate;
-		this.cardId = cardId;
 	}
 
 	public String getName() {
@@ -29,6 +25,17 @@ public class GiftCard {
 
 	public String toString() {
 		return this.name;
+	}
+
+	public boolean editCard(int option) {
+	//option 1: name
+	//option 2: number
+	//option 3: pin
+	//option 4: expiryDate
+	//option 5: balance
+		if (option == 1) {
+			
+		}
 	}
 
 }
