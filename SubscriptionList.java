@@ -11,13 +11,32 @@ public class SubscriptionList {
 	private double annualCost;
 	private double montlyCost;
 
+	public ArrayList<Subscription> getSubscriptions() {
+		return this.subscriptions;
+	}
+
+	public void setSubscriptions(ArrayList<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
+	}
+
 	public SubscriptionList (ArrayList<Subscription> subscriptions) {
 		this.length = subscriptions.size();
 		this.subscriptions = subscriptions;
 	}
 
 	public SubscriptionList() {
+		this.length = 0;
 		this.subscriptions = new ArrayList<Subscription>();
+	}
+
+	public void updateCost() {
+		Subscription subscription;
+
+		for (int i = 0; i < subscriptions.size(); i++) {
+			subscription = subscriptions.get(i);
+			this.totalSpent += subscription.getCost() * subscription.getTimesRenewed();
+		}
+
 	}
 
 	public boolean addSubscription(Subscription newSubscription) {
