@@ -1,4 +1,5 @@
 public class Date {
+	// standard format is month/day/year
 	int month;
 	int day;
 	int year;
@@ -7,6 +8,13 @@ public class Date {
 		this.month = month;
 		this.day = day;
 		this.year = year;
+	}
+
+	public Date(String date_string) {
+		String[] split_date = date_string.split("/");
+		this.month = Integer.parseInt(split_date[0]);
+		this.day = Integer.parseInt(split_date[1]);
+		this.year = Integer.parseInt(split_date[2]);
 	}
 
 	public int getMonth() {

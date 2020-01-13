@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Login {
-    final String ACCOUNT_LIST_TEMP = "login_test.txt";
+    final String ACCOUNT_LIST_FILE = "Database/LoginAccount.txt";
 
     LoginAccount[] list;
     int numAccount;
@@ -9,10 +9,11 @@ public class Login {
     final String FILE_ERROR = "FILE_ERROR";
     final String WEAK_PASSWORD = "WEAK_PASSWORD";
     final String USERNAME_TAKEN = "USERNAME_TAKEN";
+    final String USER_DOES_NOT_EXIST = "USER_DOES_NOT_EXIST";
 
     public Login() {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ACCOUNT_LIST_TEMP));
+            BufferedReader in = new BufferedReader(new FileReader(ACCOUNT_LIST_FILE));
             String input;
             while ((input = in.readLine()) != null) {
                 numAccount = Integer.parseInt(input);
@@ -46,7 +47,7 @@ public class Login {
             if (username.compareTo(list[i].getUsername()) + email.compareTo(list[i].getEmail()) == 0)
                 return list[i].getPassword();
         }
-        return "Username does not exist or wrong email";
+        return USER_DOES_NOT_EXIST;
     }
 
     public String register(String username, String password, String email) {
@@ -61,7 +62,7 @@ public class Login {
             addUser(username, password, email);
             return username;
         } else if (usernameTaken)
-            return "USERNAME_TAKEN";
+            return USERNAME_TAKEN;
         else
             return WEAK_PASSWORD;
     }
@@ -87,9 +88,9 @@ public class Login {
 
     public void addUser(String username, String password, String email) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(ACCOUNT_LIST_TEMP, true));
+            BufferedWriter out = new BufferedWriter(new FileWriter(ACCOUNT_LIST_FILE, true));
 
-            RandomAccessFile randomAccess = new RandomAccessFile(ACCOUNT_LIST_TEMP, "rw");
+            RandomAccessFile randomAccess = new RandomAccessFile(ACCOUNT_LIST_FILE, "rw");
             randomAccess.seek(0);
             randomAccess.write(("" + (numAccount + 1)).getBytes());
             out.newLine();
