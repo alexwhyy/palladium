@@ -8,7 +8,7 @@ public class DateTime {
     int hour;
     int min;
 
-    public DateTime(int year, int month, int day) {
+    public DateTime (int month, int day, int year){
         this.day = day;
         this.month = month;
         this.year = year;

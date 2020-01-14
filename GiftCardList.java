@@ -1,23 +1,19 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class GiftCardList {
-	private ArrayList<GiftCard> giftcards;
-	int length;
+	private ArrayList<GiftCard> giftCards;
 
-	public GiftCardList(ArrayList<GiftCard> giftcards) {
-		this.giftcards = giftcards;
-		this.length = giftcards.size();
+	public GiftCardList(ArrayList<GiftCard> giftCards) {
+		this.giftCards = giftCards;
 	}
 
 	public GiftCardList() {
-		this.giftcards = new ArrayList<GiftCard>();
-		this.length = 0;
+		this.giftCards = new ArrayList<GiftCard>();
 	}
 
-	public boolean addGiftCard(GiftCard newGiftCard) {
+	public boolean addGiftCard(String name, int number, double balance, int pin, DateTime expiryDate) {
 		try {
-			this.giftcards.add(newGiftCard);
-			length++;
+			this.giftCards.add(new GiftCard(name, number, balance, pin, expiryDate));
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -25,7 +21,7 @@ public class GiftCardList {
 	}
 
 	public String toString() {
-		return "lmao";
+		return "alex gay";
 	}
 
 }
