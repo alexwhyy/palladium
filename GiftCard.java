@@ -1,22 +1,18 @@
 public class GiftCard extends Card {
 	private String name;
+	private String retailer;
 	private int number;
 	private double balance;
 	private int pin;
-	private Date expiryDate;
-	private int cardId;
+	private DateTime expiryDate;
 
-	public GiftCard(String name, int number, double balance, int pin, Date expiryDate, int cardId) {
-		super(name, number, pin, expiryDate, cardId);
+	public GiftCard(String name, String retailer, int number, double balance, int pin, DateTime expiryDate) {
+		this.name = name;
+		this.retailer = retailer;
+		this.number = number;
 		this.balance = balance;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public double getBalance() {
-		return this.balance;
+		this.pin = pin;
+		this.expiryDate = expiryDate;
 	}
 
 	public double compareTo(GiftCard other) {

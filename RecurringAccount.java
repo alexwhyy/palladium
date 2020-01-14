@@ -1,7 +1,7 @@
 public abstract class RecurringAccount {
 	protected double cost;
-	protected Date purchasedDate;
-	protected Date expiryDate;
+	protected DateTime purchasedDate;
+	protected DateTime expiryDate;
 	protected String name;
 	protected int timesRenewed;
 

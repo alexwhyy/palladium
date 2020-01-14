@@ -1,8 +1,23 @@
 class Coupon {
+	private String name;
 	private String retailer;
-	private String id;
 	private double discount;
-	private Date expiryDate;
+	private DateTime expiryDate;
+
+	public Coupon(String name, String retailer, double discount, DateTime expiryDate) {
+		this.name = name;
+		this.retailer = retailer;
+		this.discount = discount;
+		this.expiryDate = expiryDate;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getRetailer() {
 		return this.retailer;
@@ -10,14 +25,6 @@ class Coupon {
 
 	public void setRetailer(String retailer) {
 		this.retailer = retailer;
-	}
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public double getDiscount() {
@@ -28,11 +35,11 @@ class Coupon {
 		this.discount = discount;
 	}
 
-	public Date getExpiryDate() {
+	public DateTime getExpiryDate() {
 		return this.expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(DateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

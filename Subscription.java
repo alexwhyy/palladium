@@ -1,5 +1,5 @@
 class Subscription extends RecurringAccount {
-	public Subscription(String name, double cost, Date purchasedDate, Date expiryDate, int timesRenewed) {
+	public Subscription(String name, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed) {
 		this.name = name;
 		this.cost = cost;
 		this.purchasedDate = purchasedDate;
@@ -15,19 +15,19 @@ class Subscription extends RecurringAccount {
 		this.cost = cost;
 	}
 
-	public Date getPurchasedDate() {
+	public DateTime getPurchasedDate() {
 		return this.purchasedDate;
 	}
 
-	public void setPurchasedDate(Date purchasedDate) {
+	public void setPurchasedDate(DateTime purchasedDate) {
 		this.purchasedDate = purchasedDate;
 	}
 
-	public Date getExpiryDate() {
+	public DateTime getExpiryDate() {
 		return this.expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(DateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

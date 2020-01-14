@@ -63,7 +63,6 @@ public class SubscriptionList {
 			return this.subscriptions.get(index);
 		}
 	}
-	
 
 	public boolean saveToFile() {
 		return true;
@@ -75,8 +74,8 @@ public class SubscriptionList {
 
 		String parsedName;
 		double parsedCost;
-		Date parsedPurchasedDate;
-		Date parsedExpiryDate;
+		DateTime parsedPurchasedDate;
+		DateTime parsedExpiryDate;
 		int parsedTimesRenewed;
 
 		try {
@@ -87,8 +86,8 @@ public class SubscriptionList {
 				
 				parsedName = in.readLine();
 				parsedCost = Double.parseDouble(in.readLine());
-				parsedPurchasedDate = new Date(in.readLine());
-				parsedExpiryDate = new Date(in.readLine());
+				parsedPurchasedDate = new DateTime(in.readLine());
+				parsedExpiryDate = new DateTime(in.readLine());
 				parsedTimesRenewed = Integer.parseInt(in.readLine());
 
 				parsedSubscription = new Subscription(parsedName, parsedCost, parsedExpiryDate, parsedPurchasedDate, parsedTimesRenewed);

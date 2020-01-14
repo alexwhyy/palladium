@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 public class DateTime {
     int year;
     int month;
@@ -7,11 +8,12 @@ public class DateTime {
     int hour;
     int min;
 
-    public DateTime (int year, int month, int day){
+    public DateTime(int year, int month, int day) {
         this.day = day;
         this.month = month;
         this.year = year;
     }
+
     public DateTime(String date_string) {
         String[] split_date = date_string.split("/");
         this.month = Integer.parseInt(split_date[0]);
@@ -19,22 +21,22 @@ public class DateTime {
         this.year = Integer.parseInt(split_date[2]);
     }
 
-    public DateTime (){
+    public DateTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm");
         LocalDateTime now = LocalDateTime.now();
         String formattedDate = dtf.format(now);
-        String temp [] = formattedDate.split("-");
-        for(int i = 0 ; i < temp.length ; i ++) System.out.println(temp[i]);
+        String temp[] = formattedDate.split("-");
+        for (int i = 0; i < temp.length; i++)
+            System.out.println(temp[i]);
     }
-    public DateTime(int year, int month, int day, int hour, int min){
+
+    public DateTime(int year, int month, int day, int hour, int min) {
         this.day = day;
         this.month = month;
         this.year = year;
         this.hour = hour;
         this.min = min;
     }
-
-
 
     public String toString() {
         return this.month + "/" + this.day + "/" + this.year;
@@ -63,6 +65,7 @@ public class DateTime {
     public void setDay(int day) {
         this.day = day;
     }
+
     public int getHour() {
         return hour;
     }

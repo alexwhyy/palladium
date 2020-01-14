@@ -12,6 +12,9 @@ public class Palladium {
 
 	public static User currentUser;
 	public static SubscriptionList subscriptionList = new SubscriptionList();
+	public static CouponList couponList = new CouponList();
+	public static GiftCardList giftCardList = new GiftCardList();
+	public static CreditCardList creditCardList = new CreditCardList();
 
 	public static void main(String[] args) {
 
@@ -61,11 +64,32 @@ public class Palladium {
 				userInputDouble = Double.parseDouble(userInputString);
 				validInput = true;
 			} catch (Exception e) {
-
+				System.out.println("\nInvalid input, please try again.\n");
 			}
 		} while (!validInput);
 
 		return userInputDouble;
+	}
+
+	static DateTime getDateInput() {
+		String userInputString;
+		DateTime userInputDate = null;
+
+		boolean validInput = false;
+
+		do {
+			System.out.print("> ");
+			userInputString = sc.nextLine();
+
+			try {
+				userInputDate = new DateTime(userInputString);
+				validInput = true;
+			} catch (Exception e) {
+				System.out.println("\nInvalid input, please try again.\n");
+			}
+		} while (!validInput);
+
+		return userInputDate;
 	}
 
 	public static void welcomeUi() {
@@ -188,7 +212,8 @@ public class Palladium {
 	}
 
 	public static void loadDataUi() {
-		final String SUBSCRIPTION_LIST_FILE = "Database/" + Palladium.currentUser.getUsername() + "/SubscriptionList.txt";
+		final String SUBSCRIPTION_LIST_FILE = "Database/" + Palladium.currentUser.getUsername()
+				+ "/SubscriptionList.txt";
 
 		boolean successfulLoad = subscriptionList.loadFromFile(SUBSCRIPTION_LIST_FILE);
 		if (!successfulLoad) {
@@ -300,15 +325,50 @@ public class Palladium {
 			System.out.println("|                                        |");
 			System.out.println("| Please select an option:               |");
 			System.out.println("|________________________________________|");
-			System.out.println("|                                        |");
-			System.out.println("|                                        |");
-			System.out.println("|                                        |");
-			System.out.println("|                                        |");
+			System.out.println("| Go Back                           (0)  |");
+			System.out.println("| Credit Cards                      (1)  |");
+			System.out.println("| Website Accounts                  (2)  |");
 			System.out.println("|________________________________________|");
+			System.out.println();
 
 			userChoice = Palladium.getIntInput();
 
+			switch (userChoice) {
+				case 0:
+					// do nothing
+				break;
+				case 1:
+					// credit cards
+				break;
+				case 2:
+					// website accounts
+				break;
+			}
+
 		} while (userChoice != Palladium.QUIT_KEY);
+	}
+
+	public static void creditCardUi() {
+		int userChoice;
+
+		do {
+
+			
+			userChoice = Palladium.getIntInput();
+
+			switch (userChoice) {
+				case 0:
+				// do nothing
+				break;
+				case 1:
+				//
+				break;
+			}
+		} while (userChoice != 0);
+	}
+
+	public static void websiteAccountsUi() {
+		int userChoice;
 	}
 
 	public static void shoppingUi() {
@@ -503,7 +563,7 @@ public class Palladium {
 				// add a subscription
 				String name;
 				double cost;
-				Date purchasedDate, expiryDate;
+				DateTime purchasedDate, expiryDate;
 				int timesRenewed;
 
 				System.out.println(" ________________________________________");
@@ -513,30 +573,23 @@ public class Palladium {
 				System.out.println("\nPlease enter your details below\n");
 
 				System.out.println("Please enter the name:");
-
 				name = Palladium.getStringInput();
 
 				System.out.println("Please enter the cost of the subscription per month:");
-
 				cost = Palladium.getDoubleInput();
 
 				System.out.println("Please enter the date when you purchased the subscription:");
-
-				purchasedDate = new Date(Palladium.getStringInput());
+				purchasedDate = Palladium.getDateInput();
 
 				System.out.println("Please enter when your subscription renews:");
-
-				expiryDate = new Date(Palladium.getStringInput());
+				expiryDate = Palladium.getDateInput();
 
 				System.out.println("Please enter how many times you renewed this subscription:");
-
 				timesRenewed = Palladium.getIntInput();
 
 				Subscription newSubscription = new Subscription(name, cost, purchasedDate, expiryDate, timesRenewed);
 
-				boolean validAdd = Palladium.subscriptionList.addSubscription(newSubscription);
-
-				if (validAdd) {
+				if (Palladium.subscriptionList.addSubscription(newSubscription)) {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Subscription has been added            |");
@@ -602,6 +655,7 @@ public class Palladium {
 			System.out.println("| Coupons                           (1)  |");
 			System.out.println("| Gift Cards                        (2)  |");
 			System.out.println("|________________________________________|");
+			System.out.println("");
 
 			userChoice = Palladium.getIntInput();
 
@@ -623,11 +677,160 @@ public class Palladium {
 	}
 
 	public static void couponsUi() {
-		System.out.println("coupons ui");
+		int userChoice;
+
+		do {
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("| Coupons                                |");
+			System.out.println("|                                        |");
+			System.out.println("| Please select an option:               |");
+			System.out.println("|________________________________________|");
+			System.out.println("| Go Back                           (0)  |");
+			System.out.println("| Display All Coupons               (1)  |");
+			System.out.println("| Add Coupon                        (2)  |");
+			System.out.println("| Remove a Coupon                   (3)  |");
+			System.out.println("|________________________________________|");
+			System.out.println("");
+
+			userChoice = Palladium.getIntInput();
+
+			switch (userChoice) {
+			case 0:
+				// do nothing
+				break;
+			case 1:
+				// list all coupons
+				if (Palladium.couponList.length == 0) {
+					// empty subscription list
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Coupons Found                       |");
+					System.out.println("|________________________________________|");
+				}
+
+				for (int i = 0; i < Palladium.couponList.length; i++) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out
+							.println("  Coupon (" + Palladium.couponList.getCouponIndex(i).getName() + ") #" + (i + 1));
+					System.out.println("");
+					System.out.println("  Name:          " + Palladium.couponList.getCouponIndex(i).getName());
+					System.out.println("  Retailer:      " + Palladium.couponList.getCouponIndex(i).getRetailer());
+					System.out.println("  Discount:      " + Palladium.couponList.getCouponIndex(i).getDiscount());
+					System.out.println(
+							"  Expiry Date:   " + Palladium.couponList.getCouponIndex(i).getExpiryDate().toString());
+					System.out.println("_________________________________________");
+				}
+				break;
+			case 2:
+				// add a coupon
+				Coupon newCoupon;
+
+				String name, retailer;
+				double discount;
+				DateTime expiryDate;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Add a new coupon                       |");
+				System.out.println("|________________________________________|");
+				System.out.println("\nPlease enter your details below\n");
+
+				System.out.println("Please enter a name for your coupon:");
+				name = Palladium.getStringInput();
+
+				System.out.println("Please enter the retailer of your coupon:");
+				retailer = Palladium.getStringInput();
+
+				System.out.println("Please enter the monetary discount of your coupon:");
+				discount = Palladium.getDoubleInput();
+
+				System.out.println("Please enter the date when the coupon expires:");
+				expiryDate = Palladium.getDateInput();
+
+				newCoupon = new Coupon(name, retailer, discount, expiryDate);
+
+				if (Palladium.couponList.addCoupon(newCoupon)) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Coupon has been added                  |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Error, coupon could not be added.      |");
+					System.out.println("| Please try again.                      |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				}
+
+				break;
+			}
+
+		} while (userChoice != Palladium.QUIT_KEY);
 	}
 
 	public static void giftCardUi() {
-		System.out.println("gift card ui");
+		int userChoice;
+
+		do {
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("| Gift Cards                             |");
+			System.out.println("|                                        |");
+			System.out.println("| Please select an option:               |");
+			System.out.println("|________________________________________|");
+			System.out.println("| Go Back                           (0)  |");
+			System.out.println("| Display all Credit Cards          (1)  |");
+			System.out.println("| Add a Credit Card                 (2)  |");
+			System.out.println("| Remove a Credit Card              (3)  |");
+			System.out.println("|________________________________________|");
+			System.out.println("");
+
+			userChoice = Palladium.getIntInput();
+		} while (userChoice != Palladium.QUIT_KEY);
+
+		switch (userChoice) {
+		case 0:
+			// do nothing
+			break;
+		case 1:
+			// display all credit cards
+			if (Palladium.couponList.length == 0) {
+				// empty subscription list
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| No Gift Cards Found                    |");
+				System.out.println("|________________________________________|");
+			}
+
+			for (int i = 0; i < Palladium.couponList.length; i++) {
+				if (i == 0) {
+					System.out.println("_________________________________________");
+				}
+				System.out.println("");
+				System.out.println("  Gift Card (" + Palladium.couponList.getCouponIndex(i).getName() + ") #" + (i + 1));
+				System.out.println("");
+				System.out.println("  Name:          " + Palladium.couponList.getCouponIndex(i).getName());
+				System.out.println("  Retailer:      " + Palladium.couponList.getCouponIndex(i).getRetailer());
+				System.out.println("  Discount:      " + Palladium.couponList.getCouponIndex(i).getDiscount());
+				System.out.println(
+						"  Expiry Date:   " + Palladium.couponList.getCouponIndex(i).getExpiryDate().toString());
+				System.out.println("_________________________________________");
+			}
+			
+			break;
+		case 2:
+			// add a credit card
+			break;
+		case 3:
+			// remove a credit card
+		}
+
 	}
 
 	public static void notificationsUi() {
