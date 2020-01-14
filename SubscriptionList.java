@@ -2,34 +2,74 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class SubscriptionList {
-	final private String SUBSCRIPTION_LIST_FILE = "Database/SubscriptionList.txt";
-
 	private ArrayList<Subscription> subscriptions;
+	public int length = 0;
+
 	private double totalSpent;
 	private double annualCost;
 	private double montlyCost;
 
 	public SubscriptionList (ArrayList<Subscription> subscriptions) {
+		this.length = subscriptions.size();
 		this.subscriptions = subscriptions;
 	}
 
 	public SubscriptionList() {
+		this.length = 0;
+		this.subscriptions = new ArrayList<Subscription>();
 	}
 
-	public boolean addSubscription(Subscription new_subscription) {
+	public ArrayList<Subscription> getSubscriptions() {
+		return this.subscriptions;
+	}
+
+	public void setSubscriptions(ArrayList<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
+	}	
+
+	public void updateCost() {
+		Subscription subscription;
+
+		for (int i = 0; i < subscriptions.size(); i++) {
+			subscription = subscriptions.get(i);
+			this.totalSpent += subscription.getCost() * subscription.getTimesRenewed();
+		}
+	}
+
+	public boolean addSubscription(Subscription newSubscription) {
 		try {
-			this.subscriptions.add(new_subscription);
+			subscriptions.add(newSubscription);
+			length++;
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	public boolean removeSubscription(int index) {
+		try {
+			subscriptions.remove(index);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
+	public Subscription getSubscriptionIndex(int index) {
+		if (index > this.subscriptions.size() - 1) {
+			return null;
+		} else {
+			return this.subscriptions.get(index);
+		}
+	}
+	
+
 	public boolean saveToFile() {
 		return true;
 	}
 
-	public boolean loadFromFile() {
+	public boolean loadFromFile(String directory) {
 		int numberSubscriptions;
 		Subscription parsedSubscription;
 
@@ -40,7 +80,7 @@ public class SubscriptionList {
 		int parsedTimesRenewed;
 
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(this.SUBSCRIPTION_LIST_FILE));
+			BufferedReader in = new BufferedReader(new FileReader(directory));
 			
 			numberSubscriptions = Integer.parseInt(in.readLine());
 			for (int i = 0; i < numberSubscriptions; i++) {
@@ -52,11 +92,11 @@ public class SubscriptionList {
 				parsedTimesRenewed = Integer.parseInt(in.readLine());
 
 				parsedSubscription = new Subscription(parsedName, parsedCost, parsedExpiryDate, parsedPurchasedDate, parsedTimesRenewed);
-				this.subscriptions.addSubscription(parsedSubscription);
+				this.subscriptions.add(parsedSubscription);
+				length++;
 			}
 			in.close();
 		} catch (IOException iox) {
-			System.out.println(iox);
 			return false;
 		}
 		return true;

@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Palladium {
 	public static Scanner sc = new Scanner(System.in);
-
 	final static int QUIT_KEY = 0;
+
+	public static User currentUser;
 	public static SubscriptionList subscriptionList = new SubscriptionList();
-	SubscriptionList = 
 
 	public static void main(String[] args) {
 
@@ -19,24 +19,71 @@ public class Palladium {
 		welcomeUi();
 	}
 
+	static String getStringInput() {
+		String userInput;
+
+		System.out.print("> ");
+		userInput = sc.nextLine();
+
+		return userInput;
+	}
+
+	static int getIntInput() {
+		String userInputString;
+		int userInputInt = 0;
+		boolean validInput = false;
+
+		do {
+			System.out.print("> ");
+			userInputString = sc.nextLine();
+
+			try {
+				userInputInt = Integer.parseInt(userInputString);
+				validInput = true;
+			} catch (Exception e) {
+				System.out.println("\nInvalid input, please try again.\n");
+			}
+		} while (!validInput);
+
+		return userInputInt;
+	}
+
+	static double getDoubleInput() {
+		String userInputString;
+		double userInputDouble = 0;
+		boolean validInput = false;
+
+		do {
+			System.out.print("> ");
+			userInputString = sc.nextLine();
+
+			try {
+				userInputDouble = Double.parseDouble(userInputString);
+				validInput = true;
+			} catch (Exception e) {
+
+			}
+		} while (!validInput);
+
+		return userInputDouble;
+	}
+
 	public static void welcomeUi() {
-		System.out.println(" ________________________________");
-		System.out.println("|                                |");
-		System.out.println("| Welcome to Palladium           |");
-		System.out.println("| The financial toolkit          |");
-		System.out.println("|                                |");
-		System.out.println("| Please select an option:       |");
-		System.out.println("| Login                     (1)  |");
-		System.out.println("| Signup                    (2)  |");
-		System.out.println("|________________________________|");
+		System.out.println(" __________________________________________________");
+		System.out.println("|                                                  |");
+		System.out.println("| Welcome to Palladium                             |");
+		System.out.println("| The financial toolkit                            |");
+		System.out.println("|                                                  |");
+		System.out.println("| Please select an option:                         |");
+		System.out.println("| Login                                       (1)  |");
+		System.out.println("| Signup                                      (2)  |");
+		System.out.println("|__________________________________________________|");
 		System.out.println("");
 
 		int userWelcomeChoice = 0;
 		while (userWelcomeChoice != 1 || userWelcomeChoice != 2) {
-			System.out.print("> ");
-			userWelcomeChoice = Palladium.sc.nextInt();
-			// flush the input:
-			Palladium.sc.nextLine();
+
+			userWelcomeChoice = Palladium.getIntInput();
 
 			if (userWelcomeChoice == 1) {
 				logInUi();
@@ -48,19 +95,20 @@ public class Palladium {
 
 	public static void logInUi() {
 		Login login = new Login();
-		String username, password, loginResult;
+		String username, password, email, loginResult;
 
 		do {
-			System.out.println("________________________________________");
+			System.out.println(" __________________________________________________");
 			System.out.println("");
 			System.out.println("Please enter your username: ");
-			System.out.print("> ");
-			username = Palladium.sc.nextLine();
+			username = Palladium.getStringInput();
+			System.out.println();
+			System.out.println("Please enter your email:");
+			email = Palladium.getStringInput();
 			System.out.println();
 			System.out.println("Please enter your password: ");
-			System.out.print("> ");
-			password = Palladium.sc.nextLine();
-			System.out.println("________________________________________");
+			password = Palladium.getStringInput();
+			System.out.println(" __________________________________________________");
 
 			loginResult = login.compareLogin(username, password);
 
@@ -78,7 +126,13 @@ public class Palladium {
 
 		} while (loginResult == "USER_NOT_FOUND");
 
-		mainMenuUi();
+		Palladium.currentUser = new User(username, password, email);
+
+		System.out.println(" ________________________________________");
+		System.out.println("|                                        |");
+		System.out.println("| Login is successful                    |");
+		System.out.println("|________________________________________|");
+		loadDataUi();
 	}
 
 	public static void signUpUi() {
@@ -86,20 +140,17 @@ public class Palladium {
 		String username, password, email, signupResult;
 
 		do {
-			System.out.println("________________________________________");
+			System.out.println(" __________________________________________________");
 			System.out.println("");
 			System.out.println("Please enter your username: ");
-			System.out.print("> ");
-			username = Palladium.sc.nextLine();
+			username = Palladium.getStringInput();
 			System.out.println();
 			System.out.println("Please enter your email:");
-			System.out.print("> ");
-			email = Palladium.sc.nextLine();
+			email = Palladium.getStringInput();
 			System.out.println();
 			System.out.println("Please enter your password: ");
-			System.out.print("> ");
-			password = Palladium.sc.nextLine();
-			System.out.println("________________________________________");
+			password = Palladium.getStringInput();
+			System.out.println(" __________________________________________________");
 
 			signupResult = login.register(username, password, email);
 
@@ -128,11 +179,29 @@ public class Palladium {
 
 		} while (signupResult.equals("WEAK_PASSWORD") || signupResult.equals("USERNAME_TAKEN"));
 
-		System.out.println("You're now logged in as: " + signupResult);
+		Palladium.currentUser = new User(username, password, email);
+		System.out.println("You're now logged in as: " + username);
 
 		// temp:
-		mainMenuUi();
+		loadDataUi();
 
+	}
+
+	public static void loadDataUi() {
+		final String SUBSCRIPTION_LIST_FILE = "Database/" + Palladium.currentUser.getUsername() + "/SubscriptionList.txt";
+
+		boolean successfulLoad = subscriptionList.loadFromFile(SUBSCRIPTION_LIST_FILE);
+		if (!successfulLoad) {
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("| Couldn't load some data from the       |");
+			System.out.println("| database, please make sure it is not   |");
+			System.out.println("| corrupted.                             |");
+			System.out.println("|________________________________________|");
+			System.out.println();
+		}
+
+		mainMenuUi();
 	}
 
 	public static void mainMenuUi() {
@@ -155,9 +224,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userMenuChoice = Palladium.sc.nextInt();
-			Palladium.sc.nextLine();
+			userMenuChoice = Palladium.getIntInput();
 
 			switch (userMenuChoice) {
 			case 0:
@@ -204,13 +271,12 @@ public class Palladium {
 			System.out.println("| Please select an option:               |");
 			System.out.println("|________________________________________|");
 			System.out.println("|                                        |");
-			System.out.println("| Yes                                (1) |");
 			System.out.println("| No                                 (0) |");
+			System.out.println("| Yes                                (1) |");
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:
@@ -240,8 +306,7 @@ public class Palladium {
 			System.out.println("|                                        |");
 			System.out.println("|________________________________________|");
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 		} while (userChoice != Palladium.QUIT_KEY);
 	}
@@ -261,8 +326,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userShoppingChoice = Palladium.sc.nextInt();
+			userShoppingChoice = Palladium.getIntInput();
 
 			switch (userShoppingChoice) {
 			case 1:
@@ -291,8 +355,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 		} while (userChoice != Palladium.QUIT_KEY);
 	}
@@ -318,8 +381,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:
@@ -339,6 +401,44 @@ public class Palladium {
 	}
 
 	public static void membershipsUi() {
+		int userChoice;
+
+		do {
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("| Memberships                           |");
+			System.out.println("|                                        |");
+			System.out.println("| Please select an option:               |");
+			System.out.println("|________________________________________|");
+			System.out.println("| Go Back                           (0)  |");
+			System.out.println("| List all Memberships              (1)  |");
+			System.out.println("| Add Membership                    (2)  |");
+			System.out.println("| Remove a Membership               (3)  |");
+			System.out.println("| Edit a Membership                 (4)  |");
+			System.out.println("| View Membership Statistics        (5)  |");
+			System.out.println("|________________________________________|");
+			System.out.println();
+
+			userChoice = Palladium.getIntInput();
+
+			switch (userChoice) {
+			case 0:
+				// do nothing
+				break;
+			case 1:
+				// list all memberships
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+
+			}
+
+		} while (userChoice != 0);
 
 	}
 
@@ -353,13 +453,15 @@ public class Palladium {
 			System.out.println("| Please select an option:               |");
 			System.out.println("|________________________________________|");
 			System.out.println("| Go Back                           (0)  |");
-			System.out.println("| List all Subscription             (1)  |");
+			System.out.println("| List all Subscriptions            (1)  |");
 			System.out.println("| Add Subscription                  (2)  |");
+			System.out.println("| Remove a Subscription             (3)  |");
+			System.out.println("| Edit a Subscription               (4)  |");
+			System.out.println("| View Subscription Statistics      (5)  |");
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:
@@ -367,10 +469,119 @@ public class Palladium {
 				break;
 			case 1:
 				// view all subscriptions
+				if (Palladium.subscriptionList.length == 0) {
+					// empty subscription list
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Subscriptions Found                 |");
+					System.out.println("|________________________________________|");
+				}
 
+				for (int i = 0; i < Palladium.subscriptionList.length; i++) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out.println("  Subscription (" + Palladium.subscriptionList.getSubscriptionIndex(i).getName()
+							+ ") #" + (i + 1));
+					System.out.println("");
+					System.out.println(
+							"  Name:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getName());
+					System.out.println(
+							"  Cost:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getCost());
+					System.out.println("  Purchased Date:    "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getPurchasedDate().toString());
+					System.out.println("  Expiry Date:       "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getExpiryDate().toString());
+					System.out.println("  Times Renewed:     "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getTimesRenewed());
+					System.out.println("_________________________________________");
+				}
 				break;
+
 			case 2:
 				// add a subscription
+				String name;
+				double cost;
+				Date purchasedDate, expiryDate;
+				int timesRenewed;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Add a new subscription                 |");
+				System.out.println("|________________________________________|");
+				System.out.println("\nPlease enter your details below\n");
+
+				System.out.println("Please enter the name:");
+
+				name = Palladium.getStringInput();
+
+				System.out.println("Please enter the cost of the subscription per month:");
+
+				cost = Palladium.getDoubleInput();
+
+				System.out.println("Please enter the date when you purchased the subscription:");
+
+				purchasedDate = new Date(Palladium.getStringInput());
+
+				System.out.println("Please enter when your subscription renews:");
+
+				expiryDate = new Date(Palladium.getStringInput());
+
+				System.out.println("Please enter how many times you renewed this subscription:");
+
+				timesRenewed = Palladium.getIntInput();
+
+				Subscription newSubscription = new Subscription(name, cost, purchasedDate, expiryDate, timesRenewed);
+
+				boolean validAdd = Palladium.subscriptionList.addSubscription(newSubscription);
+
+				if (validAdd) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Subscription has been added            |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Error adding subscription, please      |");
+					System.out.println("| try again.                             |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				}
+				break;
+
+			case 3:
+				int indexToRemove;
+				boolean validRemove;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Remove a subscription                  |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				System.out.println("Please enter an index to remove:");
+
+				indexToRemove = Palladium.getIntInput();
+
+				indexToRemove--;
+				validRemove = Palladium.subscriptionList.removeSubscription(indexToRemove);
+
+				if (validRemove) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Successful removal of subscription     |");
+					System.out.println("|________________________________________|");
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Removal failed, please try again.      |");
+					System.out.println("| Please check the index you entered.    |");
+					System.out.println("|________________________________________|");
+				}
+
 				break;
 			}
 
@@ -392,8 +603,7 @@ public class Palladium {
 			System.out.println("| Gift Cards                        (2)  |");
 			System.out.println("|________________________________________|");
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:
@@ -435,8 +645,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:
@@ -463,8 +672,7 @@ public class Palladium {
 			System.out.println("|________________________________________|");
 			System.out.println();
 
-			System.out.print("> ");
-			userChoice = Palladium.sc.nextInt();
+			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
 			case 0:

@@ -1,13 +1,20 @@
-public class LoginAccount {
+public class User {
     String username;
     String password;
     String email;
 
-    public LoginAccount(String username, String password, String email){
+    public User(String username, String password, String email){
         this.username = username;
         this.password = password;
         this.email = email;
     }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.email = "";
+    }
+
     public String getUsername() {
         return username;
     }
