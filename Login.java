@@ -1,9 +1,9 @@
 import java.io.*;
 
 public class Login {
-    final String ACCOUNT_LIST_FILE = "Database/LoginAccount.txt";
+    final String ACCOUNT_LIST_FILE = "Database/Users.txt";
 
-    LoginAccount[] list;
+    User[] list;
     int numAccount;
 
     final String FILE_ERROR = "FILE_ERROR";
@@ -17,9 +17,9 @@ public class Login {
             String input;
             while ((input = in.readLine()) != null) {
                 numAccount = Integer.parseInt(input);
-                list = new LoginAccount[numAccount];
+                list = new User[numAccount];
                 for (int i = 0; i < numAccount; i++) {
-                    list[i] = new LoginAccount(in.readLine(), in.readLine(), in.readLine());
+                    list[i] = new User(in.readLine(), in.readLine(), in.readLine());
                 }
             }
             in.close();
