@@ -2,9 +2,9 @@ public abstract class Card {
 	protected String name;
 	protected int number;
 	protected int pin;
-	protected Date expiryDate;
+	protected DateTime expiryDate;
 
-	public Card(String nick, int numb, int pin, Date expiry){
+	public Card(String nick, int numb, int pin, DateTime expiry){
 		this.name = nick;
 		this.number = numb;
 		this.pin = pin;

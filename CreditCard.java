@@ -2,9 +2,9 @@ public class CreditCard extends Card {
 	private String name;
 	private int number;
 	private int pin;
-	private Date expiryDate;
+	private DateTime expiryDate;
 
-	public CreditCard(String name, int number, int pin, Date expiryDate) {
+	public CreditCard(String name, int number, int pin, DateTime expiryDate) {
 		super(name, number, pin, expiryDate);
 	}
 
@@ -32,11 +32,11 @@ public class CreditCard extends Card {
 		this.pin = pin;
 	}
 
-	public Date getExpiryDate() {
+	public DateTime getExpiryDate() {
 		return this.expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(DateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 
@@ -55,7 +55,7 @@ public class CreditCard extends Card {
 			this.pin = Integer.parseInt(newValue);
 			return true;
 		} else if (option == 4) {
-			this.expiryDate = new Date(newValue);
+			this.expiryDate = new DateTime(newValue);
 			return true;
 		} else {
 			return false;

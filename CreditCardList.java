@@ -11,7 +11,7 @@ public class CreditCardList {
 		this.creditCards = new ArrayList<CreditCard>();
 	}
 
-	public boolean addCreditCard(String name, int number, int pin, Date expiryDate) {
+	public boolean addCreditCard(String name, int number, int pin, DateTime expiryDate) {
 		try {
 			this.creditCards.add(new CreditCard(name, number, pin, expiryDate));
 			return true;

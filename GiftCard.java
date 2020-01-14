@@ -3,9 +3,9 @@ public class GiftCard extends Card {
 	private int number;
 	private double balance;
 	private int pin;
-	private Date expiryDate;
+	private DateTime expiryDate;
 
-	public GiftCard(String name, int number, double balance, int pin, Date expiryDate) {
+	public GiftCard(String name, int number, double balance, int pin, DateTime expiryDate) {
 		super(name, number, pin, expiryDate);
 		this.balance = balance;
 	}
@@ -42,11 +42,11 @@ public class GiftCard extends Card {
 		this.pin = pin;
 	}
 
-	public Date getExpiryDate() {
+	public DateTime getExpiryDate() {
 		return this.expiryDate;
 	}
 
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(DateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 
@@ -74,7 +74,7 @@ public class GiftCard extends Card {
 			this.pin = Integer.parseInt(newValue);
 			return true;
 		} else if (option == 4) {
-			this.expiryDate = new Date(newValue);
+			this.expiryDate = new DateTime(newValue);
 			return true;
 		} else if (option == 5) {
 			this.balance = Integer.parseInt(newValue);
