@@ -1,15 +1,19 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class CreditCardList {
-	private ArrayList<CreditCard> cards;
+	private ArrayList<CreditCard> creditCards;
 
-	public CreditCardList(ArrayList<CreditCard> cards) {
-		this.cards = cards;
+	public CreditCardList(ArrayList<CreditCard> creditCards) {
+		this.creditCards = creditCards;
 	}
 
-	public boolean addCard(CreditCard new_card) {
+	public CreditCardList() {
+		this.creditCards = new ArrayList<CreditCard>();
+	}
+
+	public boolean addCreditCard(String name, int number, int pin, Date expiryDate) {
 		try {
-			this.cards.add(new_card);
+			this.creditCards.add(new CreditCard(name, number, pin, expiryDate));
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -17,7 +21,7 @@ public class CreditCardList {
 	}
 
 	public String toString() {
-		return "There are " cards.size() + " cards in this list.";
+		return "There are " + creditCards.size() + " cards in this list.";
 	}
 
 }
