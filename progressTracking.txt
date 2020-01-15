@@ -1,0 +1,36 @@
+Mark the following as follows:
+    D for done
+    W for work in progress
+    N for not started
+
+Followed by the date that it was completed on and who it was completed by.
+Example:
+    x.java:   D--14/01/20--SC
+
+
+Access.java:                    |
+Card.java:                      |   D--14/10/20--SC
+Catalog.java:                   |
+Coupon.java:                    |
+CouponList.java:                |
+CreditCard.Java:                |   D--14/10/20--SC
+CreditCardList.java:            |   D--14/01/20--SC
+Date.java:                      |   
+DateTime.java:                  |
+GiftCard.java:                  |   D--14/10/20--SC
+GiftCardLIst.java               |   D--14/10/20--SC
+Login.java:                     |
+Membership.java:                |
+Notification.java:              |
+NotificationList.java:          |
+Palladium.java:                 |
+Product.java:                   |
+ProductList.java:               |
+RecurringAccount.java           |
+SavedProducts.java              |
+Search.java                     |
+ShoppingCart.java               |
+Subscription.java               |
+SubscriptionList.java           |
+User.java                       |
+WishList.java                   |
