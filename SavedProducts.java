@@ -9,22 +9,24 @@ public abstract class SavedProducts{
    }
      
    public void sortProduct(String input, ArrayList<Product> list){
+      int listSize = list.size();
       if(input.equals("Name")){
-         sortName(list);
+         recursiveSortName(list, listSize);
       }
       else if(input.equals("Retailer")){
-         sortRetailer(list);
+         recursiveSortRetailer(list, listSize);
       }
       else if(input.equals("Price")){
-         sortPrice(list);
+         recursiveSortPrice(list, listSize);
       }
       else if(input.equals("Id")){
-         sortId(list);
+         recursiveSortId(list, listSize);
       }
       else if(input.equals("SalesPercent")){
-         sortSalePercent(list);
+         recursiveSortSalePercent(list, listSize);
       }
    }
+
       
    //Sorting Methods:
    
