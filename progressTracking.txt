@@ -8,11 +8,10 @@ Example:
     x.java:   D--14/01/20--SC
 
 
-Access.java:                    |
 Card.java:                      |   D--14/10/20--SC
 Catalog.java:                   |
 Coupon.java:                    |
-CouponList.java:                |
+CouponList.java:                |   
 CreditCard.Java:                |   D--14/10/20--SC
 CreditCardList.java:            |   D--14/01/20--SC
 Date.java:                      |   

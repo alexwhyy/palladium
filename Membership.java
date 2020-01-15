@@ -2,7 +2,7 @@ class Membership extends RecurringAccount {
 	private double discount;
 	private String membershipNumber;
 
-	public Membership(String name, double cost, Date purchasedDate, Date expiryDate, int timesRenewed, double discount, String membershipNumber) {
+	public Membership(String name, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed, double discount, String membershipNumber) {
 		this.name = name;
 		this.cost = cost;
 		this.purchasedDate = purchasedDate;

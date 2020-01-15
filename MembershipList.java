@@ -1,30 +1,30 @@
 import java.util.ArrayList;
 import java.io.*;
 
-public class SubscriptionList {
-	private ArrayList<Subscription> subscriptions;
+public class MembershipList {
+	private ArrayList<Membership> memberships;
 	public int length = 0;
 
 	private double totalSpent;
 	private double annualCost;
 	private double montlyCost;
 
-	public SubscriptionList (ArrayList<Subscription> subscriptions) {
-		this.length = subscriptions.size();
-		this.subscriptions = subscriptions;
+	public MembershipList (ArrayList<Membership> memberships) {
+		this.length = memberships.size();
+		this.memberships = memberships;
 	}
 
-	public SubscriptionList() {
+	public MembershipList() {
 		this.length = 0;
-		this.subscriptions = new ArrayList<Subscription>();
+		this.memberships = new ArrayList<Membership>();
 	}
 
-	public ArrayList<Subscription> getSubscriptions() {
-		return this.subscriptions;
+	public ArrayList<Membership> getMemberships() {
+		return this.memberships;
 	}
 
-	public void setSubscriptions(ArrayList<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
+	public void setMemberships(ArrayList<Membership> memberships) {
+		this.memberships = memberships;
 	}
 
 	public double getTotalSpent() {
@@ -51,22 +51,9 @@ public class SubscriptionList {
 		this.montlyCost = montlyCost;
 	}
 
-	public void updateCost() {
-		Subscription subscription;
-
-		for (int i = 0; i < subscriptions.size(); i++) {
-			subscription = subscriptions.get(i);
-			
-			this.totalSpent += subscription.getCost() * subscription.getTimesRenewed();
-			this.montlyCost += subscription.getCost();
-		}
-
-		this.annualCost = this.montlyCost * 12;
-	}
-
-	public boolean addSubscription(Subscription newSubscription) {
+	public boolean addMembership(Membership newMembership) {
 		try {
-			subscriptions.add(newSubscription);
+			memberships.add(newMembership);
 			length++;
 			return true;
 		} catch (Exception e) {
@@ -75,9 +62,9 @@ public class SubscriptionList {
 		}
 	}
 
-	public boolean removeSubscription(int index) {
+	public boolean removeMembership(int index) {
 		try {
-			subscriptions.remove(index);
+			memberships.remove(index);
 			length--;
 			return true;
 		} catch (Exception e) {
@@ -85,11 +72,11 @@ public class SubscriptionList {
 		}
 	}
 
-	public Subscription getSubscriptionIndex(int index) {
-		if (index > this.subscriptions.size() - 1) {
+	public Membership getMembershipIndex(int index) {
+		if (index > this.memberships.size() - 1) {
 			return null;
 		} else {
-			return this.subscriptions.get(index);
+			return this.memberships.get(index);
 		}
 	}
 
@@ -98,29 +85,34 @@ public class SubscriptionList {
 	}
 
 	public boolean loadFromFile(String directory) {
-		int numberSubscriptions;
-		Subscription parsedSubscription;
+		int numMemberships;
+		Membership parsedMembership;
 
 		String parsedName;
 		double parsedCost;
 		DateTime parsedPurchasedDate;
 		DateTime parsedExpiryDate;
 		int parsedTimesRenewed;
+		int parsedDiscount;
+		String parsedMembershipNumber;
 
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(directory));
 			
-			numberSubscriptions = Integer.parseInt(in.readLine());
-			for (int i = 0; i < numberSubscriptions; i++) {
+			numMemberships = Integer.parseInt(in.readLine());
+
+			for (int i = 0; i < numMemberships; i++) {
 				
 				parsedName = in.readLine();
 				parsedCost = Double.parseDouble(in.readLine());
 				parsedPurchasedDate = new DateTime(in.readLine());
 				parsedExpiryDate = new DateTime(in.readLine());
 				parsedTimesRenewed = Integer.parseInt(in.readLine());
+				parsedDiscount = Integer.parseInt(in.readLine());
+				parsedMembershipNumber = in.readLine();
 
-				parsedSubscription = new Subscription(parsedName, parsedCost, parsedExpiryDate, parsedPurchasedDate, parsedTimesRenewed);
-				this.subscriptions.add(parsedSubscription);
+				parsedMembership = new Membership(parsedName, parsedCost, parsedPurchasedDate, parsedExpiryDate, parsedTimesRenewed, parsedDiscount, parsedMembershipNumber);
+				this.memberships.add(parsedMembership);
 				length++;
 			}
 			in.close();

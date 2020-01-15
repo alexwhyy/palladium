@@ -6,8 +6,9 @@ public class GiftCard extends Card {
 	private int pin;
 	private DateTime expiryDate;
 
-	public GiftCard(String name, int number, double balance, int pin, DateTime expiryDate) {
+	public GiftCard(String name, String retailer, int number, double balance, int pin, DateTime expiryDate) {
 		super(name, number, pin, expiryDate);
+		this.retailer = retailer;
 		this.balance = balance;
 	}
 
@@ -17,6 +18,14 @@ public class GiftCard extends Card {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getRetailer() {
+		return this.retailer;
+	}
+
+	public void setRetailer(String retailer) {
+		this.retailer = retailer;
 	}
 
 	public int getNumber() {

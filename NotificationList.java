@@ -1,23 +1,38 @@
 import java.util.ArrayList;
 
 public class NotificationList {
-	private ArrayList<Notification> notification_list;
+	private ArrayList<Notification> notificationList;
 
-	public NotificationList(ArrayList<Notification> notification_list) {
-		this.notification_list = notification_list;
+	public NotificationList(ArrayList<Notification> notificationList) {
+		this.notificationList = notificationList;
 	}
 
 	public boolean addNotification(Notification new_notification) {
 		try {
-			this.notification_list.add(new_notification);
+			this.notificationList.add(new_notification);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
+	public boolean removeNotification(int index) {
+		try {
+			this.notificationList.remove(index);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public void removeAllNotifications() {
+		for (int i = 0; i < this.notificationList.size(); i++) {
+			this.notificationList.remove(i);
+		}
+	}
+
 	public String toString() {
-		return "There are " + notification_list.size() + " notifications in this list.";
+		return "There are " + notificationList.size() + " notifications in this list.";
 	}
 
 }

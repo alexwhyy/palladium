@@ -20,6 +20,15 @@ public class CreditCardList {
 		}
 	}
 
+	public boolean removeCreditCard(int index) {
+		try {
+			this.creditCards.remove(index);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	public String toString() {
 		return "There are " + creditCards.size() + " cards in this list.";
 	}

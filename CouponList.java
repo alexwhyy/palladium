@@ -32,4 +32,13 @@ public class CouponList {
 		}
 	}
 
+	public boolean removeCoupon(int index) {
+		try {
+			this.coupons.remove(index);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

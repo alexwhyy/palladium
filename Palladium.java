@@ -12,6 +12,7 @@ public class Palladium {
 
 	public static User currentUser;
 	public static SubscriptionList subscriptionList = new SubscriptionList();
+	public static MembershipList membershipList = new MembershipList();
 	public static CouponList couponList = new CouponList();
 	public static GiftCardList giftCardList = new GiftCardList();
 	public static CreditCardList creditCardList = new CreditCardList();
@@ -334,14 +335,16 @@ public class Palladium {
 			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
-				case 0:
-					// do nothing
+			case 0:
+				// do nothing
 				break;
-				case 1:
-					// credit cards
+			case 1:
+				// credit cards
+				creditCardUi();
 				break;
-				case 2:
-					// website accounts
+			case 2:
+				// website accounts
+				websiteAccountsUi();
 				break;
 			}
 
@@ -353,14 +356,13 @@ public class Palladium {
 
 		do {
 
-			
 			userChoice = Palladium.getIntInput();
 
 			switch (userChoice) {
-				case 0:
+			case 0:
 				// do nothing
 				break;
-				case 1:
+			case 1:
 				//
 				break;
 			}
@@ -486,8 +488,35 @@ public class Palladium {
 				// do nothing
 				break;
 			case 1:
-				// list all memberships
+				// view all memberships
+				if (Palladium.subscriptionList.length == 0) {
+					// empty membership list
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Memberships Found                   |");
+					System.out.println("|________________________________________|");
+				}
 
+				for (int i = 0; i < Palladium.subscriptionList.length; i++) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out.println("  Subscription (" + Palladium.subscriptionList.getSubscriptionIndex(i).getName()
+							+ ") #" + (i + 1));
+					System.out.println("");
+					System.out.println(
+							"  Name:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getName());
+					System.out.println(
+							"  Cost:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getCost());
+					System.out.println("  Purchased Date:    "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getPurchasedDate().toString());
+					System.out.println("  Expiry Date:       "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getExpiryDate().toString());
+					System.out.println("  Times Renewed:     "
+							+ Palladium.subscriptionList.getSubscriptionIndex(i).getTimesRenewed());
+					System.out.println("_________________________________________");
+				}
 				break;
 			case 2:
 
@@ -616,10 +645,9 @@ public class Palladium {
 				System.out.println("");
 
 				System.out.println("Please enter an index to remove:");
-
 				indexToRemove = Palladium.getIntInput();
-
 				indexToRemove--;
+
 				validRemove = Palladium.subscriptionList.removeSubscription(indexToRemove);
 
 				if (validRemove) {
@@ -634,7 +662,94 @@ public class Palladium {
 					System.out.println("| Please check the index you entered.    |");
 					System.out.println("|________________________________________|");
 				}
+				break;
 
+			case 4:
+				if (Palladium.subscriptionList.length > 0) {
+
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No subscriptions to edit               |");
+					System.out.println("|________________________________________|");
+				}
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Edit a subscription                    |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				int indexToEdit;
+				do {
+					System.out.println("Please enter the index to edit:");
+					indexToEdit = Palladium.getIntInput();
+					indexToEdit--;
+
+					if (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length) {
+						System.out.println("\nInvalid index, please select another one.\n");
+					}
+				} while (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length);
+
+				Subscription subscriptionToEdit = Palladium.subscriptionList.getSubscriptionIndex(indexToEdit);
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Please select an option                |");
+				System.out.println("|________________________________________|");
+				System.out.println("| Edit Name                         (1)  |");
+				System.out.println("| Edit Cost                         (2)  |");
+				System.out.println("| Edit Purchased Date               (3)  |");
+				System.out.println("| Edit Renew Date                   (4)  |");
+				System.out.println("| Edit Times Renewed                (5)  |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				int optionToEdit;
+				optionToEdit = Palladium.getIntInput();
+
+				String newName;
+				double newCost;
+				DateTime newExpiryDate, newRenewDate;
+
+				switch (optionToEdit) {
+				case 1:
+					System.out.println("Please enter the new name: ");
+					newName = Palladium.getStringInput();
+					subscriptionToEdit.setName(newName);
+					break;
+				case 2:
+					System.out.println("Please enter the new cost:");
+					newCost = Palladium.getDoubleInput();
+					subscriptionToEdit.setCost(newCost);
+					break;
+				case 3:
+					System.out.println("Please enter the new purchased date:");
+					newExpiryDate = Palladium.getDateInput();
+					subscriptionToEdit.setPurchasedDate(newExpiryDate);
+					break;
+				case 4:
+					System.out.println("Please enter the new renew date:");
+					newRenewDate = Palladium.getDateInput();
+					subscriptionToEdit.setPurchasedDate(newRenewDate);
+					break;
+				default:
+					System.out.println("\nInvalid option added.");
+				}
+			case 5:
+				// calculate subscriptions
+				Palladium.subscriptionList.updateCost();
+
+				System.out.println("_________________________________________");
+				System.out.println("");
+				System.out.println("  All Subscription Statistics");
+				System.out.println("  These costs are for all your");
+				System.out.println("  subscriptions combined.");
+				System.out.println("");
+				System.out.println("  Montly Cost:		" + Palladium.subscriptionList.getMontlyCost());
+				System.out.println("  Annual Cost:		" + Palladium.subscriptionList.getAnnualCost());
+				System.out.println("  Total Spent:		" + Palladium.subscriptionList.getTotalSpent());
+				System.out.println("_________________________________________");
 				break;
 			}
 
@@ -813,7 +928,8 @@ public class Palladium {
 					System.out.println("_________________________________________");
 				}
 				System.out.println("");
-				System.out.println("  Gift Card (" + Palladium.couponList.getCouponIndex(i).getName() + ") #" + (i + 1));
+				System.out
+						.println("  Gift Card (" + Palladium.couponList.getCouponIndex(i).getName() + ") #" + (i + 1));
 				System.out.println("");
 				System.out.println("  Name:          " + Palladium.couponList.getCouponIndex(i).getName());
 				System.out.println("  Retailer:      " + Palladium.couponList.getCouponIndex(i).getRetailer());
@@ -822,10 +938,16 @@ public class Palladium {
 						"  Expiry Date:   " + Palladium.couponList.getCouponIndex(i).getExpiryDate().toString());
 				System.out.println("_________________________________________");
 			}
-			
+
 			break;
 		case 2:
 			// add a credit card
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("| Add a new gift card                    |");
+			System.out.println("|________________________________________|");
+			System.out.println("\nPlease enter your details below\n");
+
 			break;
 		case 3:
 			// remove a credit card
