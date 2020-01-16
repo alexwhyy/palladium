@@ -4,6 +4,7 @@ Description:
 */
 
 import java.io.*;
+import java.lang.reflect.Member;
 import java.util.Scanner;
 
 public class Palladium {
@@ -355,6 +356,19 @@ public class Palladium {
 		int userChoice;
 
 		do {
+			System.out.println(" ________________________________________");
+			System.out.println("|                                        |");
+			System.out.println("|  Credit Cards                          |");
+			System.out.println("|                                        |");
+			System.out.println("| Please select an option:               |");
+			System.out.println("|________________________________________|");
+			System.out.println("| Go Back                           (0)  |");
+			System.out.println("| List all Credit Cards             (1)  |");
+			System.out.println("| Add a Credit Card                 (2)  |");
+			System.out.println("| Remove a Credit Card              (3)  |");
+			System.out.println("| Edit a Credit Card                (4)  |");
+			System.out.println("|________________________________________|");
+			System.out.println();
 
 			userChoice = Palladium.getIntInput();
 
@@ -363,9 +377,174 @@ public class Palladium {
 				// do nothing
 				break;
 			case 1:
-				//
+				// view all memberships
+				if (Palladium.creditCardList.length) {
+					// empty membership list
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Credit Cards                        |");
+					System.out.println("|________________________________________|");
+				}
+
+				for (int i = 0; i < Palladium.creditCardList.length) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out.println("  Credit Card (" + Palladium.creditCardList.getCreditCardIndex(i).getName()
+							+ ") #" + (i + 1));
+					System.out.println("");
+					System.out.println(
+							"  Name:              " + Palladium.creditCardList.getCreditCardIndex(i).getName());
+					System.out.println(
+							"  Number:              " + Palladium.creditCardList.getCreditCardIndex(i).getNumber());
+					System.out.println("  Pin:    "
+							+ Palladium.creditCardList.getCreditCardIndex(i).getPin().toString());
+					System.out.println("  Expiry Date:       "
+							+ Palladium.creditCardList.getCreditCardIndex(i).getExpiryDate().toString());
+
+					System.out.println("_________________________________________");
+				}
+				break;
+			case 2:
+				// add a credit card
+				String name;
+				int number;
+				int pin;
+				DateTime expiryDate;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Add a new credit card                  |");
+				System.out.println("|________________________________________|");
+				System.out.println("\nPlease enter your details below\n");
+
+				System.out.println("Please enter the name:");
+				name = Palladium.getStringInput();
+
+
+				CreditCard newCreditCard = new CreditCard(name, number, pin, expiryDate);
+
+				if (Palladium.creditCardList.addCreditCard(newCreditCard)) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Credit card has been added             |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Error adding card, please              |");
+					System.out.println("| try again.                             |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				}
+				break;
+			case 3:
+				int indexToRemove;
+				boolean validRemove;
+
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Remove a credit card                   |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				System.out.println("Please enter an index to remove:");
+				indexToRemove = Palladium.getIntInput();
+				indexToRemove--;
+
+				validRemove = Palladium.creditCardList.removeCreditCard(indexToRemove);
+
+				if (validRemove) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Successful removal of credit card      |");
+					System.out.println("|________________________________________|");
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Removal failed, please try again.      |");
+					System.out.println("| Please check the index you entered.    |");
+					System.out.println("|________________________________________|");
+				}
+				break;
+			case 4:
+				if (Palladium.subscriptionList.length > 0) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Edit a credit card                     |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
+
+					int indexToEdit;
+					do {
+						System.out.println("Please enter the index to edit:");
+						indexToEdit = Palladium.getIntInput();
+						indexToEdit--;
+
+						if (indexToEdit < 0 || indexToEdit > Palladium.creditCardList.length) {
+							System.out.println("\nInvalid index, please select another one.\n");
+						}
+					} while (indexToEdit < 0 || indexToEdit > Palladium.creditCardList.length);
+
+					CreditCard creditCardToEdit = Palladium.creditCardList.getCreditCardIndex(indexToEdit);
+
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Please select an option                |");
+					System.out.println("|________________________________________|");
+					System.out.println("| Edit Name                         (1)  |");
+					System.out.println("| Edit Number                       (2)  |");
+					System.out.println("| Edit Pin                          (3)  |");
+					System.out.println("| Edit Expiry Date                  (4)  |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
+
+					int optionToEdit;
+					optionToEdit = Palladium.getIntInput();
+
+					String newName;
+					int newNumber;
+					int newPin;
+					DateTime newExpiryDate;
+
+					switch (optionToEdit) {
+					case 1:
+						System.out.println("Please enter the new name: ");
+						newName = Palladium.getStringInput();
+						creditCardToEdit.setName(newName);
+						break;
+					case 2:
+						System.out.println("Please enter the new number:");
+						newNumber = Palladium.getIntInput();
+						creditCardToEdit.setNumber(newNumber);
+						break;
+					case 3:
+						System.out.println("Please enter the new pin:");
+						newPin = Palladium.getIntInput();
+						creditCardToEdit.setExpiryDate(newExpiryDate);
+						break;
+					case 4:
+						System.out.println("Please enter the new expiry date:");
+						newExpiryDate = Palladium.getDateInput();
+						creditCardToEdit.setExpiryDate(newExpiryDate);
+						break;
+					default:
+						System.out.println("\nInvalid option added.");
+					}
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No credit cards to edit                |");
+					System.out.println("|________________________________________|");
+				}
+				break;
+			case 5:
+				// view credit card statistics
 				break;
 			}
+
 		} while (userChoice != 0);
 	}
 
@@ -489,7 +668,7 @@ public class Palladium {
 				break;
 			case 1:
 				// view all memberships
-				if (Palladium.subscriptionList.length == 0) {
+				if (Palladium.membershipList.length == 0) {
 					// empty membership list
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
@@ -497,34 +676,213 @@ public class Palladium {
 					System.out.println("|________________________________________|");
 				}
 
-				for (int i = 0; i < Palladium.subscriptionList.length; i++) {
+				for (int i = 0; i < Palladium.membershipList.length; i++) {
 					if (i == 0) {
 						System.out.println("_________________________________________");
 					}
 					System.out.println("");
-					System.out.println("  Subscription (" + Palladium.subscriptionList.getSubscriptionIndex(i).getName()
+					System.out.println("  Subscription (" + Palladium.membershipList.getMembershipIndex(i).getName()
 							+ ") #" + (i + 1));
 					System.out.println("");
 					System.out.println(
-							"  Name:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getName());
+							"  Name:              " + Palladium.membershipList.getMembershipIndex(i).getName());
 					System.out.println(
-							"  Cost:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getCost());
+							"  Cost:              " + Palladium.membershipList.getMembershipIndex(i).getCost());
 					System.out.println("  Purchased Date:    "
-							+ Palladium.subscriptionList.getSubscriptionIndex(i).getPurchasedDate().toString());
+							+ Palladium.membershipList.getMembershipIndex(i).getPurchasedDate().toString());
 					System.out.println("  Expiry Date:       "
-							+ Palladium.subscriptionList.getSubscriptionIndex(i).getExpiryDate().toString());
-					System.out.println("  Times Renewed:     "
-							+ Palladium.subscriptionList.getSubscriptionIndex(i).getTimesRenewed());
+							+ Palladium.membershipList.getMembershipIndex(i).getExpiryDate().toString());
+					System.out.println(
+							"  Times Renewed:     " + Palladium.membershipList.getMembershipIndex(i).getTimesRenewed());
+
+					System.out.println(
+							"  Discount:         " + Palladium.membershipList.getMembershipIndex(i).getDiscount());
+
+					System.out.println("  Membership ID:    "
+							+ Palladium.membershipList.getMembershipIndex(i).getMembershipNumber());
+
 					System.out.println("_________________________________________");
 				}
 				break;
 			case 2:
+				// add a membership
+				String name;
+				double cost;
+				DateTime purchasedDate, expiryDate;
+				int timesRenewed;
+				double discount;
+				String membershipNumber;
 
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Add a new membership                   |");
+				System.out.println("|________________________________________|");
+				System.out.println("\nPlease enter your details below\n");
+
+				System.out.println("Please enter the name:");
+				name = Palladium.getStringInput();
+
+				System.out.println("Please enter the cost of the subscription per month:");
+				cost = Palladium.getDoubleInput();
+
+				System.out.println("Please enter the date when you purchased the subscription:");
+				purchasedDate = Palladium.getDateInput();
+
+				System.out.println("Please enter when your subscription renews:");
+				expiryDate = Palladium.getDateInput();
+
+				System.out.println("Please enter how many times you renewed this subscription:");
+				timesRenewed = Palladium.getIntInput();
+
+				System.out.println("Please enter the discount you recieve with this membership:");
+				discount = Palladium.getDoubleInput();
+
+				System.out.println("Please enter the membership number (optional):");
+				membershipNumber = Palladium.getStringInput();
+
+				Membership newMembership = new Membership(name, cost, purchasedDate, expiryDate, timesRenewed, discount,
+						membershipNumber);
+
+				if (Palladium.membershipList.addMembership(newMembership)) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Membership has been added              |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Error adding membership, please        |");
+					System.out.println("| try again.                             |");
+					System.out.println("|________________________________________|");
+					System.out.println();
+				}
 				break;
 			case 3:
+				// remove a membership
+				int indexToRemove;
+				boolean validRemove;
 
+				System.out.println(" ________________________________________");
+				System.out.println("|                                        |");
+				System.out.println("| Remove a membership                    |");
+				System.out.println("|________________________________________|");
+				System.out.println("");
+
+				System.out.println("Please enter an index to remove:");
+				indexToRemove = Palladium.getIntInput();
+				indexToRemove--;
+
+				validRemove = Palladium.membershipList.removeMembership(indexToRemove);
+
+				if (validRemove) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Successful removal of membership       |");
+					System.out.println("|________________________________________|");
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Removal failed, please try again.      |");
+					System.out.println("| Please check the index you entered.    |");
+					System.out.println("|________________________________________|");
+				}
 				break;
+			case 4:
+				// edit a membership
+				if (Palladium.subscriptionList.length > 0) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Edit a membership                      |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
 
+					int indexToEdit;
+					do {
+						System.out.println("Please enter the index to edit:");
+						indexToEdit = Palladium.getIntInput();
+						indexToEdit--;
+
+						if (indexToEdit < 0 || indexToEdit > Palladium.membershipList.length) {
+							System.out.println("\nInvalid index, please select another one.\n");
+						}
+					} while (indexToEdit < 0 || indexToEdit > Palladium.membershipList.length);
+
+					Membership membershipToEdit = Palladium.membershipList.getMembershipIndex(indexToEdit);
+
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Please select an option                |");
+					System.out.println("|________________________________________|");
+					System.out.println("| Edit Name                         (1)  |");
+					System.out.println("| Edit Cost                         (2)  |");
+					System.out.println("| Edit Purchased Date               (3)  |");
+					System.out.println("| Edit Renew Date                   (4)  |");
+					System.out.println("| Edit Times Renewed                (5)  |");
+					System.out.println("| Edit Discount                     (6)  |");
+					System.out.println("| Edit Memebership Number           (7)  |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
+
+					int optionToEdit;
+					optionToEdit = Palladium.getIntInput();
+
+					String newName;
+					double newCost;
+					DateTime newExpiryDate, newRenewDate;
+					int newTimesRenewed;
+					double newDiscount;
+					String newMembershipNumber;
+
+					switch (optionToEdit) {
+					case 1:
+						System.out.println("Please enter the new name: ");
+						newName = Palladium.getStringInput();
+						membershipToEdit.setName(newName);
+						break;
+					case 2:
+						System.out.println("Please enter the new cost:");
+						newCost = Palladium.getDoubleInput();
+						membershipToEdit.setCost(newCost);
+						break;
+					case 3:
+						System.out.println("Please enter the new purchased date:");
+						newExpiryDate = Palladium.getDateInput();
+						membershipToEdit.setPurchasedDate(newExpiryDate);
+						break;
+					case 4:
+						System.out.println("Please enter the new renew date:");
+						newRenewDate = Palladium.getDateInput();
+						membershipToEdit.setPurchasedDate(newRenewDate);
+						break;
+					case 5:
+						System.out.println("Please enter how many times you have renewed:");
+						newTimesRenewed = Palladium.getIntInput();
+						membershipToEdit.setTimesRenewed(newTimesRenewed);
+						break;
+					case 6:
+						System.out.println("Please enter the discount you recieve with this membership:");
+						newDiscount = Palladium.getDoubleInput();
+						membershipToEdit.setDiscount(newDiscount);
+						break;
+					case 7:
+						System.out.println("Please enter your new subscription ID:");
+						newMembershipNumber = Palladium.getStringInput();
+						membershipToEdit.setMembershipNumber(newMembershipNumber);
+						break;
+					default:
+						System.out.println("\nInvalid option added.");
+					}
+				} else {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No memberships to edit                 |");
+					System.out.println("|________________________________________|");
+				}
+				break;
+			case 5:
+				// view membership statistics
+				break;
 			}
 
 		} while (userChoice != 0);
@@ -576,12 +934,16 @@ public class Palladium {
 					System.out.println("");
 					System.out.println(
 							"  Name:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getName());
+
 					System.out.println(
 							"  Cost:              " + Palladium.subscriptionList.getSubscriptionIndex(i).getCost());
+
 					System.out.println("  Purchased Date:    "
 							+ Palladium.subscriptionList.getSubscriptionIndex(i).getPurchasedDate().toString());
+
 					System.out.println("  Expiry Date:       "
 							+ Palladium.subscriptionList.getSubscriptionIndex(i).getExpiryDate().toString());
+
 					System.out.println("  Times Renewed:     "
 							+ Palladium.subscriptionList.getSubscriptionIndex(i).getTimesRenewed());
 					System.out.println("_________________________________________");
@@ -666,75 +1028,73 @@ public class Palladium {
 
 			case 4:
 				if (Palladium.subscriptionList.length > 0) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Edit a subscription                    |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
 
+					int indexToEdit;
+					do {
+						System.out.println("Please enter the index to edit:");
+						indexToEdit = Palladium.getIntInput();
+						indexToEdit--;
+
+						if (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length) {
+							System.out.println("\nInvalid index, please select another one.\n");
+						}
+					} while (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length);
+
+					Subscription subscriptionToEdit = Palladium.subscriptionList.getSubscriptionIndex(indexToEdit);
+
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| Please select an option                |");
+					System.out.println("|________________________________________|");
+					System.out.println("| Edit Name                         (1)  |");
+					System.out.println("| Edit Cost                         (2)  |");
+					System.out.println("| Edit Purchased Date               (3)  |");
+					System.out.println("| Edit Renew Date                   (4)  |");
+					System.out.println("| Edit Times Renewed                (5)  |");
+					System.out.println("|________________________________________|");
+					System.out.println("");
+
+					int optionToEdit;
+					optionToEdit = Palladium.getIntInput();
+
+					String newName;
+					double newCost;
+					DateTime newExpiryDate, newRenewDate;
+
+					switch (optionToEdit) {
+					case 1:
+						System.out.println("Please enter the new name: ");
+						newName = Palladium.getStringInput();
+						subscriptionToEdit.setName(newName);
+						break;
+					case 2:
+						System.out.println("Please enter the new cost:");
+						newCost = Palladium.getDoubleInput();
+						subscriptionToEdit.setCost(newCost);
+						break;
+					case 3:
+						System.out.println("Please enter the new purchased date:");
+						newExpiryDate = Palladium.getDateInput();
+						subscriptionToEdit.setPurchasedDate(newExpiryDate);
+						break;
+					case 4:
+						System.out.println("Please enter the new renew date:");
+						newRenewDate = Palladium.getDateInput();
+						subscriptionToEdit.setPurchasedDate(newRenewDate);
+						break;
+					default:
+						System.out.println("\nInvalid option added.");
+					}
 				} else {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| No subscriptions to edit               |");
 					System.out.println("|________________________________________|");
-				}
-
-				System.out.println(" ________________________________________");
-				System.out.println("|                                        |");
-				System.out.println("| Edit a subscription                    |");
-				System.out.println("|________________________________________|");
-				System.out.println("");
-
-				int indexToEdit;
-				do {
-					System.out.println("Please enter the index to edit:");
-					indexToEdit = Palladium.getIntInput();
-					indexToEdit--;
-
-					if (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length) {
-						System.out.println("\nInvalid index, please select another one.\n");
-					}
-				} while (indexToEdit < 0 || indexToEdit > Palladium.subscriptionList.length);
-
-				Subscription subscriptionToEdit = Palladium.subscriptionList.getSubscriptionIndex(indexToEdit);
-
-				System.out.println(" ________________________________________");
-				System.out.println("|                                        |");
-				System.out.println("| Please select an option                |");
-				System.out.println("|________________________________________|");
-				System.out.println("| Edit Name                         (1)  |");
-				System.out.println("| Edit Cost                         (2)  |");
-				System.out.println("| Edit Purchased Date               (3)  |");
-				System.out.println("| Edit Renew Date                   (4)  |");
-				System.out.println("| Edit Times Renewed                (5)  |");
-				System.out.println("|________________________________________|");
-				System.out.println("");
-
-				int optionToEdit;
-				optionToEdit = Palladium.getIntInput();
-
-				String newName;
-				double newCost;
-				DateTime newExpiryDate, newRenewDate;
-
-				switch (optionToEdit) {
-				case 1:
-					System.out.println("Please enter the new name: ");
-					newName = Palladium.getStringInput();
-					subscriptionToEdit.setName(newName);
-					break;
-				case 2:
-					System.out.println("Please enter the new cost:");
-					newCost = Palladium.getDoubleInput();
-					subscriptionToEdit.setCost(newCost);
-					break;
-				case 3:
-					System.out.println("Please enter the new purchased date:");
-					newExpiryDate = Palladium.getDateInput();
-					subscriptionToEdit.setPurchasedDate(newExpiryDate);
-					break;
-				case 4:
-					System.out.println("Please enter the new renew date:");
-					newRenewDate = Palladium.getDateInput();
-					subscriptionToEdit.setPurchasedDate(newRenewDate);
-					break;
-				default:
-					System.out.println("\nInvalid option added.");
 				}
 			case 5:
 				// calculate subscriptions
