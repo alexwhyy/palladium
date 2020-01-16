@@ -8,14 +8,17 @@ Purpose: Contains all Products the user can browse
 import java.util.ArrayList;
 
 public class Catalog extends SavedProducts {
-   public ArrayList<Product> catalog = new ArrayList<Product>();
+	private ArrayList<Product> catalog = new ArrayList<Product>();
    
-   /*
-   Name: Catalog
-   Purpose: Catalog constructor
-   Description: passes in ArrayList to initialize
-   */
 	public Catalog(ArrayList<Product> catalog) {
 		this.catalog = catalog;
 	}
+   
+	public Catalog() {
+		this.catalog = new ArrayList<Product>();
+	}
+   
+   public ArrayList<Product> getCatalog(){
+      return catalog;
+   }
 }
