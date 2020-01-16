@@ -11,9 +11,9 @@ public class GiftCardList {
 		this.giftCards = new ArrayList<GiftCard>();
 	}
 
-	public boolean addGiftCard(String name, int number, double balance, int pin, DateTime expiryDate) {
+	public boolean addGiftCard(GiftCard giftCard) {
 		try {
-			this.giftCards.add(new GiftCard(name, number, balance, pin, expiryDate));
+			this.giftCards.add(giftCard);
 			return true;
 		} catch (Exception e) {
 			return false;
