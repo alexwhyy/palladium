@@ -17,6 +17,7 @@ public class Palladium {
 	public static CouponList couponList = new CouponList();
 	public static GiftCardList giftCardList = new GiftCardList();
 	public static CreditCardList creditCardList = new CreditCardList();
+	public static NotificationList notificationList = new NotificationList();
 
 	public static void main(String[] args) {
 
@@ -85,7 +86,7 @@ public class Palladium {
 
 			try {
 				userInputDate = new DateTime(userInputString);
-				validInput = true;
+				validInput = DateTime.verifyDate(userInputDate);
 			} catch (Exception e) {
 				System.out.println("\nInvalid input, please try again.\n");
 			}
@@ -374,19 +375,16 @@ public class Palladium {
 
 			switch (userChoice) {
 			case 0:
-				// do nothing
 				break;
 			case 1:
-				// view all memberships
-				if (Palladium.creditCardList.length) {
-					// empty membership list
+				if (Palladium.creditCardList.length == 0) {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| No Credit Cards                        |");
 					System.out.println("|________________________________________|");
 				}
 
-				for (int i = 0; i < Palladium.creditCardList.length) {
+				for (int i = 0; i < Palladium.creditCardList.length; i++) {
 					if (i == 0) {
 						System.out.println("_________________________________________");
 					}
@@ -399,7 +397,7 @@ public class Palladium {
 					System.out.println(
 							"  Number:              " + Palladium.creditCardList.getCreditCardIndex(i).getNumber());
 					System.out.println("  Pin:    "
-							+ Palladium.creditCardList.getCreditCardIndex(i).getPin().toString());
+							+ Palladium.creditCardList.getCreditCardIndex(i).getPin());
 					System.out.println("  Expiry Date:       "
 							+ Palladium.creditCardList.getCreditCardIndex(i).getExpiryDate().toString());
 
@@ -407,7 +405,6 @@ public class Palladium {
 				}
 				break;
 			case 2:
-				// add a credit card
 				String name;
 				int number;
 				int pin;
@@ -422,6 +419,14 @@ public class Palladium {
 				System.out.println("Please enter the name:");
 				name = Palladium.getStringInput();
 
+				System.out.println("Please enter the card number:");
+				number = Palladium.getIntInput();
+
+				System.out.println("Please enter the pin of the card:");
+				pin = Palladium.getIntInput();
+
+				System.out.println("Please enter the expiry date:");
+				expiryDate = Palladium.getDateInput();
 
 				CreditCard newCreditCard = new CreditCard(name, number, pin, expiryDate);
 
@@ -470,7 +475,7 @@ public class Palladium {
 				}
 				break;
 			case 4:
-				if (Palladium.subscriptionList.length > 0) {
+				if (Palladium.creditCardList.length > 0) {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Edit a credit card                     |");
@@ -523,7 +528,7 @@ public class Palladium {
 					case 3:
 						System.out.println("Please enter the new pin:");
 						newPin = Palladium.getIntInput();
-						creditCardToEdit.setExpiryDate(newExpiryDate);
+						creditCardToEdit.setPin(newPin);
 						break;
 					case 4:
 						System.out.println("Please enter the new expiry date:");
@@ -549,7 +554,6 @@ public class Palladium {
 	}
 
 	public static void websiteAccountsUi() {
-		int userChoice;
 	}
 
 	public static void shoppingUi() {
@@ -705,7 +709,6 @@ public class Palladium {
 				}
 				break;
 			case 2:
-				// add a membership
 				String name;
 				double cost;
 				DateTime purchasedDate, expiryDate;
@@ -759,7 +762,6 @@ public class Palladium {
 				}
 				break;
 			case 3:
-				// remove a membership
 				int indexToRemove;
 				boolean validRemove;
 
@@ -789,8 +791,7 @@ public class Palladium {
 				}
 				break;
 			case 4:
-				// edit a membership
-				if (Palladium.subscriptionList.length > 0) {
+				if (Palladium.membershipList.length > 0) {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Edit a membership                      |");
@@ -881,7 +882,6 @@ public class Palladium {
 				}
 				break;
 			case 5:
-				// view membership statistics
 				break;
 			}
 
@@ -912,12 +912,9 @@ public class Palladium {
 
 			switch (userChoice) {
 			case 0:
-				// do nothing
 				break;
 			case 1:
-				// view all subscriptions
 				if (Palladium.subscriptionList.length == 0) {
-					// empty subscription list
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| No Subscriptions Found                 |");
@@ -1136,7 +1133,6 @@ public class Palladium {
 
 			switch (userChoice) {
 			case 0:
-				// does nothing
 				break;
 			case 1:
 				couponsUi();
@@ -1145,6 +1141,7 @@ public class Palladium {
 				giftCardUi();
 				break;
 			default:
+				System.out.println("\nInvalid input.\n");
 			}
 
 		} while (userChoice != Palladium.QUIT_KEY);
@@ -1172,12 +1169,9 @@ public class Palladium {
 
 			switch (userChoice) {
 			case 0:
-				// do nothing
 				break;
 			case 1:
-				// list all coupons
 				if (Palladium.couponList.length == 0) {
-					// empty subscription list
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| No Coupons Found                       |");
@@ -1201,7 +1195,6 @@ public class Palladium {
 				}
 				break;
 			case 2:
-				// add a coupon
 				Coupon newCoupon;
 
 				String name, retailer;
@@ -1271,12 +1264,9 @@ public class Palladium {
 
 		switch (userChoice) {
 		case 0:
-			// do nothing
 			break;
 		case 1:
-			// display all credit cards
 			if (Palladium.couponList.length == 0) {
-				// empty subscription list
 				System.out.println(" ________________________________________");
 				System.out.println("|                                        |");
 				System.out.println("| No Gift Cards Found                    |");
@@ -1336,7 +1326,27 @@ public class Palladium {
 			case 0:
 				break;
 			case 1:
-				// display all notifications
+				if (Palladium.notificationList.length == 0) {
+					System.out.println(" ________________________________________");
+					System.out.println("|                                        |");
+					System.out.println("| No Notifications Found                 |");
+					System.out.println("|________________________________________|");
+				}
+
+				for (int i = 0; i < Palladium.notificationList.length; i++) {
+					if (i == 0) {
+						System.out.println("_________________________________________");
+					}
+					System.out.println("");
+					System.out.println(
+							"  Notification (" + Palladium.notificationList.getNotificationIndex(i).getTitle() + ") #" + (i + 1));
+					System.out.println("");
+					System.out.println("  Title:         " + Palladium.notificationList.getNotificationIndex(i).getTitle());
+					System.out.println("  Time Created:  " + Palladium.notificationList.getNotificationIndex(i).getTimeCreated());
+					System.out.println("  Content:      " + Palladium.notificationList.getNotificationIndex(i).getContent());
+					System.out.println("_________________________________________");
+				}
+
 				break;
 			}
 		} while (userChoice != Palladium.QUIT_KEY);
