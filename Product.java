@@ -94,7 +94,12 @@ public class Product {
 		this.applicableMemberships = applicableMemberships;
 	}
 
-	public String toString() {
-		return this.name;
+	public String toString(boolean option) {
+		if (!option) {
+			return name + "\n" + price + "\n" + retailer + "\n" + id + "\n" + onSale + "\n" + salePercent;
+		}else {
+			return "";
+		}
 	}
+
 }

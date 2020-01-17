@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Login {
-    final String ACCOUNT_LIST_FILE = "Database/Users.txt";
+    String filePath;
 
     User[] list;
     int numAccount;
@@ -11,9 +11,10 @@ public class Login {
     final String USERNAME_TAKEN = "USERNAME_TAKEN";
     final String USER_DOES_NOT_EXIST = "USER_DOES_NOT_EXIST";
 
-    public Login() {
+    public Login(String filePath) {
+        this.filePath = filePath+"\\accountList.txt";
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ACCOUNT_LIST_FILE));
+            BufferedReader in = new BufferedReader(new FileReader(this.filePath));
             String input;
             while ((input = in.readLine()) != null) {
                 numAccount = Integer.parseInt(input);
@@ -88,9 +89,9 @@ public class Login {
 
     public void addUser(String username, String password, String email) {
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(ACCOUNT_LIST_FILE, true));
+            BufferedWriter out = new BufferedWriter(new FileWriter(filePath, true));
 
-            RandomAccessFile randomAccess = new RandomAccessFile(ACCOUNT_LIST_FILE, "rw");
+            RandomAccessFile randomAccess = new RandomAccessFile(filePath, "rw");
             randomAccess.seek(0);
             randomAccess.write(("" + (numAccount + 1)).getBytes());
             out.newLine();

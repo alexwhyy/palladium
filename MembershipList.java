@@ -1,31 +1,31 @@
-import java.util.ArrayList;
 import java.io.*;
+import java.util.ArrayList;
 
 public class MembershipList {
-	private ArrayList<Membership> memberships;
-	public int length = 0;
-
+    private ArrayList<Membership> memberships;
+    public int length = 0;
+    private String filePath;
 	private double totalSpent;
 	private double annualCost;
 	private double montlyCost;
 
-	public MembershipList (ArrayList<Membership> memberships) {
-		this.length = memberships.size();
-		this.memberships = memberships;
-	}
+    public MembershipList (ArrayList<Membership> memberships) {
+        this.length = memberships.size();
+        this.memberships = memberships;
+    }
 
-	public MembershipList() {
-		this.length = 0;
-		this.memberships = new ArrayList<Membership>();
-	}
+    public MembershipList() {
+        this.length = 0;
+        this.memberships = new ArrayList<Membership>();
+    }
 
-	public ArrayList<Membership> getMemberships() {
-		return this.memberships;
-	}
+    public ArrayList<Membership> getMemberships() {
+        return this.memberships;
+    }
 
-	public void setMemberships(ArrayList<Membership> memberships) {
-		this.memberships = memberships;
-	}
+    public void setMemberships(ArrayList<Membership> memberships) {
+        this.memberships = memberships;
+    }
 
 	public double getTotalSpent() {
 		return this.totalSpent;
@@ -50,79 +50,70 @@ public class MembershipList {
 	public void setMontlyCost(double montlyCost) {
 		this.montlyCost = montlyCost;
 	}
+    public boolean addMembership(Membership newMembership) {
+        try {
+            memberships.add(newMembership);
+            length++;
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 
-	public boolean addMembership(Membership newMembership) {
-		try {
-			memberships.add(newMembership);
-			length++;
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
+    public boolean removeMembership(int index) {
+        try {
+            memberships.remove(index);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	public boolean removeMembership(int index) {
-		try {
-			memberships.remove(index);
-			length--;
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    public Membership getMembershipIndex(int index) {
+        if (index > this.memberships.size() - 1) {
+            return null;
+        } else {
+            return this.memberships.get(index);
+        }
+    }
 
-	public Membership getMembershipIndex(int index) {
-		if (index > this.memberships.size() - 1) {
-			return null;
-		} else {
-			return this.memberships.get(index);
-		}
-	}
+    private void updateFile(){
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
+            out.write(length);
+            out.newLine();
+            for (int i = 0 ; i < length; i ++){
+                out.write(memberships.get(i).toString());
+                out.newLine();
+            }
+            out.close();
+        }catch (IOException iox){
 
-	public boolean saveToFile() {
-		return true;
-	}
+        }
+    }
 
-	public boolean loadFromFile(String directory) {
-		int numMemberships;
-		Membership parsedMembership;
+    public MembershipList(String directory) {
+        Membership parsedMembership;
+        filePath = directory;
 
-		String parsedName;
-		double parsedCost;
-		DateTime parsedPurchasedDate;
-		DateTime parsedExpiryDate;
-		int parsedTimesRenewed;
-		int parsedDiscount;
-		String parsedMembershipNumber;
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(directory));
 
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(directory));
-			
-			numMemberships = Integer.parseInt(in.readLine());
+            length = Integer.parseInt(in.readLine());
+            for (int i = 0; i < length; i++) {
 
-			for (int i = 0; i < numMemberships; i++) {
-				
-				parsedName = in.readLine();
-				parsedCost = Double.parseDouble(in.readLine());
-				parsedPurchasedDate = new DateTime(in.readLine());
-				parsedExpiryDate = new DateTime(in.readLine());
-				parsedTimesRenewed = Integer.parseInt(in.readLine());
-				parsedDiscount = Integer.parseInt(in.readLine());
-				parsedMembershipNumber = in.readLine();
+                parsedMembership = new Membership(in.readLine(), Double.parseDouble(in.readLine()), new DateTime(in.readLine()), new DateTime(in.readLine()), Integer.parseInt(in.readLine()
+                        ), Double.parseDouble(in.readLine()), in.readLine());
+                this.memberships.add(parsedMembership);
+                length++;
+            }
+            in.close();
+        } catch (IOException iox) {
 
-				parsedMembership = new Membership(parsedName, parsedCost, parsedPurchasedDate, parsedExpiryDate, parsedTimesRenewed, parsedDiscount, parsedMembershipNumber);
-				this.memberships.add(parsedMembership);
-				length++;
-			}
-			in.close();
-		} catch (IOException iox) {
-			return false;
-		}
-		return true;
-	}
+        }
 
-	public String toString() {
-		return "lmao";
-	}
+    }
+
+
 }

@@ -4,7 +4,7 @@ import java.io.*;
 public class SubscriptionList {
 	private ArrayList<Subscription> subscriptions;
 	public int length = 0;
-
+	private String filePath;
 	private double totalSpent;
 	private double annualCost;
 	private double montlyCost;
@@ -78,7 +78,6 @@ public class SubscriptionList {
 	public boolean removeSubscription(int index) {
 		try {
 			subscriptions.remove(index);
-			length--;
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -97,10 +96,9 @@ public class SubscriptionList {
 		return true;
 	}
 
-	public boolean loadFromFile(String directory) {
-		int numberSubscriptions;
+	public SubscriptionList(String directory) {
 		Subscription parsedSubscription;
-
+		filePath = directory;
 		String parsedName;
 		double parsedCost;
 		DateTime parsedPurchasedDate;
@@ -110,8 +108,8 @@ public class SubscriptionList {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(directory));
 			
-			numberSubscriptions = Integer.parseInt(in.readLine());
-			for (int i = 0; i < numberSubscriptions; i++) {
+			length = Integer.parseInt(in.readLine());
+			for (int i = 0; i < length; i++) {
 				
 				parsedName = in.readLine();
 				parsedCost = Double.parseDouble(in.readLine());
@@ -125,9 +123,9 @@ public class SubscriptionList {
 			}
 			in.close();
 		} catch (IOException iox) {
-			return false;
+
 		}
-		return true;
+
 	}
 
 	public String toString() {

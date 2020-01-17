@@ -1,9 +1,37 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CouponList {
 	private ArrayList<Coupon> coupons;
 	public int length;
+	String filePath;
 
+
+	public CouponList(String filePath) {
+		this.filePath = filePath;
+		Coupon parsedCoupon;
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
+			String input;
+			while ((input = in.readLine()) != null) {
+				length = Integer.parseInt(input);
+				for (int i = 0; i < length; i++) {
+					parsedCoupon = new Coupon(in.readLine(), in.readLine(), Double.parseDouble(in.readLine()), new DateTime(in.readLine()));
+					coupons.add(parsedCoupon);
+				}
+			}
+			in.close();
+		} catch (IOException iox) {
+			System.out.println(" ____________________________________");
+			System.out.println("|                                    |");
+			System.out.println("| File Reading Error!                |");
+			System.out.println("|                                    |");
+			System.out.println("|____________________________________|");
+			System.out.println("Error: " + iox + "\n");
+		}
+	}
 	public CouponList(ArrayList<Coupon> coupons) {
 		this.coupons = coupons;
 		this.length = coupons.size();
@@ -31,8 +59,7 @@ public class CouponList {
 			return false;
 		}
 	}
-
-	public boolean removeCoupon(int index) {
+public boolean removeCoupon(int index) {
 		try {
 			this.coupons.remove(index);
 			return true;

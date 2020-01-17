@@ -1,23 +1,40 @@
+import javax.naming.NoInitialContextException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class NotificationList {
-	private ArrayList<Notification> notifications;
-	int length;
-
-	public NotificationList(ArrayList<Notification> notifications) {
-		this.notifications = notifications;
-		this.length = notifications.size();
+	private ArrayList<Notification> notification_list;
+	private String filePath;
+	private int length;
+	public NotificationList(ArrayList<Notification> notification_list) {
+		this.notification_list = notification_list;
 	}
-
-	public NotificationList() {
-		this.notifications = new ArrayList<Notification>();
-		this.length = 0;
-	}
-
-	public boolean addNotification(Notification newNotification) {
+	public NotificationList(String filePath){
+		this.filePath = filePath;
+		Notification parsedNotification;
 		try {
-			this.notifications.add(newNotification);
-			length++;
+			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
+			String input;
+			while ((input = in.readLine()) != null) {
+				length = Integer.parseInt(input);
+				for (int i = 0; i < length; i++) {
+					parsedNotification = new Notification(in.readLine(), Boolean.parseBoolean(in.readLine()), new DateTime(in.readLine()), in.readLine());
+					notification_list.add(parsedNotification);
+				}
+			}
+			in.close();
+		} catch (IOException iox) {
+			System.out.println(" ____________________________________");
+			System.out.println("|                                    |");
+			System.out.println("| File Reading Error!                |");
+			System.out.println("|                                    |");
+			System.out.println("|____________________________________|");
+			System.out.println("Error: " + iox + "\n");
+		}
+	}
+	public boolean addNotification(Notification new_notification) {
+		try {
+			this.notification_list.add(new_notification);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -47,9 +64,22 @@ public class NotificationList {
 			this.notifications.remove(i);
 		}
 	}
+	private void updateFile(){
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
+			out.write(length);
+			out.newLine();
+			for (int i = 0 ; i < length; i ++){
+				out.write(notification_list.get(i).toString());
+				out.newLine();
+			}
+			out.close();
+		}catch (IOException iox){
 
+		}
+	}
 	public String toString() {
-		return "There are " + notifications.size() + " notifications in this list.";
+		return "There are " + notification_list.size() + " notifications in this list.";
 	}
 
 }

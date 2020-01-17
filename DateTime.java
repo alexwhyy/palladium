@@ -8,14 +8,6 @@ public class DateTime {
     int hour;
     int min;
 
-    public static boolean verifyDate(int month, int day, int year) {
-        return (month <= 12 && month >= 1) && (day <= 31 && day >= 1) && (year >= 0);
-    }
-
-    public static boolean verifyDate(DateTime dateTime) {
-        return (dateTime.getMonth() <= 12 && dateTime.getMonth() >= 1) && (dateTime.getDay() <= 31 && dateTime.getDay() >= 1) && (dateTime.getYear() >= 0);
-    }
-
     public DateTime (int month, int day, int year){
         this.day = day;
         this.month = month;
@@ -45,6 +37,14 @@ public class DateTime {
         this.hour = hour;
         this.min = min;
     }
+    public static boolean verifyDate(int month, int day, int year) {
+        return (month <= 12 && month >= 1) && (day <= 31 && day >= 1) && (year >= 0);
+    }
+
+    public static boolean verifyDate(DateTime dateTime) {
+        return (dateTime.getMonth() <= 12 && dateTime.getMonth() >= 1) && (dateTime.getDay() <= 31 && dateTime.getDay() >= 1) && (dateTime.getYear() >= 0);
+    }
+
 
     public String toString() {
         return this.month + "/" + this.day + "/" + this.year;

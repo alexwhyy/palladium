@@ -10,21 +10,60 @@ import java.util.Scanner;
 public class Palladium {
 	public static Scanner sc = new Scanner(System.in);
 	final static int QUIT_KEY = 0;
-
-	public static User currentUser;
-	public static SubscriptionList subscriptionList = new SubscriptionList();
-	public static MembershipList membershipList = new MembershipList();
-	public static CouponList couponList = new CouponList();
-	public static GiftCardList giftCardList = new GiftCardList();
-	public static CreditCardList creditCardList = new CreditCardList();
-	public static NotificationList notificationList = new NotificationList();
-
+	public static String currentUser;
+	public static SubscriptionList subscriptionList ;
+	public static CouponList couponList ;
+	public static GiftCardList giftCardList ;
+	public static WishList wishList;
+	public static NotificationList notificationList;
+	public static ShoppingCart shoppingCart;
+	public static MembershipList membershipList;
+	public static CreditCardList creditCardList ;
+	public static String filePath;
+	public static String accountListPath;
+	public static String accountPath;
+	public static Catalog catalog;
 	public static void main(String[] args) {
 
 		// starts the program, welcomeUi() will call all the other methods
+		initconfig();
 		welcomeUi();
 	}
+	static void initconfig(){
 
+		filePath = System.getProperty("user.dir") +"\\palladium";
+        catalog= new Catalog(filePath+"catalog.txt");
+		System.out.println(filePath);
+		File file = new File(filePath);
+		file.mkdir();
+		accountListPath = filePath+ "\\accountList.txt";
+		file = new File(accountListPath);
+		if(!(file.exists())) {
+			try {
+				BufferedWriter out = new BufferedWriter(new FileWriter(accountListPath));
+				out.write("0");
+				out.close();
+			} catch (IOException iox) {
+
+			}
+		}
+
+
+
+	}
+	static void accountConfig(){
+        subscriptionList = new SubscriptionList(filePath+"\\SubsciptionList.txt");
+        couponList = new CouponList(filePath+"\\CouponList.txt");
+        membershipList = new MembershipList(filePath+"\\MembershipList.txt");
+        creditCardList = new CreditCardList(filePath+"\\CreditCardList.txt");
+        shoppingCart = new ShoppingCart(filePath+"\\ShoppingCart.txt");
+        wishList = new WishList(filePath + "WishList.txt");
+        giftCardList = new GiftCardList(filePath + "GiftCardList.txt");
+        notificationList = new NotificationList(filePath + "NotificationList.txt");
+		mainMenuUi();
+
+
+	}
 	static String getStringInput() {
 		String userInput;
 
@@ -121,17 +160,14 @@ public class Palladium {
 	}
 
 	public static void logInUi() {
-		Login login = new Login();
-		String username, password, email, loginResult;
+		Login login = new Login(filePath);
+		String username, password, loginResult;
 
 		do {
 			System.out.println(" __________________________________________________");
 			System.out.println("");
 			System.out.println("Please enter your username: ");
 			username = Palladium.getStringInput();
-			System.out.println();
-			System.out.println("Please enter your email:");
-			email = Palladium.getStringInput();
 			System.out.println();
 			System.out.println("Please enter your password: ");
 			password = Palladium.getStringInput();
@@ -153,17 +189,18 @@ public class Palladium {
 
 		} while (loginResult == "USER_NOT_FOUND");
 
-		Palladium.currentUser = new User(username, password, email);
+		currentUser = username;
 
 		System.out.println(" ________________________________________");
 		System.out.println("|                                        |");
 		System.out.println("| Login is successful                    |");
 		System.out.println("|________________________________________|");
-		loadDataUi();
+		//loadDataUi();
+        accountConfig();
 	}
 
 	public static void signUpUi() {
-		Login login = new Login();
+		Login login = new Login(filePath);
 		String username, password, email, signupResult;
 
 		do {
@@ -206,30 +243,46 @@ public class Palladium {
 
 		} while (signupResult.equals("WEAK_PASSWORD") || signupResult.equals("USERNAME_TAKEN"));
 
-		Palladium.currentUser = new User(username, password, email);
+		currentUser = username;
 		System.out.println("You're now logged in as: " + username);
+		filePath = filePath+"//"+username;
+		File file = new File(filePath);
+		file.mkdir();
+		try{
+			BufferedWriter out = new BufferedWriter(new FileWriter(filePath+"\\ShoppingCart.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath + "\\WishList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\CouponList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\CreditCardList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\GiftCard.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\NotificationList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\SubscriptionList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\MembershipList.txt"));
+			out.write("0");
+			out.close();
+			out = new BufferedWriter(new FileWriter(filePath+"\\shoppingCart.txt"));
+			out.write("0");
+			out.close();
 
-		// temp:
-		loadDataUi();
 
-	}
+		}catch (IOException iox){
 
-	public static void loadDataUi() {
-		final String SUBSCRIPTION_LIST_FILE = "Database/" + Palladium.currentUser.getUsername()
-				+ "/SubscriptionList.txt";
-
-		boolean successfulLoad = subscriptionList.loadFromFile(SUBSCRIPTION_LIST_FILE);
-		if (!successfulLoad) {
-			System.out.println(" ________________________________________");
-			System.out.println("|                                        |");
-			System.out.println("| Couldn't load some data from the       |");
-			System.out.println("| database, please make sure it is not   |");
-			System.out.println("| corrupted.                             |");
-			System.out.println("|________________________________________|");
-			System.out.println();
 		}
-
-		mainMenuUi();
+		
+        accountConfig();
 	}
 
 	public static void mainMenuUi() {

@@ -11,8 +11,7 @@ class Membership extends RecurringAccount {
 		this.discount = discount;
 		this.membershipNumber = membershipNumber;
 	}
-
-	public double getCost() {
+		public double getCost() {
 		return this.cost;
 	}
 
@@ -70,6 +69,10 @@ class Membership extends RecurringAccount {
 
 	public String toString() {
 		return this.name;
+	}
+
+	public String toString() {
+		return name+"\n"+cost+"\n"+purchasedDate+"\n"+expiryDate+"\n"+timesRenewed+"\n"+discount+"\n"+membershipNumber;
 	}
 
 }

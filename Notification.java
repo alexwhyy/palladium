@@ -1,13 +1,13 @@
 public class Notification {
 	private String title;
 	private boolean isImportant;
-	private DateTime timeCreated;
+	private DateTime time_created;
 	private String content;
 
-	public Notification(String title, boolean isImportant, DateTime timeCreated, String content) {
+	public Notification(String title, boolean isImportant, DateTime time_created, String content) {
 		this.title = title;
 		this.isImportant = isImportant;
-		this.timeCreated = timeCreated;
+		this.time_created = time_created;
 		this.content = content;
 	}
 
@@ -31,12 +31,12 @@ public class Notification {
 		this.isImportant = isImportant;
 	}
 
-	public DateTime getTimeCreated() {
-		return this.timeCreated;
+	public DateTime getTime_created() {
+		return this.time_created;
 	}
 
-	public void setTimeCreated(DateTime timeCreated) {
-		this.timeCreated = timeCreated;
+	public void setTime_created(DateTime time_created) {
+		this.time_created = time_created;
 	}
 
 	public String getContent() {
@@ -48,7 +48,9 @@ public class Notification {
 	}
 
 	public String toString() {
-		return this.title;
+		return title+"\n"+isImportant+"\n"+time_created.toString()+"\n"+content;
 	}
+
+
 
 }
