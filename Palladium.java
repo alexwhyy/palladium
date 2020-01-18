@@ -11,34 +11,35 @@ public class Palladium {
 	public static Scanner sc = new Scanner(System.in);
 	final static int QUIT_KEY = 0;
 	public static String currentUser;
-	public static SubscriptionList subscriptionList ;
-	public static CouponList couponList ;
-	public static GiftCardList giftCardList ;
+	public static SubscriptionList subscriptionList;
+	public static CouponList couponList;
+	public static GiftCardList giftCardList;
 	public static WishList wishList;
 	public static NotificationList notificationList;
 	public static ShoppingCart shoppingCart;
 	public static MembershipList membershipList;
-	public static CreditCardList creditCardList ;
+	public static CreditCardList creditCardList;
 	public static String filePath;
 	public static String accountListPath;
 	public static String accountPath;
 	public static Catalog catalog;
+
 	public static void main(String[] args) {
 
 		// starts the program, welcomeUi() will call all the other methods
 		initconfig();
 		welcomeUi();
 	}
-	static void initconfig(){
 
-		filePath = System.getProperty("user.dir") +"\\palladium";
-        catalog= new Catalog(filePath+"catalog.txt");
+	static void initconfig() {
+		filePath = System.getProperty("user.dir") + "\\palladium";
+		catalog = new Catalog(filePath + "catalog.txt");
 		System.out.println(filePath);
 		File file = new File(filePath);
 		file.mkdir();
-		accountListPath = filePath+ "\\accountList.txt";
+		accountListPath = filePath + "\\accountList.txt";
 		file = new File(accountListPath);
-		if(!(file.exists())) {
+		if (!(file.exists())) {
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(accountListPath));
 				out.write("0");
@@ -48,22 +49,8 @@ public class Palladium {
 			}
 		}
 
-
-
 	}
-	static void accountConfig(){
-        subscriptionList = new SubscriptionList(filePath+"\\SubsciptionList.txt");
-        couponList = new CouponList(filePath+"\\CouponList.txt");
-        membershipList = new MembershipList(filePath+"\\MembershipList.txt");
-        creditCardList = new CreditCardList(filePath+"\\CreditCardList.txt");
-        shoppingCart = new ShoppingCart(filePath+"\\ShoppingCart.txt");
-        wishList = new WishList(filePath + "WishList.txt");
-        giftCardList = new GiftCardList(filePath + "GiftCardList.txt");
-        notificationList = new NotificationList(filePath + "NotificationList.txt");
-		mainMenuUi();
 
-
-	}
 	static String getStringInput() {
 		String userInput;
 
@@ -195,8 +182,8 @@ public class Palladium {
 		System.out.println("|                                        |");
 		System.out.println("| Login is successful                    |");
 		System.out.println("|________________________________________|");
-		//loadDataUi();
-        accountConfig();
+		// loadDataUi();
+		accountConfig();
 	}
 
 	public static void signUpUi() {
@@ -245,44 +232,55 @@ public class Palladium {
 
 		currentUser = username;
 		System.out.println("You're now logged in as: " + username);
-		filePath = filePath+"//"+username;
+		filePath = filePath + "//" + username;
 		File file = new File(filePath);
 		file.mkdir();
-		try{
-			BufferedWriter out = new BufferedWriter(new FileWriter(filePath+"\\ShoppingCart.txt"));
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(filePath + "\\ShoppingCart.txt"));
 			out.write("0");
 			out.close();
 			out = new BufferedWriter(new FileWriter(filePath + "\\WishList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\CouponList.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\CouponList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\CreditCardList.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\CreditCardList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\GiftCard.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\GiftCard.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\NotificationList.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\NotificationList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\SubscriptionList.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\SubscriptionList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\MembershipList.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\MembershipList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath+"\\shoppingCart.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\shoppingCart.txt"));
 			out.write("0");
 			out.close();
 
-
-		}catch (IOException iox){
-
+		} catch (IOException iox) {
+			System.out.println("Failed to load files.");
 		}
-		
-        accountConfig();
+
+		accountConfig();
+	}
+
+	static void accountConfig() {
+		subscriptionList = new SubscriptionList(filePath + "\\SubsciptionList.txt");
+		couponList = new CouponList(filePath + "\\CouponList.txt");
+		membershipList = new MembershipList(filePath + "\\MembershipList.txt");
+		creditCardList = new CreditCardList(filePath + "\\CreditCardList.txt");
+		shoppingCart = new ShoppingCart(filePath + "\\ShoppingCart.txt");
+		wishList = new WishList(filePath + "WishList.txt");
+		giftCardList = new GiftCardList(filePath + "GiftCardList.txt");
+		notificationList = new NotificationList(filePath + "NotificationList.txt");
+		mainMenuUi();
 	}
 
 	public static void mainMenuUi() {
@@ -449,8 +447,7 @@ public class Palladium {
 							"  Name:              " + Palladium.creditCardList.getCreditCardIndex(i).getName());
 					System.out.println(
 							"  Number:              " + Palladium.creditCardList.getCreditCardIndex(i).getNumber());
-					System.out.println("  Pin:    "
-							+ Palladium.creditCardList.getCreditCardIndex(i).getPin());
+					System.out.println("  Pin:    " + Palladium.creditCardList.getCreditCardIndex(i).getPin());
 					System.out.println("  Expiry Date:       "
 							+ Palladium.creditCardList.getCreditCardIndex(i).getExpiryDate().toString());
 
@@ -1391,12 +1388,15 @@ public class Palladium {
 						System.out.println("_________________________________________");
 					}
 					System.out.println("");
-					System.out.println(
-							"  Notification (" + Palladium.notificationList.getNotificationIndex(i).getTitle() + ") #" + (i + 1));
+					System.out.println("  Notification ("
+							+ Palladium.notificationList.getNotificationIndex(i).getTitle() + ") #" + (i + 1));
 					System.out.println("");
-					System.out.println("  Title:         " + Palladium.notificationList.getNotificationIndex(i).getTitle());
-					System.out.println("  Time Created:  " + Palladium.notificationList.getNotificationIndex(i).getTimeCreated());
-					System.out.println("  Content:      " + Palladium.notificationList.getNotificationIndex(i).getContent());
+					System.out.println(
+							"  Title:         " + Palladium.notificationList.getNotificationIndex(i).getTitle());
+					System.out.println(
+							"  Time Created:  " + Palladium.notificationList.getNotificationIndex(i).getTimeCreated());
+					System.out.println(
+							"  Content:      " + Palladium.notificationList.getNotificationIndex(i).getContent());
 					System.out.println("_________________________________________");
 				}
 

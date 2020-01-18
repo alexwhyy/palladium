@@ -4,8 +4,8 @@ import java.util.*;
 public class CreditCardList {
 	private ArrayList<CreditCard> creditCards;
 	private String filePath;
-	private int length;
-	
+	public int length;
+
 	public CreditCardList(ArrayList<CreditCard> creditCards) {
 		this.creditCards = creditCards;
 	}
@@ -13,7 +13,8 @@ public class CreditCardList {
 	public CreditCardList() {
 		this.creditCards = new ArrayList<CreditCard>();
 	}
-	public CreditCardList(String filePath){
+
+	public CreditCardList(String filePath) {
 		this.filePath = filePath;
 		CreditCard parsedCreditCard;
 		try {
@@ -22,7 +23,8 @@ public class CreditCardList {
 			while ((input = in.readLine()) != null) {
 				length = Integer.parseInt(input);
 				for (int i = 0; i < length; i++) {
-					parsedCreditCard = new CreditCard(in.readLine(), Integer.parseInt(in.readLine()), Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
+					parsedCreditCard = new CreditCard(in.readLine(), Integer.parseInt(in.readLine()),
+							Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
 					creditCards.add(parsedCreditCard);
 				}
 			}
@@ -36,6 +38,7 @@ public class CreditCardList {
 			System.out.println("Error: " + iox + "\n");
 		}
 	}
+
 	public boolean addCreditCard(String name, int number, int pin, DateTime expiryDate) {
 		try {
 			this.creditCards.add(new CreditCard(name, number, pin, expiryDate));
@@ -44,7 +47,17 @@ public class CreditCardList {
 			return false;
 		}
 	}
-public CreditCard getCreditCardIndex(int index) {
+
+	public boolean addCreditCard(CreditCard creditCard) {
+		try {
+			this.creditCards.add(creditCard);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public CreditCard getCreditCardIndex(int index) {
 		if (index < 0 || index > this.length - 1) {
 			return null;
 		} else {
@@ -62,20 +75,21 @@ public CreditCard getCreditCardIndex(int index) {
 		}
 	}
 
-	private void updateFile(){
+	private void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
 			out.write(length);
 			out.newLine();
-			for (int i = 0 ; i < length; i ++){
+			for (int i = 0; i < length; i++) {
 				out.write(creditCards.get(i).toString());
 				out.newLine();
 			}
 			out.close();
-		}catch (IOException iox){
+		} catch (IOException iox) {
 
 		}
 	}
+
 	public String toString() {
 		return "There are " + creditCards.size() + " cards in this list.";
 	}

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class GiftCardList {
@@ -19,7 +20,7 @@ public class GiftCardList {
 			while ((input = in.readLine()) != null) {
 				length = Integer.parseInt(input);
 				for (int i = 0; i < length; i++) {
-					parsedGiftCard = new GiftCard(in.readLine(),Integer.parseInt(in.readLine()), Double.parseDouble(in.readLine()), Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
+					parsedGiftCard = new GiftCard(in.readLine(), in.readLine(), Integer.parseInt(in.readLine()), Double.parseDouble(in.readLine()), Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
 					giftCards.add(parsedGiftCard);
 				}
 			}
@@ -35,14 +36,24 @@ public class GiftCardList {
 		
 	}
 
-	public boolean addGiftCard(String name, int number, double balance, int pin, DateTime expiryDate) {
+	public boolean addGiftCard(String name, String retailer, int number, double balance, int pin, DateTime expiryDate) {
 		try {
-			this.giftCards.add(new GiftCard(name, number, balance, pin, expiryDate));
+			this.giftCards.add(new GiftCard(name, retailer, number, balance, pin, expiryDate));
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
+
+	public boolean addGiftCard(GiftCard giftCard) {
+		try {
+			this.giftCards.add(giftCard);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	private void updateFile(){
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
@@ -58,7 +69,7 @@ public class GiftCardList {
 		}
 	}
 	public String toString() {
-		return "alex gay";
+		return "GiftCardList";
 	}
 
 }

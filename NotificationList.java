@@ -3,13 +3,15 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class NotificationList {
-	private ArrayList<Notification> notification_list;
+	private ArrayList<Notification> notifications;
 	private String filePath;
-	private int length;
-	public NotificationList(ArrayList<Notification> notification_list) {
-		this.notification_list = notification_list;
+	public int length;
+
+	public NotificationList(ArrayList<Notification> notifications) {
+		this.notifications = notifications;
 	}
-	public NotificationList(String filePath){
+
+	public NotificationList(String filePath) {
 		this.filePath = filePath;
 		Notification parsedNotification;
 		try {
@@ -18,8 +20,9 @@ public class NotificationList {
 			while ((input = in.readLine()) != null) {
 				length = Integer.parseInt(input);
 				for (int i = 0; i < length; i++) {
-					parsedNotification = new Notification(in.readLine(), Boolean.parseBoolean(in.readLine()), new DateTime(in.readLine()), in.readLine());
-					notification_list.add(parsedNotification);
+					parsedNotification = new Notification(in.readLine(), Boolean.parseBoolean(in.readLine()),
+							new DateTime(in.readLine()), in.readLine());
+					notifications.add(parsedNotification);
 				}
 			}
 			in.close();
@@ -32,9 +35,10 @@ public class NotificationList {
 			System.out.println("Error: " + iox + "\n");
 		}
 	}
+
 	public boolean addNotification(Notification new_notification) {
 		try {
-			this.notification_list.add(new_notification);
+			this.notifications.add(new_notification);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -64,22 +68,24 @@ public class NotificationList {
 			this.notifications.remove(i);
 		}
 	}
-	private void updateFile(){
+
+	private void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
 			out.write(length);
 			out.newLine();
-			for (int i = 0 ; i < length; i ++){
-				out.write(notification_list.get(i).toString());
+			for (int i = 0; i < length; i++) {
+				out.write(notifications.get(i).toString());
 				out.newLine();
 			}
 			out.close();
-		}catch (IOException iox){
+		} catch (IOException iox) {
 
 		}
 	}
+
 	public String toString() {
-		return "There are " + notification_list.size() + " notifications in this list.";
+		return "There are " + notifications.size() + " notifications in this list.";
 	}
 
 }

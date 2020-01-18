@@ -70,9 +70,4 @@ class Membership extends RecurringAccount {
 	public String toString() {
 		return this.name;
 	}
-
-	public String toString() {
-		return name+"\n"+cost+"\n"+purchasedDate+"\n"+expiryDate+"\n"+timesRenewed+"\n"+discount+"\n"+membershipNumber;
-	}
-
 }
