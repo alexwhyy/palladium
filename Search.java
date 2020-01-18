@@ -1,7 +1,7 @@
 /*
 Class Name: 
 Author: Eric Fang
-Date: Dec 18, 2019
+Date: Jan 6, 2019
 School: A.Y.Jackson Secondary School
 Purpose: Searches catalog for matches and adds them to WishList/ShoppingCart
 */
@@ -48,25 +48,5 @@ public class Search{
          }
       }
       return returnList;
-   }
-   
-   /*
-   Name: addProductToCart
-   Purpose: adds a Product to ShoppingCart
-   Description: passes in ArrayList of searched items and ShoppingCart and index of product to be added
-   from the searched list
-   */
-   public void addProductToCart(int position, ArrayList<Product> searchList, ArrayList<Product> shoppingCart){
-      shoppingCart.add(searchList.get(position));
-   }
-   
-   /*
-   Name: addProductToCart
-   Purpose: adds a Product to WishList
-   Description: passes in ArrayList of searched items and WishList and index of product to be added
-   from the searched list
-   */
-   public void addProductToWishList(int position, ArrayList<Product> searchList, ArrayList<Product> wishList){
-      wishList.add(searchList.get(position));
    }
 }
