@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Catalog extends SavedProducts {
@@ -28,6 +26,20 @@ public class Catalog extends SavedProducts {
          System.out.println("|                                    |");
          System.out.println("|____________________________________|");
          System.out.println("Error: " + iox + "\n");
+      }
+   }
+   void updateFile(){
+      try {
+         BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
+         out.write(length);
+         out.newLine();
+         for (int i = 0 ; i < length; i ++){
+            out.write(catalog.get(i).toString(false));
+            out.newLine();
+         }
+         out.close();
+      }
+      catch (IOException iox){
       }
    }
 }

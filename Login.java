@@ -12,7 +12,7 @@ public class Login {
     final String USER_DOES_NOT_EXIST = "USER_DOES_NOT_EXIST";
 
     public Login(String filePath) {
-        this.filePath = filePath + "/Users.txt";
+        this.filePath = filePath;
         try {
             BufferedReader in = new BufferedReader(new FileReader(this.filePath));
             String input;

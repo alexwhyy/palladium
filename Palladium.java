@@ -21,7 +21,6 @@ public class Palladium {
 	public static CreditCardList creditCardList;
 	public static String filePath;
 	public static String accountListPath;
-	public static String accountPath;
 	public static Catalog catalog;
 
 	public static void main(String[] args) {
@@ -147,7 +146,7 @@ public class Palladium {
 	}
 
 	public static void logInUi() {
-		Login login = new Login(filePath);
+		Login login = new Login(accountListPath);
 		String username, password, loginResult;
 
 		do {
@@ -187,7 +186,7 @@ public class Palladium {
 	}
 
 	public static void signUpUi() {
-		Login login = new Login(filePath);
+		Login login = new Login(accountListPath);
 		String username, password, email, signupResult;
 
 		do {
