@@ -1,9 +1,23 @@
+/*
+Class Name: WishList
+Author: Eric Fang
+Date: Dec 18, 2019
+School: A.Y.Jackson Secondary School
+Purpose: Holds item that user is interested in but does not intend to buy at the moment
+*/
 import java.io.*;
 import java.util.ArrayList;
 public class WishList extends SavedProducts{
-   public ArrayList<Product> wishList = new ArrayList<Product>();      
+   protected ArrayList<Product> wishList = new ArrayList<Product>();      
    private String filePath;
    private int length;
+   
+   /*
+   Name: WishList
+   Purpose: Initiates WishList
+   Description: Passes in filePath in order to read in the contents and saves 
+   it for future use 
+   */
    public WishList(String filePath){
       this.filePath = filePath;
       Product parsedProduct;
@@ -27,23 +41,36 @@ public class WishList extends SavedProducts{
          System.out.println("Error: " + iox + "\n");
       }
    }
+   
+   /*
+   Name: addToShoppingCart
+   Purpose: moves a product from WishList to ShoppingCart
+   Description: passes in ArrayList(from ShoppingCart) and the position of product
+   in Wishlist
+   */
    public void addToShoppingCart(int position, ArrayList<Product> shoppingCart){
       shoppingCart.add(wishList.get(position));
       wishList.remove(position);
+      updateFile();
    }
-   private void updateFile(){
+   
+   /*
+   Name: updateFile
+   Purpose: Updates file whenever a change is made
+   Description: Uses filePath which was previously saved during intialization 
+   */
+   void updateFile(){
       try {
          BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
          out.write(length);
          out.newLine();
          for (int i = 0 ; i < length; i ++){
-            out.write(wishList.get(i).toString());
+            out.write(wishList.get(i).toString(false));
             out.newLine();
          }
          out.close();
-      }catch (IOException iox){
-
+      }
+      catch (IOException iox){
       }
    }
-
 }
