@@ -12,7 +12,7 @@ public class Login {
     final String USER_DOES_NOT_EXIST = "USER_DOES_NOT_EXIST";
 
     public Login(String filePath) {
-        this.filePath = filePath+"\\accountList.txt";
+        this.filePath = filePath + "/Users.txt";
         try {
             BufferedReader in = new BufferedReader(new FileReader(this.filePath));
             String input;
@@ -30,7 +30,7 @@ public class Login {
             System.out.println("| File Reading Error!                |");
             System.out.println("|                                    |");
             System.out.println("|____________________________________|");
-            System.out.println("Error: " + iox + "\n");            
+            System.out.println("Error: " + iox + "\n");
         }
     }
 

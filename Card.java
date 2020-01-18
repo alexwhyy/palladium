@@ -14,10 +14,5 @@ public abstract class Card {
 	}
 
 	abstract public String toString();
-	abstract public boolean editCard(int option, String newValue);
-	//option 1: name
-	//option 2: number
-	//option 3: pin
-	//option 4: expiryDate
-	
+
 }

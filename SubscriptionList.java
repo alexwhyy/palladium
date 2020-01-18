@@ -1,3 +1,12 @@
+/*
+Name:         SubscriptionList.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for storing the subscriptions
+              used by the program and applying the sorting, searching,
+              loading, and saving of the database.
+*/
+
 import java.util.ArrayList;
 import java.io.*;
 
@@ -92,8 +101,19 @@ public class SubscriptionList {
 		}
 	}
 
-	public boolean saveToFile() {
-		return true;
+	public void updateFile() {
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
+			out.write(length);
+			out.newLine();
+			for (int i = 0; i < length; i++) {
+				out.write(subscriptions.get(i).toString());
+				out.newLine();
+			}
+			out.close();
+		} catch (IOException iox) {
+
+		}
 	}
 
 	public SubscriptionList(String directory) {
@@ -125,10 +145,9 @@ public class SubscriptionList {
 		} catch (IOException iox) {
 
 		}
-
 	}
 
 	public String toString() {
-		return "lmao";
+		return "List";
 	}
 }

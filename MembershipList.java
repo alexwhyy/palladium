@@ -5,11 +5,11 @@ public class MembershipList {
     private ArrayList<Membership> memberships;
     public int length = 0;
     private String filePath;
-	private double totalSpent;
-	private double annualCost;
-	private double montlyCost;
+    private double totalSpent;
+    private double annualCost;
+    private double montlyCost;
 
-    public MembershipList (ArrayList<Membership> memberships) {
+    public MembershipList(ArrayList<Membership> memberships) {
         this.length = memberships.size();
         this.memberships = memberships;
     }
@@ -27,29 +27,30 @@ public class MembershipList {
         this.memberships = memberships;
     }
 
-	public double getTotalSpent() {
-		return this.totalSpent;
-	}
+    public double getTotalSpent() {
+        return this.totalSpent;
+    }
 
-	public void setTotalSpent(double totalSpent) {
-		this.totalSpent = totalSpent;
-	}
+    public void setTotalSpent(double totalSpent) {
+        this.totalSpent = totalSpent;
+    }
 
-	public double getAnnualCost() {
-		return this.annualCost;
-	}
+    public double getAnnualCost() {
+        return this.annualCost;
+    }
 
-	public void setAnnualCost(double annualCost) {
-		this.annualCost = annualCost;
-	}
+    public void setAnnualCost(double annualCost) {
+        this.annualCost = annualCost;
+    }
 
-	public double getMontlyCost() {
-		return this.montlyCost;
-	}
+    public double getMontlyCost() {
+        return this.montlyCost;
+    }
 
-	public void setMontlyCost(double montlyCost) {
-		this.montlyCost = montlyCost;
-	}
+    public void setMontlyCost(double montlyCost) {
+        this.montlyCost = montlyCost;
+    }
+
     public boolean addMembership(Membership newMembership) {
         try {
             memberships.add(newMembership);
@@ -78,17 +79,17 @@ public class MembershipList {
         }
     }
 
-    private void updateFile(){
+    public void updateFile() {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
             out.write(length);
             out.newLine();
-            for (int i = 0 ; i < length; i ++){
+            for (int i = 0; i < length; i++) {
                 out.write(memberships.get(i).toString());
                 out.newLine();
             }
             out.close();
-        }catch (IOException iox){
+        } catch (IOException iox) {
 
         }
     }
@@ -103,8 +104,9 @@ public class MembershipList {
             length = Integer.parseInt(in.readLine());
             for (int i = 0; i < length; i++) {
 
-                parsedMembership = new Membership(in.readLine(), Double.parseDouble(in.readLine()), new DateTime(in.readLine()), new DateTime(in.readLine()), Integer.parseInt(in.readLine()
-                        ), Double.parseDouble(in.readLine()), in.readLine());
+                parsedMembership = new Membership(in.readLine(), Double.parseDouble(in.readLine()),
+                        new DateTime(in.readLine()), new DateTime(in.readLine()), Integer.parseInt(in.readLine()),
+                        Double.parseDouble(in.readLine()), in.readLine());
                 this.memberships.add(parsedMembership);
                 length++;
             }
@@ -114,6 +116,5 @@ public class MembershipList {
         }
 
     }
-
 
 }

@@ -53,6 +53,6 @@ class Subscription extends RecurringAccount {
 	}
 
 	public String toString() {
-		return this.name;
+		return this.name + "\n" + this.cost + "\n" + this.purchasedDate.toString() + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed;
 	}
 }

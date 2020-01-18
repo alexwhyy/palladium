@@ -272,11 +272,11 @@ public class Palladium {
 	}
 
 	static void accountConfig() {
-		subscriptionList = new SubscriptionList(filePath + "\\SubsciptionList.txt");
-		couponList = new CouponList(filePath + "\\CouponList.txt");
-		membershipList = new MembershipList(filePath + "\\MembershipList.txt");
-		creditCardList = new CreditCardList(filePath + "\\CreditCardList.txt");
-		shoppingCart = new ShoppingCart(filePath + "\\ShoppingCart.txt");
+		subscriptionList = new SubscriptionList(filePath + "SubsciptionList.txt");
+		couponList = new CouponList(filePath + "CouponList.txt");
+		membershipList = new MembershipList(filePath + "MembershipList.txt");
+		creditCardList = new CreditCardList(filePath + "CreditCardList.txt");
+		shoppingCart = new ShoppingCart(filePath + "ShoppingCart.txt");
 		wishList = new WishList(filePath + "WishList.txt");
 		giftCardList = new GiftCardList(filePath + "GiftCardList.txt");
 		notificationList = new NotificationList(filePath + "NotificationList.txt");
@@ -481,6 +481,8 @@ public class Palladium {
 				CreditCard newCreditCard = new CreditCard(name, number, pin, expiryDate);
 
 				if (Palladium.creditCardList.addCreditCard(newCreditCard)) {
+					Palladium.creditCardList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Credit card has been added             |");
@@ -512,6 +514,8 @@ public class Palladium {
 				validRemove = Palladium.creditCardList.removeCreditCard(indexToRemove);
 
 				if (validRemove) {
+					Palladium.creditCardList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Successful removal of credit card      |");
@@ -588,6 +592,7 @@ public class Palladium {
 					default:
 						System.out.println("\nInvalid option added.");
 					}
+					Palladium.creditCardList.updateFile();
 				} else {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
@@ -797,6 +802,8 @@ public class Palladium {
 						membershipNumber);
 
 				if (Palladium.membershipList.addMembership(newMembership)) {
+					Palladium.membershipList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Membership has been added              |");
@@ -828,6 +835,8 @@ public class Palladium {
 				validRemove = Palladium.membershipList.removeMembership(indexToRemove);
 
 				if (validRemove) {
+					Palladium.membershipList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Successful removal of membership       |");
@@ -924,6 +933,7 @@ public class Palladium {
 					default:
 						System.out.println("\nInvalid option added.");
 					}
+					Palladium.membershipList.updateFile();
 				} else {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
@@ -1028,6 +1038,8 @@ public class Palladium {
 				Subscription newSubscription = new Subscription(name, cost, purchasedDate, expiryDate, timesRenewed);
 
 				if (Palladium.subscriptionList.addSubscription(newSubscription)) {
+					Palladium.subscriptionList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Subscription has been added            |");
@@ -1060,6 +1072,8 @@ public class Palladium {
 				validRemove = Palladium.subscriptionList.removeSubscription(indexToRemove);
 
 				if (validRemove) {
+					Palladium.subscriptionList.updateFile();
+
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");
 					System.out.println("| Successful removal of subscription     |");
@@ -1137,6 +1151,7 @@ public class Palladium {
 					default:
 						System.out.println("\nInvalid option added.");
 					}
+					Palladium.subscriptionList.updateFile();
 				} else {
 					System.out.println(" ________________________________________");
 					System.out.println("|                                        |");

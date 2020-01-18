@@ -43,5 +43,8 @@ class Coupon {
 		this.expiryDate = expiryDate;
 	}
 
+	public String toString() {
+		return this.name + "\n" + this.retailer + "\n" + this.discount + "\n" + this.expiryDate.toString();
+	}
 	
 }

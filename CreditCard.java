@@ -40,30 +40,8 @@ public class CreditCard extends Card {
 		this.expiryDate = expiryDate;
 	}
 
-	public boolean editCard(int option, String newValue) {
-		//option 1: name
-		//option 2: number
-		//option 3: pin
-		//option 4: expiryDate
-		if (option == 1) {
-			this.name = newValue;
-			return true;
-		} else if (option == 2) {
-			this.number = Integer.parseInt(newValue);
-			return true;
-		} else if (option == 3) {
-			this.pin = Integer.parseInt(newValue);
-			return true;
-		} else if (option == 4) {
-			this.expiryDate = new DateTime(newValue);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public String toString() {
-		return this.name;
+		return this.name + "\n" + this.number + "\n" + this.pin + "\n" + this.expiryDate.toString();
 	}
 
 }

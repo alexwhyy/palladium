@@ -1,13 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class CouponList {
 	private ArrayList<Coupon> coupons;
 	public int length;
 	String filePath;
-
 
 	public CouponList(String filePath) {
 		this.filePath = filePath;
@@ -18,7 +15,8 @@ public class CouponList {
 			while ((input = in.readLine()) != null) {
 				length = Integer.parseInt(input);
 				for (int i = 0; i < length; i++) {
-					parsedCoupon = new Coupon(in.readLine(), in.readLine(), Double.parseDouble(in.readLine()), new DateTime(in.readLine()));
+					parsedCoupon = new Coupon(in.readLine(), in.readLine(), Double.parseDouble(in.readLine()),
+							new DateTime(in.readLine()));
 					coupons.add(parsedCoupon);
 				}
 			}
@@ -32,6 +30,7 @@ public class CouponList {
 			System.out.println("Error: " + iox + "\n");
 		}
 	}
+
 	public CouponList(ArrayList<Coupon> coupons) {
 		this.coupons = coupons;
 		this.length = coupons.size();
@@ -59,12 +58,28 @@ public class CouponList {
 			return false;
 		}
 	}
-public boolean removeCoupon(int index) {
+
+	public boolean removeCoupon(int index) {
 		try {
 			this.coupons.remove(index);
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	public void updateFile() {
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
+			out.write(length);
+			out.newLine();
+			for (int i = 0; i < length; i++) {
+				out.write(this.coupons.get(i).toString());
+				out.newLine();
+			}
+			out.close();
+		} catch (IOException iox) {
+
 		}
 	}
 

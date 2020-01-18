@@ -54,7 +54,7 @@ public class GiftCardList {
 		}
 	}
 
-	private void updateFile(){
+	public void updateFile(){
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
 			out.write(length);
