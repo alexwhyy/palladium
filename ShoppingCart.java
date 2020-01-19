@@ -21,6 +21,7 @@ public class ShoppingCart extends SavedProducts{
    public ShoppingCart(String filePath){
       this.filePath = filePath;
       Product parsedProduct;
+      shoppingCart = new ArrayList<Product>();
       try {
          BufferedReader in = new BufferedReader(new FileReader(this.filePath));
          String input;

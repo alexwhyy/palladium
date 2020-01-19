@@ -1,10 +1,7 @@
 public class GiftCard extends Card {
-	private String name;
 	private String retailer;
-	private int number;
 	private double balance;
-	private int pin;
-	private DateTime expiryDate;
+
 
 	public GiftCard(String name, String retailer,int number, double balance, int pin, DateTime expiryDate) {
 		super(name, number, pin, expiryDate);

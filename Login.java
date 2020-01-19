@@ -15,14 +15,14 @@ public class Login {
         this.filePath = filePath;
         try {
             BufferedReader in = new BufferedReader(new FileReader(this.filePath));
-            String input;
-            while ((input = in.readLine()) != null) {
-                numAccount = Integer.parseInt(input);
+
+
+                numAccount = Integer.parseInt(in.readLine());
                 list = new User[numAccount];
                 for (int i = 0; i < numAccount; i++) {
                     list[i] = new User(in.readLine(), in.readLine(), in.readLine());
                 }
-            }
+
             in.close();
         } catch (IOException iox) {
             System.out.println(" ____________________________________");
@@ -100,7 +100,6 @@ public class Login {
             out.write(password);
             out.newLine();
             out.write(email);
-            out.newLine();
             out.close();
             randomAccess.close();
         } catch (IOException iox) {

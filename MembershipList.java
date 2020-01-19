@@ -97,7 +97,7 @@ public class MembershipList {
     public MembershipList(String directory) {
         Membership parsedMembership;
         filePath = directory;
-
+    memberships = new ArrayList<Membership>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(directory));
 

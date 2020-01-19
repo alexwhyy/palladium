@@ -1,15 +1,11 @@
 public class CreditCard extends Card {
-	private String name;
-	private int number;
-	private int pin;
-	private DateTime expiryDate;
 
 	public CreditCard(String name, int number, int pin, DateTime expiryDate) {
 		super(name, number, pin, expiryDate);
 	}
 
 	public String getName() {
-		return this.name;
+		return super.name;
 	}
 
 	public void setName(String name) {
@@ -40,8 +36,5 @@ public class CreditCard extends Card {
 		this.expiryDate = expiryDate;
 	}
 
-	public String toString() {
-		return this.name + "\n" + this.number + "\n" + this.pin + "\n" + this.expiryDate.toString();
-	}
 
 }

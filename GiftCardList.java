@@ -14,6 +14,7 @@ public class GiftCardList {
 	public GiftCardList(String filePath) {
 		this.filePath = filePath;
 		GiftCard parsedGiftCard;
+		giftCards= new ArrayList<GiftCard>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;

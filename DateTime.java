@@ -17,8 +17,11 @@ public class DateTime {
     public DateTime(String date_string) {
         String[] split_date = date_string.split("/");
         this.month = Integer.parseInt(split_date[0]);
+        System.out.println(month);
         this.day = Integer.parseInt(split_date[1]);
+        System.out.println(day);
         this.year = Integer.parseInt(split_date[2]);
+        System.out.println(year);
     }
 
     public DateTime() {

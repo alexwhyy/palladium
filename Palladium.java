@@ -32,12 +32,10 @@ public class Palladium {
 
 	static void initconfig() {
 		filePath = System.getProperty("user.dir") + "\\palladium";
-		catalog = new Catalog(filePath + "catalog.txt");
-		System.out.println(filePath);
+		//catalog = new Catalog(filePath + "\\catalog.txt");
 		File file = new File(filePath);
 		file.mkdir();
 		accountListPath = filePath + "\\accountList.txt";
-		file = new File(accountListPath);
 		if (!(file.exists())) {
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(accountListPath));
@@ -231,7 +229,7 @@ public class Palladium {
 
 		currentUser = username;
 		System.out.println("You're now logged in as: " + username);
-		filePath = filePath + "//" + username;
+		filePath = filePath + "\\" + username;
 		File file = new File(filePath);
 		file.mkdir();
 		try {
@@ -478,7 +476,7 @@ public class Palladium {
 				expiryDate = Palladium.getDateInput();
 
 				CreditCard newCreditCard = new CreditCard(name, number, pin, expiryDate);
-
+				newCreditCard.toString();
 				if (Palladium.creditCardList.addCreditCard(newCreditCard)) {
 					Palladium.creditCardList.updateFile();
 

@@ -1,8 +1,6 @@
 public abstract class Card {
 	protected String name;
-	protected String retailer;
 	protected int number;
-	protected double balance;
 	protected int pin;
 	protected DateTime expiryDate;
 
@@ -13,6 +11,8 @@ public abstract class Card {
 		this.expiryDate = expiry;
 	}
 
-	abstract public String toString();
+	public String toString(){
+		return name+ "\n" + number + "\n" + pin + "\n" + expiryDate.toString();
+	}
 
 }

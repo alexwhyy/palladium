@@ -124,7 +124,7 @@ public class SubscriptionList {
 		DateTime parsedPurchasedDate;
 		DateTime parsedExpiryDate;
 		int parsedTimesRenewed;
-
+		subscriptions = new ArrayList<Subscription>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(directory));
 			

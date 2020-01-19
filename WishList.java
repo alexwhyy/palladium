@@ -21,6 +21,7 @@ public class WishList extends SavedProducts{
    public WishList(String filePath){
       this.filePath = filePath;
       Product parsedProduct;
+      wishList = new ArrayList<Product>();
       try {
          BufferedReader in = new BufferedReader(new FileReader(this.filePath));
          String input;

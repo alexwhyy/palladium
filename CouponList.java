@@ -9,6 +9,7 @@ public class CouponList {
 	public CouponList(String filePath) {
 		this.filePath = filePath;
 		Coupon parsedCoupon;
+		coupons = new ArrayList<Coupon>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;

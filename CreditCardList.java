@@ -17,6 +17,7 @@ public class CreditCardList {
 	public CreditCardList(String filePath) {
 		this.filePath = filePath;
 		CreditCard parsedCreditCard;
+		creditCards=new ArrayList<CreditCard>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;
@@ -48,9 +49,11 @@ public class CreditCardList {
 		}
 	}
 
+
 	public boolean addCreditCard(CreditCard creditCard) {
 		try {
 			this.creditCards.add(creditCard);
+			length++;
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -81,8 +84,14 @@ public class CreditCardList {
 			out.write(length);
 			out.newLine();
 			for (int i = 0; i < length; i++) {
-				out.write(creditCards.get(i).toString());
+				out.write(creditCards.get(i).getName());
 				out.newLine();
+				out.write(creditCards.get(i).getNumber());
+				out.newLine();
+				out.write(creditCards.get(i).getPin());
+				out.newLine();
+				out.write(creditCards.get(i).getExpiryDate().toString());
+
 			}
 			out.close();
 		} catch (IOException iox) {

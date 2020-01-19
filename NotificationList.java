@@ -14,6 +14,7 @@ public class NotificationList {
 	public NotificationList(String filePath) {
 		this.filePath = filePath;
 		Notification parsedNotification;
+		notifications = new ArrayList<Notification>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;
