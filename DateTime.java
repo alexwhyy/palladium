@@ -1,3 +1,12 @@
+/*
+Name:         DateTime.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for representing the
+              date and time which is used in many parts of the
+              project.
+*/
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,12 +17,14 @@ public class DateTime {
     int hour;
     int min;
 
+    // Allows the user to construct the DateTime object with varibles.
     public DateTime(int month, int day, int year) {
         this.day = day;
         this.month = month;
         this.year = year;
     }
 
+    // Allows the user to construct the DateTime object with a string.
     public DateTime(String date_string) {
         String[] split_date = date_string.split("/");
         this.month = Integer.parseInt(split_date[0]);
@@ -36,26 +47,33 @@ public class DateTime {
         this.min = min;
     }
 
+    // Allows the verification of a valid date entered with varibles.
     public static boolean verifyDate(int month, int day, int year) {
         return (month <= 12 && month >= 1) && (day <= 31 && day >= 1) && (year >= 0);
     }
 
+    // Allows the user to compare another DateTime object.
     public int compareTo(DateTime other) {
         if (this.year == other.year) {
-            if (this.month == other.month) return this.day - other.day;
-            else return this.month - other.month;
-        } else return this.year - other.year;
+            if (this.month == other.month)
+                return this.day - other.day;
+            else
+                return this.month - other.month;
+        } else
+            return this.year - other.year;
     }
 
+    // Allows the verification of a valid date entered with the DateTime object.
     public static boolean verifyDate(DateTime dateTime) {
-        return (dateTime.getMonth() <= 12 && dateTime.getMonth() >= 1) && (dateTime.getDay() <= 31 && dateTime.getDay() >= 1) && (dateTime.getYear() >= 0);
+        return (dateTime.getMonth() <= 12 && dateTime.getMonth() >= 1)
+                && (dateTime.getDay() <= 31 && dateTime.getDay() >= 1) && (dateTime.getYear() >= 0);
     }
-
 
     public String toString() {
         return this.month + "/" + this.day + "/" + this.year;
     }
 
+    // ********** GETTERS AND SETTERS **********
     public int getYear() {
         return year;
     }

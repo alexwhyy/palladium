@@ -1,8 +1,18 @@
+/*
+Name:         Membership.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for representing
+              the membership in class form. This includes storing
+              all the varibles and applying various methods.
+*/
+
 class Membership extends RecurringAccount {
 	private double discount;
 	private String membershipNumber;
 
-	public Membership(String retailer, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed, double discount, String membershipNumber) {
+	public Membership(String retailer, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed,
+			double discount, String membershipNumber) {
 		this.retailer = retailer;
 		this.cost = cost;
 		this.purchasedDate = purchasedDate;
@@ -11,6 +21,8 @@ class Membership extends RecurringAccount {
 		this.discount = discount;
 		this.membershipNumber = membershipNumber;
 	}
+
+	// ********** GETTERS AND SETTERS **********
 	public double getCost() {
 		return this.cost;
 	}
@@ -65,9 +77,10 @@ class Membership extends RecurringAccount {
 
 	public void setMembershipNumber(String membershipNumber) {
 		this.membershipNumber = membershipNumber;
-	}	
+	}
 
 	public String toString() {
-		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed + "\n" + this.discount + "\n" + this.membershipNumber;
+		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate + "\n" + this.expiryDate.toString() + "\n"
+				+ this.timesRenewed + "\n" + this.discount + "\n" + this.membershipNumber;
 	}
 }

@@ -1,3 +1,11 @@
+/*
+Name:         Subscription.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for representing the
+              subscription in class form.
+*/
+
 class Subscription extends RecurringAccount {
 	public Subscription(String retailer, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed) {
 		this.retailer = retailer;
@@ -7,6 +15,7 @@ class Subscription extends RecurringAccount {
 		this.timesRenewed = timesRenewed;
 	}
 
+	// ********** GETTERS AND SETTERS **********
 	public double getCost() {
 		return this.cost;
 	}
@@ -47,12 +56,17 @@ class Subscription extends RecurringAccount {
 		this.timesRenewed = timesRenewed;
 	}
 
+	// renews the subscription by adding the times
+	// renewed by 1
 	public boolean renewSubscription() {
 		this.timesRenewed++;
 		return true;
 	}
 
+	// returns string form representation of object which
+	// is useful for storing it in the text file
 	public String toString() {
-		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate.toString() + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed;
+		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate.toString() + "\n"
+				+ this.expiryDate.toString() + "\n" + this.timesRenewed;
 	}
 }

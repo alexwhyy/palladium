@@ -1,3 +1,12 @@
+/*
+Name:         Notification.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for representing
+              the notification in class form. This includes storing
+              all the varibles and applying various methods.
+*/
+
 public class Notification {
 	private String title;
 	private boolean isImportant;
@@ -11,6 +20,7 @@ public class Notification {
 		this.content = content;
 	}
 
+	// ********** GETTERS AND SETTERS **********
 	public String getTitle() {
 		return this.title;
 	}
@@ -47,10 +57,9 @@ public class Notification {
 		this.content = content;
 	}
 
+	// String form representation of the Notification object
 	public String toString() {
-		return title+"\n"+isImportant+"\n"+timeCreated.toString()+"\n"+content;
+		return title + "\n" + isImportant + "\n" + timeCreated.toString() + "\n" + content;
 	}
-
-
 
 }

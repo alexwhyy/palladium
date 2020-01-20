@@ -5,8 +5,6 @@ public abstract class RecurringAccount {
 	protected String retailer;
 	protected int timesRenewed;
 
-
 	abstract public String toString();
-
 }
 

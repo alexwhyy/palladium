@@ -1,3 +1,14 @@
+/*
+Name:         MembershipList.java
+Author:       Alex Yuan
+Date:         Jan 18, 2020
+Purpose:      This class is responsible for storing the
+              the memberships in class form and allowing the
+              user to manipulate the list by adding, removing,
+              and searching. Additionally, it manages the parsing,
+              reading, and writing of the membership to the text file.
+*/
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -82,10 +93,11 @@ public class MembershipList {
         }
     }
 
+    // Allows the user to update the Memberships and save to the file.
     public void updateFile() {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-            out.write(""+length);
+            out.write("" + length);
             out.newLine();
             for (int i = 0; i < length; i++) {
                 out.write(memberships.get(i).toString());
@@ -100,13 +112,12 @@ public class MembershipList {
     public MembershipList(String directory) {
         Membership parsedMembership;
         filePath = directory;
-    memberships = new ArrayList<Membership>();
+        memberships = new ArrayList<Membership>();
+        // Attempt to parse the Memberships saved from the file first.
         try {
             BufferedReader in = new BufferedReader(new FileReader(directory));
-
-            length = Integer.parseInt(in.readLine())-1;
+            length = Integer.parseInt(in.readLine()) - 1;
             for (int i = 0; i < length; i++) {
-
                 parsedMembership = new Membership(in.readLine(), Double.parseDouble(in.readLine()),
                         new DateTime(in.readLine()), new DateTime(in.readLine()), Integer.parseInt(in.readLine()),
                         Double.parseDouble(in.readLine()), in.readLine());
