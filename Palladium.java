@@ -951,10 +951,10 @@ public class Palladium {
                     System.out.println("");
                     System.out.println("  Product #" + (i + 1));
                     System.out.println("");
-                    System.out.println("  Name:           " + Palladium.wishList.getProductIndex(i).getName());
-                    System.out.println("  Price:          " + Palladium.wishList.getProductIndex(i).getPrice());
-                    System.out.println("  Retailer:       " + Palladium.wishList.getProductIndex(i).getRetailer());
-                    System.out.println("  ID:             " + Palladium.wishList.getProductIndex(i).getId());
+                    System.out.println("  Name:           " + Palladium.wishList.getProductWithIndex(i).getName());
+                    System.out.println("  Price:          " + Palladium.wishList.getProductWithIndex(i).getPrice());
+                    System.out.println("  Retailer:       " + Palladium.wishList.getProductWithIndex(i).getRetailer());
+                    System.out.println("  ID:             " + Palladium.wishList.getProductWithIndex(i).getId());
                     System.out.println("_________________________________________");
                     System.out.println();
 
@@ -1031,7 +1031,7 @@ public class Palladium {
                 ArrayList<Product> searchResult = new ArrayList<Product>();
                 System.out.println("Please enter the name of the product");
                 input = Palladium.getStringInput();
-                searchResult = search.searchProductK(input, catalog.getCatalog());
+                searchResult = search.searchProduct(input, catalog.getCatalog());
                 if (searchResult.size() == 0) {
                     System.out.println(" ________________________________________");
                     System.out.println("|                                        |");
