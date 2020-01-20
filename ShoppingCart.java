@@ -54,6 +54,12 @@ public class ShoppingCart extends SavedProducts{
       removeProduct(position);
       updateFile();
    }
+   
+   /*
+   Name: addProduct
+   Purpose: Adds product to array
+   Description: Passes in product to be added
+   */
    public boolean addProduct(Product newProduct) {
       try {
          shoppingCart.add(newProduct);
@@ -66,6 +72,11 @@ public class ShoppingCart extends SavedProducts{
       }
    }
 
+   /*
+   Name: removeProduct
+   Purpose: Removes a product from the Array
+   Description: passes in index of Product to remove
+   */
    public boolean removeProduct(int index) {
       try {
          shoppingCart.remove(index);
@@ -76,13 +87,26 @@ public class ShoppingCart extends SavedProducts{
          return false;
       }
    }
-   public Product getProductId(int id) {
-   for (int i = 0 ; i < length ; i ++){
-      if (shoppingCart.get(i).getId() == id)return shoppingCart.get(i);
+   
+   /*
+   Name: getProductWithId
+   Purpose: finds a Product using Product Id
+   Description: passes in id to search with
+   */
+   public Product getProductWithId(int id) {
+      for (int i = 0 ; i < length ; i ++){
+         if (shoppingCart.get(i).getId() == id)
+            return shoppingCart.get(i);
+      }
+      return null;
    }
-   return null;
-   }
-   public Product getProductIndex(int index) {
+   
+   /*
+   Name: getProductWithIndex
+   Purpose: finds a Product using index of Array
+   Description: passes in index of object 
+   */
+   public Product getProductWithIndex(int index) {
       if (index > this.shoppingCart.size() - 1) {
          return null;
       } else {
