@@ -1,6 +1,6 @@
 class Subscription extends RecurringAccount {
-	public Subscription(String name, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed) {
-		this.name = name;
+	public Subscription(String retailer, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed) {
+		this.retailer = retailer;
 		this.cost = cost;
 		this.purchasedDate = purchasedDate;
 		this.expiryDate = expiryDate;
@@ -31,12 +31,12 @@ class Subscription extends RecurringAccount {
 		this.expiryDate = expiryDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getRetailer() {
+		return this.retailer;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRetailer(String retailer) {
+		this.retailer = retailer;
 	}
 
 	public int getTimesRenewed() {
@@ -53,6 +53,6 @@ class Subscription extends RecurringAccount {
 	}
 
 	public String toString() {
-		return this.name + "\n" + this.cost + "\n" + this.purchasedDate.toString() + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed;
+		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate.toString() + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed;
 	}
 }

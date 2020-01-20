@@ -2,20 +2,24 @@ public class Product {
 	String name;
 	double price;
 	String retailer;
-	String id;
-	boolean onSale;
+	int id;
+	DateTime  saleDate;
 	double salePercent;
-	Date saleEnd;
 	GiftCard[] applicableCards;
 	Membership[] applicableMemberships;
 
-	public Product(String name, double price, String retailer, String id, boolean onSale, double salePercent) {
+	public Product(String name, double price, String retailer,  String saleDate, double salePercent, int id) {
 		this.name = name;
 		this.price = price;
 		this.retailer = retailer;
 		this.id = id;
-		this.onSale = onSale;
-		this.salePercent = salePercent;
+		this.saleDate = new DateTime(saleDate);
+		this.salePercent = 1 - (salePercent/100);
+	}
+	public boolean onSale(DateTime curDate){
+		if (curDate.compareTo(saleDate) == 0){
+			return true;
+		}return false;
 	}
 
 	public String getName() {
@@ -42,24 +46,12 @@ public class Product {
 		this.retailer = retailer;
 	}
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
-	}
-
-	public boolean isOnSale() {
-		return this.onSale;
-	}
-
-	public boolean getOnSale() {
-		return this.onSale;
-	}
-
-	public void setOnSale(boolean onSale) {
-		this.onSale = onSale;
 	}
 
 	public double getSalePercent() {
@@ -70,13 +62,7 @@ public class Product {
 		this.salePercent = salePercent;
 	}
 
-	public Date getSaleEnd() {
-		return this.saleEnd;
-	}
 
-	public void setSaleEnd(Date saleEnd) {
-		this.saleEnd = saleEnd;
-	}
 
 	public GiftCard[] getApplicableCards() {
 		return this.applicableCards;
@@ -96,10 +82,9 @@ public class Product {
 
 	public String toString(boolean option) {
 		if (!option) {
-			return name + "\n" + price + "\n" + retailer + "\n" + id + "\n" + onSale + "\n" + salePercent;
-		}else {
-			return "";
+			return name + "\n" + price + "\n" + retailer + "\n" + id + "\n" + saleDate.toString() + "\n" + salePercent+"\n" + id;
 		}
+		return "";
 	}
 
 }

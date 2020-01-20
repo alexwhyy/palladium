@@ -2,8 +2,8 @@ class Membership extends RecurringAccount {
 	private double discount;
 	private String membershipNumber;
 
-	public Membership(String name, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed, double discount, String membershipNumber) {
-		this.name = name;
+	public Membership(String retailer, double cost, DateTime purchasedDate, DateTime expiryDate, int timesRenewed, double discount, String membershipNumber) {
+		this.retailer = retailer;
 		this.cost = cost;
 		this.purchasedDate = purchasedDate;
 		this.expiryDate = expiryDate;
@@ -11,7 +11,7 @@ class Membership extends RecurringAccount {
 		this.discount = discount;
 		this.membershipNumber = membershipNumber;
 	}
-		public double getCost() {
+	public double getCost() {
 		return this.cost;
 	}
 
@@ -35,12 +35,12 @@ class Membership extends RecurringAccount {
 		this.expiryDate = expiryDate;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getRetailer() {
+		return this.retailer;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRetailer(String retailer) {
+		this.retailer = retailer;
 	}
 
 	public int getTimesRenewed() {
@@ -68,6 +68,6 @@ class Membership extends RecurringAccount {
 	}	
 
 	public String toString() {
-		return this.name + "\n" + this.cost + "\n" + this.purchasedDate + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed + "\n" + this.discount + "\n" + this.membershipNumber;
+		return this.retailer + "\n" + this.cost + "\n" + this.purchasedDate + "\n" + this.expiryDate.toString() + "\n" + this.timesRenewed + "\n" + this.discount + "\n" + this.membershipNumber;
 	}
 }

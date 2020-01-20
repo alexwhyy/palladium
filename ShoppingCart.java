@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ShoppingCart extends SavedProducts{
    protected ArrayList<Product> shoppingCart = new ArrayList<Product>();
    private String filePath;
-   private int length;
+   public int length;
    
    /*
    Name: ShoppingCart
@@ -28,7 +28,7 @@ public class ShoppingCart extends SavedProducts{
          while ((input = in.readLine()) != null) {
             length = Integer.parseInt(input);
             for (int i = 0; i < length; i++) {
-               parsedProduct = new Product(in.readLine(), Double.parseDouble(in.readLine()), in.readLine(), in.readLine(), Boolean.parseBoolean(in.readLine()), Double.parseDouble(in.readLine()));
+               parsedProduct = new Product(in.readLine(), Double.parseDouble(in.readLine()), in.readLine(), in.readLine(), Double.parseDouble(in.readLine()),Integer.parseInt(in.readLine()));
                shoppingCart.add(parsedProduct);
             }
          }
@@ -74,7 +74,12 @@ public class ShoppingCart extends SavedProducts{
          return false;
       }
    }
-
+   public Product getProductId(int id) {
+   for (int i = 0 ; i < length ; i ++){
+      if (shoppingCart.get(i).getId() == id)return shoppingCart.get(i);
+   }
+   return null;
+   }
    public Product getProductIndex(int index) {
       if (index > this.shoppingCart.size() - 1) {
          return null;

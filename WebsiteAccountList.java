@@ -34,7 +34,7 @@ public class WebsiteAccountList {
     }
 
 
-    public WebsiteAccount getWebsiteAccountIndex(int index) {
+    public WebsiteAccount getIndex(int index) {
         if (index > this.length - 1) {
             return null;
         } else {

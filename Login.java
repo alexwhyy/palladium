@@ -7,9 +7,9 @@ public class Login {
     int numAccount;
 
     final String FILE_ERROR = "FILE_ERROR";
-    final String WEAK_PASSWORD = "WEAK_PASSWORD";
     final String USERNAME_TAKEN = "USERNAME_TAKEN";
-    final String USER_DOES_NOT_EXIST = "USER_DOES_NOT_EXIST";
+    final String WEAK_PASSWORD = "WEAK_PASSWORD";
+    final String INCORRECT_INFO = "Incorrect username or password";
 
     public Login(String filePath) {
         this.filePath = filePath;
@@ -34,13 +34,13 @@ public class Login {
         }
     }
 
-    public String compareLogin(String username, String password) {
+    public boolean compareLogin(String username, String password) {
         for (int i = 0; i < numAccount; i++) {
             if (username.compareTo(list[i].getUsername()) + password.compareTo(list[i].getPassword()) == 0) {
-                return username;
+                return true;
             }
         }
-        return "USER_NOT_FOUND";
+        return false;
     }
 
     public String forgetPassword(String username, String email) {
@@ -48,7 +48,7 @@ public class Login {
             if (username.compareTo(list[i].getUsername()) + email.compareTo(list[i].getEmail()) == 0)
                 return list[i].getPassword();
         }
-        return USER_DOES_NOT_EXIST;
+        return INCORRECT_INFO;
     }
 
     public String register(String username, String password, String email) {

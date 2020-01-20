@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class WishList extends SavedProducts{
    protected ArrayList<Product> wishList = new ArrayList<Product>();      
    private String filePath;
-   private int length;
+   public int length;
    
    /*
    Name: WishList
@@ -28,7 +28,7 @@ public class WishList extends SavedProducts{
          while ((input = in.readLine()) != null) {
             length = Integer.parseInt(input);
             for (int i = 0; i < length; i++) {
-               parsedProduct = new Product(in.readLine(), Double.parseDouble(in.readLine()), in.readLine(), in.readLine(), Boolean.parseBoolean(in.readLine()), Double.parseDouble(in.readLine()));
+               parsedProduct = new Product(in.readLine(), Double.parseDouble(in.readLine()), in.readLine(), in.readLine(), Double.parseDouble(in.readLine()),Integer.parseInt(in.readLine()));
                wishList.add(parsedProduct);
             }
          }
@@ -49,8 +49,8 @@ public class WishList extends SavedProducts{
    Description: passes in ArrayList(from ShoppingCart) and the position of product
    in Wishlist
    */
-   public void addToShoppingCart(int position, ArrayList<Product> shoppingCart){
-      shoppingCart.add(wishList.get(position));
+   public void addToShoppingCart(int position, ShoppingCart shoppingCart){
+      shoppingCart.addProduct(wishList.get(position));
       wishList.remove(position);
       updateFile();
    }
@@ -62,6 +62,13 @@ public class WishList extends SavedProducts{
       } catch (Exception e) {
          System.out.println(e);
          return false;
+      }
+   }
+   public Product getProductIndex(int index) {
+      if (index > this.wishList.size() - 1) {
+         return null;
+      } else {
+         return this.wishList.get(index);
       }
    }
 

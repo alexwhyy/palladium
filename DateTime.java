@@ -8,7 +8,7 @@ public class DateTime {
     int hour;
     int min;
 
-    public DateTime (int month, int day, int year){
+    public DateTime(int month, int day, int year) {
         this.day = day;
         this.month = month;
         this.year = year;
@@ -17,11 +17,8 @@ public class DateTime {
     public DateTime(String date_string) {
         String[] split_date = date_string.split("/");
         this.month = Integer.parseInt(split_date[0]);
-        System.out.println(month);
         this.day = Integer.parseInt(split_date[1]);
-        System.out.println(day);
         this.year = Integer.parseInt(split_date[2]);
-        System.out.println(year);
     }
 
     public DateTime() {
@@ -29,8 +26,6 @@ public class DateTime {
         LocalDateTime now = LocalDateTime.now();
         String formattedDate = dtf.format(now);
         String temp[] = formattedDate.split("-");
-        for (int i = 0; i < temp.length; i++)
-            System.out.println(temp[i]);
     }
 
     public DateTime(int year, int month, int day, int hour, int min) {
@@ -40,8 +35,16 @@ public class DateTime {
         this.hour = hour;
         this.min = min;
     }
+
     public static boolean verifyDate(int month, int day, int year) {
         return (month <= 12 && month >= 1) && (day <= 31 && day >= 1) && (year >= 0);
+    }
+
+    public int compareTo(DateTime other) {
+        if (this.year == other.year) {
+            if (this.month == other.month) return this.day - other.day;
+            else return this.month - other.month;
+        } else return this.year - other.year;
     }
 
     public static boolean verifyDate(DateTime dateTime) {

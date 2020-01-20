@@ -1,20 +1,20 @@
 public class WebsiteAccount {
-    private String account;
+    private String username;
     private String password;
     private String website;
 
-    public WebsiteAccount(String account, String password, String website) {
-        this.account = account;
+    public WebsiteAccount(String username, String password, String website) {
+        this.username= username;
         this.password = password;
         this.website = website;
     }
 
-    public String getAccount() {
-        return account;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setUsername(String username) {
+        this.username= username;
     }
 
     public String getPassword() {

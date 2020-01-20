@@ -1,0 +1,301 @@
+51
+Office Chair
+29.99
+Home Depot
+1/22/2020
+0
+1
+Reclining Chair
+59.99
+Home Depot
+1/22/2020
+0
+2
+PewDiePie Chair
+399.99
+BestBuy
+1/26/2020
+0
+3
+Nylon Rope 12’
+9.99
+ULINE Canada
+1/25/2020
+10
+4
+Nylon Rope 60’
+39.99
+ULINE Canada
+1/23/2020
+10
+5
+Twisted Sisal Rope 60’
+9.99
+ULINE Canada
+1/22/2020
+10
+6
+Twisted Sisal Rope 500’
+79.99
+ULINE Canada
+1/22/2020
+10
+7
+Handbook of Knots
+5.31
+Amazon Canada
+1/22/2020
+50
+8
+Tyelnol 50 tablets
+13.99
+Shopper’s Drugmart
+1/22/2020
+69
+9
+Razor Blades 10 pack
+3.99
+Shopper’s Drugmart
+1/22/2020
+66
+10
+Samsung Galaxy Note10+ 256GB Smartphone
+1499.99
+BestBuy
+1/22/2020
+50
+11
+Bose Soundbar 700
+1000.00
+BestBuy
+1/22/2020
+25
+12
+Sony 65" 4K UHD HDR LED Android Smart TV
+2299.99
+BestBuy
+1/22/2020
+33
+13
+GoPro HERO8 Waterproof 4K Sports & Helmet Camera
+529.99
+BestBuy
+1/22/2020
+10
+14
+HP 14" Laptop - Silver (AMD Ryzen 3 3200U/512GB SSD/8GB RAM/Windows 10)
+649.99
+BestBuy
+1/25/2020
+25
+15
+Dyson V11 Torque Drive Cordless Stick Vacuum
+799.99
+BestBuy
+1/25/2020
+18
+16
+Dell Gaming PC - Abyss Grey (Intel Core i5-9400/512GB SSD/8GB RAM/NVIDIA GeForce 1660)
+1099.99
+BestBuy
+1/25/2020
+11
+17
+Arlo Pro Wire-Free Security System with 4 HD Cameras
+799.99
+BestBuy
+1/30/2020
+25
+18
+ViscoLogic MAXIMA Comfort Luxurious Organic Cotton Quilted Flippable Foam Mattress - Single (Twin)
+400.00
+Walmart
+1/30/2020
+60
+20
+Nature's Way SystemWell Ultimate Immunity 90 tabs
+29.26
+Walmart
+1/23/2020
+10
+21
+ViscoLogic Luxury Shredded Memory Foam Pillow with Thin Memory Foam Shell, Cool Bamboo Mix Fabric Cover - Never compressed- Pillow (Single, King)
+59.99
+Walmart
+1/23/2020
+33
+22
+Diono Traverze Super Compact Stroller - Yellow Sulphur Linear with Carbon Chassis
+319.99
+Walmart
+1/16/2020
+50
+23
+Dip Station Multi-Function Bar Body Strength Training Exercise W/ Slings Loops
+182.99
+Walmart
+1/22/2020
+10
+24
+Bluetooth 5.0 Headphones, Wireless Earbuds 3D Stereo Sports Headsets IPX5 Water-resistant Earphones w/ Charge Case for iOS Android
+39.38
+Walmart
+1/22/2020
+50
+25
+PrimeCables TV Wall Mount Bracket for Most 23-42 inch LED, LCD Curved / Flat Panel TVs up to VESA 200 and 66 Lbs
+12.99
+Walmart
+1/22/2020
+10
+26
+axGear Kingston 64GB Micro SD Memory Card 64G SDHC Class 10 UHS-I TF w/ SD Adapter 64 GB
+30.95
+Walmart
+1/20/2020
+33
+27
+SortWise MDF End Table/Night Stand with Storage Bins, Removeable Storage Drawer Bedroom Organizer
+99.99
+Walmart
+1/22/2020
+45
+28
+ViscoLogic SAVY Deep Feel High Density Foam Mattress for Guest Beds, Bunk Beds (Twin)
+400.00
+Walmart
+1/22/2020
+55
+29
+TurboTax Standard 2019, 8 Returns, English [Download]
+34.99
+Staples
+1/22/2020
+25
+30
+Cottonelle Ultra Comfort Care Double Roll Toilet Paper, 12 Rolls/Pack (39417)
+10.99
+Staples
+1/22/2020
+60
+31
+Staples Hyken Technical Mesh Task Chair, Red
+299.99
+Staples
+1/22/2020
+66
+32
+Acer 31.5" WQHD LCD IPS Monitor with AMD FreeSync Technology - ET322QU
+399.99
+Staples
+1/22/2020
+25
+33
+Staples FSC-Certified Copy Paper, 20 lb., 8-1/2" x 11", Case
+63.99
+Staples
+1/22/2020
+25
+34
+Staples Recycled File Folders, Letter Size, 8-1/2" x 11", Manila, 100 Pack
+10.49
+Staples
+1/22/2020
+10
+35
+Staples Hyken Technical Mesh Task Chair, Black
+299.99
+Staples
+1/22/2020
+33
+36
+Sharpie Fine Tip Permanent Markers, Black, 12 Pack
+12.79
+Staples
+1/22/2020
+33
+37
+Lexar JumpDrive TwistTurn2 32GB USB 2.0 Flash Drive, 3 Pack
+29.99
+Staples
+1/22/2020
+33
+38
+HP OfficeJet 3830 All-in-One Inkjet Printer (K7V40A#B1H)
+99.99
+Staples
+1/22/2020
+60
+39
+Troy-Bilt 61 cm (24 in.) 3-stage 272 cc Gas Snow Blower
+1499.99
+Costco
+1/22/2020
+7
+40
+Dynamic Saunas San Marino 2-person Low EMF FAR Infrared Sauna
+1999.99
+Costco
+1/22/2020
+15
+41
+Teeter Fitspine X2
+599.99
+Costco
+1/22/2020
+20
+42
+Dyson V11 Cordless Stick Vacuum Torque Drive + with Floor Dok
+899.99
+Costco
+1/22/2020
+17
+43
+Blackstone 25.4 cm (10 in.) Cooling Gel Memory Foam Queen Mattress
+429.99
+Costco
+1/22/2020
+29
+44
+Starbucks Single Serve Coffee Caffè Verona, 2 x 54 K-Cup Pods
+76.99
+Costco
+1/22/2020
+18
+45
+Champion 9000 W Portable Dual Fuel Generator
+1199.99
+Costco
+1/22/2020
+10
+46
+Sinclair 3-piece Fabric Sectional
+1899.99
+Costco
+1/22/2020
+25
+47
+Melanie Steel Lamp, 2-pack
+129.99
+Costco
+1/22/2020
+23
+48
+Lifetime 10 ft. x 8 ft. Outdoor Storage Shed
+1799.99
+Costco
+1/22/2020
+17
+49
+HOOK-AND-LOOP MONOGRAM SHORT SLEEVE T-SHIRT
+1710.00
+Louis Vuitton
+1/20/2020
+10
+50
+1.1 MILLIONAIRES SUNGLASSES
+1020.00
+Louis Vuitton
+1/31/2020
+10
+51

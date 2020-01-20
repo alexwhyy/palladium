@@ -116,7 +116,7 @@ public abstract class SavedProducts{
          return;
       }
       for(int i = 0; i < count - 1; i++){
-         if(list.get(i).id.compareTo(list.get(i).id) > 0){
+         if(list.get(i).id>list.get(i).id){
             Product holder = list.get(i);
             list.set(i, list.get(i + 1));
             list.set(i + 1, holder);
@@ -158,5 +158,6 @@ public abstract class SavedProducts{
             list.set(i + 1, holder);
          }
       }
-   }   
+   }
+
 }
