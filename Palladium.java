@@ -22,6 +22,7 @@ public class Palladium {
 	public static String filePath;
 	public static String accountListPath;
 	public static Catalog catalog;
+	public static WebsiteAccountList websiteAccountList;
 
 	public static void main(String[] args) {
 
@@ -179,7 +180,6 @@ public class Palladium {
 		System.out.println("|                                        |");
 		System.out.println("| Login is successful                    |");
 		System.out.println("|________________________________________|");
-		// loadDataUi();
 		filePath = filePath + "\\" + username;
 		accountConfig();
 	}
@@ -261,6 +261,9 @@ public class Palladium {
 			out = new BufferedWriter(new FileWriter(filePath + "\\ShoppingCart.txt"));
 			out.write("0");
 			out.close();
+			out = new BufferedWriter(new FileWriter(filePath + "\\WebsiteAccount.txt"));
+			out.write("0");
+			out.close();
 
 		} catch (IOException iox) {
 			System.out.println("Failed to load files.");
@@ -278,6 +281,7 @@ public class Palladium {
 		wishList = new WishList(filePath + "\\WishList.txt");
 		giftCardList = new GiftCardList(filePath + "\\GiftCard.txt");
 		notificationList = new NotificationList(filePath + "\\NotificationList.txt");
+		websiteAccountList = new WebsiteAccountList(filePath+"\\WebsiteAccount.txt");
 		mainMenuUi();
 	}
 

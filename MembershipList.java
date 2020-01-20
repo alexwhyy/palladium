@@ -65,6 +65,7 @@ public class MembershipList {
     public boolean removeMembership(int index) {
         try {
             memberships.remove(index);
+            length--;
             return true;
         } catch (Exception e) {
             return false;

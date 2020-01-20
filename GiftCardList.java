@@ -49,12 +49,21 @@ public class GiftCardList {
 	public boolean addGiftCard(GiftCard giftCard) {
 		try {
 			this.giftCards.add(giftCard);
+			length++;
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
-
+	public boolean removeGiftcard(int index) {
+		try {
+			this.giftCards.remove(index);
+			length--;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	public void updateFile(){
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));

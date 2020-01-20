@@ -51,10 +51,38 @@ public class ShoppingCart extends SavedProducts{
    */
    public void addToWishList(int position, ArrayList<Product> wishList){
       wishList.add(shoppingCart.get(position));
-      shoppingCart.remove(position);
+      removeProduct(position);
       updateFile();
    }
-   
+   public boolean addProduct(Product newProduct) {
+      try {
+         shoppingCart.add(newProduct);
+         length++;
+         return true;
+      } catch (Exception e) {
+         System.out.println(e);
+         return false;
+      }
+   }
+
+   public boolean removeProduct(int index) {
+      try {
+         shoppingCart.remove(index);
+         length--;
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
+
+   public Product getProductIndex(int index) {
+      if (index > this.shoppingCart.size() - 1) {
+         return null;
+      } else {
+         return this.shoppingCart.get(index);
+      }
+   }
+
    /*
    Name: updateFile
    Purpose: Updates file whenever a change is made

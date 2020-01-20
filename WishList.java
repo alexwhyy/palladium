@@ -54,7 +54,26 @@ public class WishList extends SavedProducts{
       wishList.remove(position);
       updateFile();
    }
-   
+   public boolean addProduct(Product newProduct) {
+      try {
+         wishList.add(newProduct);
+         length++;
+         return true;
+      } catch (Exception e) {
+         System.out.println(e);
+         return false;
+      }
+   }
+
+   public boolean removeProduct(int index) {
+      try {
+         wishList.remove(index);
+         length--;
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
    /*
    Name: updateFile
    Purpose: Updates file whenever a change is made

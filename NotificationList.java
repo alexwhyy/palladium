@@ -40,6 +40,7 @@ public class NotificationList {
 	public boolean addNotification(Notification new_notification) {
 		try {
 			this.notifications.add(new_notification);
+			length++;
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -86,7 +87,7 @@ public class NotificationList {
 	}
 
 	public String toString() {
-		return "There are " + notifications.size() + " notifications in this list.";
+		return "There are " + length + " notifications in this list.";
 	}
 
 }
