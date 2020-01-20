@@ -180,6 +180,7 @@ public class Palladium {
 		System.out.println("| Login is successful                    |");
 		System.out.println("|________________________________________|");
 		// loadDataUi();
+		filePath = filePath + "\\" + username;
 		accountConfig();
 	}
 
@@ -257,7 +258,7 @@ public class Palladium {
 			out = new BufferedWriter(new FileWriter(filePath + "\\MembershipList.txt"));
 			out.write("0");
 			out.close();
-			out = new BufferedWriter(new FileWriter(filePath + "\\shoppingCart.txt"));
+			out = new BufferedWriter(new FileWriter(filePath + "\\ShoppingCart.txt"));
 			out.write("0");
 			out.close();
 
@@ -269,14 +270,14 @@ public class Palladium {
 	}
 
 	static void accountConfig() {
-		subscriptionList = new SubscriptionList(filePath + "SubsciptionList.txt");
-		couponList = new CouponList(filePath + "CouponList.txt");
-		membershipList = new MembershipList(filePath + "MembershipList.txt");
-		creditCardList = new CreditCardList(filePath + "CreditCardList.txt");
-		shoppingCart = new ShoppingCart(filePath + "ShoppingCart.txt");
-		wishList = new WishList(filePath + "WishList.txt");
-		giftCardList = new GiftCardList(filePath + "GiftCardList.txt");
-		notificationList = new NotificationList(filePath + "NotificationList.txt");
+		subscriptionList = new SubscriptionList(filePath + "\\SubsciptionList.txt");
+		couponList = new CouponList(filePath + "\\CouponList.txt");
+		membershipList = new MembershipList(filePath + "\\MembershipList.txt");
+		creditCardList = new CreditCardList(filePath + "\\CreditCardList.txt");
+		shoppingCart = new ShoppingCart(filePath + "\\ShoppingCart.txt");
+		wishList = new WishList(filePath + "\\WishList.txt");
+		giftCardList = new GiftCardList(filePath + "\\GiftCard.txt");
+		notificationList = new NotificationList(filePath + "\\NotificationList.txt");
 		mainMenuUi();
 	}
 
@@ -606,6 +607,7 @@ public class Palladium {
 	}
 
 	public static void websiteAccountsUi() {
+
 	}
 
 	public static void shoppingUi() {

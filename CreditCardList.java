@@ -20,14 +20,13 @@ public class CreditCardList {
 		creditCards=new ArrayList<CreditCard>();
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
-			String input;
-			while ((input = in.readLine()) != null) {
-				length = Integer.parseInt(input);
+
+				length = Integer.parseInt(in.readLine());
 				for (int i = 0; i < length; i++) {
 					parsedCreditCard = new CreditCard(in.readLine(), Integer.parseInt(in.readLine()),
 							Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
 					creditCards.add(parsedCreditCard);
-				}
+
 			}
 			in.close();
 		} catch (IOException iox) {
@@ -81,17 +80,21 @@ public class CreditCardList {
 	public void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-			out.write(length);
+			out.write(""+length);
 			out.newLine();
 			for (int i = 0; i < length; i++) {
+				/*
 				out.write(creditCards.get(i).getName());
 				out.newLine();
-				out.write(creditCards.get(i).getNumber());
+				out.write(""+creditCards.get(i).getNumber());
 				out.newLine();
-				out.write(creditCards.get(i).getPin());
+				out.write(""+creditCards.get(i).getPin());
 				out.newLine();
 				out.write(creditCards.get(i).getExpiryDate().toString());
 
+				 */
+				out.write(creditCards.get(i).toString());
+				out.newLine();
 			}
 			out.close();
 		} catch (IOException iox) {
