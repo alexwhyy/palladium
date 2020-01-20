@@ -892,10 +892,10 @@ public class Palladium {
                     System.out.println("");
                     System.out.println("  Product #" + (i + 1));
                     System.out.println("");
-                    System.out.println("  Name:           " + Palladium.shoppingCart.getProductIndex(i).getName());
-                    System.out.println("  Price:          " + Palladium.shoppingCart.getProductIndex(i).getPrice());
-                    System.out.println("  Retailer:       " + Palladium.shoppingCart.getProductIndex(i).getRetailer());
-                    System.out.println("  ID:             " + Palladium.shoppingCart.getProductIndex(i).getId());
+                    System.out.println("  Name:           " + Palladium.shoppingCart.getProductWithIndex(i).getName());
+                    System.out.println("  Price:          " + Palladium.shoppingCart.getProductWithIndex(i).getPrice());
+                    System.out.println("  Retailer:       " + Palladium.shoppingCart.getProductWithIndex(i).getRetailer());
+                    System.out.println("  ID:             " + Palladium.shoppingCart.getProductWithIndex(i).getId());
                     System.out.println("_________________________________________");
                     System.out.println();
 
@@ -905,7 +905,7 @@ public class Palladium {
                 System.out.println("Please enter the ID of the product");
                 input = Palladium.getIntInput();
 
-                shoppingCart.addProduct(catalog.getProductId(input));
+                shoppingCart.addProduct(catalog.getWithProductId(input));
                 break;
             case 3:
                 System.out.println("Please enter the index of the product");
