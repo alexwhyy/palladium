@@ -55,6 +55,12 @@ public class WishList extends SavedProducts{
       length--;
       updateFile();
    }
+   
+   /*
+   Name: addProduct
+   Purpose: Adds product to array
+   Description: Passes in product to be added
+   */
    public boolean addProduct(Product newProduct) {
       try {
          wishList.add(newProduct);
@@ -66,14 +72,12 @@ public class WishList extends SavedProducts{
          return false;
       }
    }
-   public Product getProductIndex(int index) {
-      if (index > this.wishList.size() - 1) {
-         return null;
-      } else {
-         return this.wishList.get(index);
-      }
-   }
 
+   /*
+   Name: removeProduct
+   Purpose: Removes a product from the Array
+   Description: passes in index of Product to remove
+   */
    public boolean removeProduct(int index) {
       try {
          wishList.remove(index);
@@ -84,6 +88,20 @@ public class WishList extends SavedProducts{
          return false;
       }
    }
+   
+   /*
+   Name: getProductWithIndex
+   Purpose: finds a Product using index of Array
+   Description: passes in index of object 
+   */
+   public Product getProductWithIndex(int index) {
+      if (index > this.wishList.size() - 1) {
+         return null;
+      } else {
+         return this.wishList.get(index);
+      }
+   }
+   
    /*
    Name: updateFile
    Purpose: Updates file whenever a change is made
