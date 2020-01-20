@@ -52,12 +52,14 @@ public class WishList extends SavedProducts{
    public void addToShoppingCart(int position, ShoppingCart shoppingCart){
       shoppingCart.addProduct(wishList.get(position));
       wishList.remove(position);
+      length--;
       updateFile();
    }
    public boolean addProduct(Product newProduct) {
       try {
          wishList.add(newProduct);
          length++;
+         updateFile();
          return true;
       } catch (Exception e) {
          System.out.println(e);
@@ -76,6 +78,7 @@ public class WishList extends SavedProducts{
       try {
          wishList.remove(index);
          length--;
+         updateFile();
          return true;
       } catch (Exception e) {
          return false;
@@ -89,7 +92,7 @@ public class WishList extends SavedProducts{
    void updateFile(){
       try {
          BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-         out.write(length);
+         out.write(""+length);
          out.newLine();
          for (int i = 0 ; i < length; i ++){
             out.write(wishList.get(i).toString(false));

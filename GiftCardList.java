@@ -19,7 +19,7 @@ public class GiftCardList {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;
 			while ((input = in.readLine()) != null) {
-				length = Integer.parseInt(input);
+				length = Integer.parseInt(input)-1;
 				for (int i = 0; i < length; i++) {
 					parsedGiftCard = new GiftCard(in.readLine(), in.readLine(), Integer.parseInt(in.readLine()), Double.parseDouble(in.readLine()), Integer.parseInt(in.readLine()), new DateTime(in.readLine()));
 					giftCards.add(parsedGiftCard);
@@ -50,6 +50,7 @@ public class GiftCardList {
 		try {
 			this.giftCards.add(giftCard);
 			length++;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -59,6 +60,7 @@ public class GiftCardList {
 		try {
 			this.giftCards.remove(index);
 			length--;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -67,7 +69,7 @@ public class GiftCardList {
 	public void updateFile(){
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-			out.write(length);
+			out.write(""+length);
 			out.newLine();
 			for (int i = 0 ; i < length; i ++){
 				out.write(giftCards.get(i).toString());

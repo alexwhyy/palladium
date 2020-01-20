@@ -26,7 +26,7 @@ public class ShoppingCart extends SavedProducts{
          BufferedReader in = new BufferedReader(new FileReader(this.filePath));
          String input;
          while ((input = in.readLine()) != null) {
-            length = Integer.parseInt(input);
+            length = Integer.parseInt(input)-1;
             for (int i = 0; i < length; i++) {
                parsedProduct = new Product(in.readLine(), Double.parseDouble(in.readLine()), in.readLine(), in.readLine(), Double.parseDouble(in.readLine()),Integer.parseInt(in.readLine()));
                shoppingCart.add(parsedProduct);
@@ -58,6 +58,7 @@ public class ShoppingCart extends SavedProducts{
       try {
          shoppingCart.add(newProduct);
          length++;
+         updateFile();
          return true;
       } catch (Exception e) {
          System.out.println(e);
@@ -69,6 +70,7 @@ public class ShoppingCart extends SavedProducts{
       try {
          shoppingCart.remove(index);
          length--;
+         updateFile();
          return true;
       } catch (Exception e) {
          return false;
@@ -96,7 +98,7 @@ public class ShoppingCart extends SavedProducts{
    void updateFile(){
       try {
          BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-         out.write(length);
+         out.write(""+length);
          out.newLine();
          for (int i = 0 ; i < length; i ++){
             out.write(shoppingCart.get(i).toString(false));

@@ -14,7 +14,7 @@ public class CouponList {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;
 			while ((input = in.readLine()) != null) {
-				length = Integer.parseInt(input);
+				length = Integer.parseInt(input)-1;
 				for (int i = 0; i < length; i++) {
 					parsedCoupon = new Coupon(in.readLine(), in.readLine(), Double.parseDouble(in.readLine()),
 							new DateTime(in.readLine()));
@@ -54,6 +54,7 @@ public class CouponList {
 		try {
 			coupons.add(new_coupon);
 			this.length++;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -64,6 +65,7 @@ public class CouponList {
 		try {
 			this.coupons.remove(index);
 			length--;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -73,7 +75,7 @@ public class CouponList {
 	public void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-			out.write(length);
+			out.write(""+length);
 			out.newLine();
 			for (int i = 0; i < length; i++) {
 				out.write(this.coupons.get(i).toString());

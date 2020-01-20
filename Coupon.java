@@ -7,7 +7,7 @@ class Coupon {
 	public Coupon(String name, String retailer, double discount, DateTime expiryDate) {
 		this.name = name;
 		this.retailer = retailer;
-		this.discount = discount;
+		this.discount = 1-(discount/100);
 		this.expiryDate = expiryDate;
 	}
 

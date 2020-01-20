@@ -1027,7 +1027,7 @@ public class Palladium {
                     ArrayList<Product> searchResult = new ArrayList<Product>();
                     System.out.println("Please enter the name of the product");
                     input = Palladium.getStringInput();
-                    searchResult = search.searchProduct(input,catalog.getCatalog());
+                    searchResult = search.searchProductK(input,catalog.getCatalog());
                     if (searchResult.size() == 0) {
                         System.out.println(" ________________________________________");
                         System.out.println("|                                        |");
@@ -1036,18 +1036,18 @@ public class Palladium {
                     }
 
                     for (int i = 0; i < searchResult.size(); i++) {
-                        if (i == 0) {
+
                             System.out.println("_________________________________________");
                             System.out.println("");
                             System.out.println("  Product #" + (i + 1));
                             System.out.println("");
                             System.out.println("  Name:           " + searchResult.get(i).getName());
-                            System.out.println("  Price:           " + searchResult.get(i).getPrice());
-                            System.out.println("  Retailer:            " + searchResult.get(i).getRetailer());
-                            System.out.println("  ID:            " + searchResult.get(i).getId());
+                            System.out.println("  Price:          " + searchResult.get(i).getPrice());
+                            System.out.println("  Retailer:       " + searchResult.get(i).getRetailer());
+                            System.out.println("  ID:             " + searchResult.get(i).getId());
                             System.out.println("_________________________________________");
                             System.out.println();
-                        }
+
                     }
                     break;
                 case 3:
@@ -1143,7 +1143,7 @@ public class Palladium {
                                 + ") #" + (i + 1));
                         System.out.println("");
                         System.out.println(
-                                "  Retailer:              " + Palladium.membershipList.getMembershipIndex(i).getRetailer());
+                                "  Retailer:          " + Palladium.membershipList.getMembershipIndex(i).getRetailer());
                         System.out.println(
                                 "  Cost:              " + Palladium.membershipList.getMembershipIndex(i).getCost());
                         System.out.println("  Purchased Date:    "
@@ -1154,9 +1154,9 @@ public class Palladium {
                                 "  Times Renewed:     " + Palladium.membershipList.getMembershipIndex(i).getTimesRenewed());
 
                         System.out.println(
-                                "  Discount:         " + Palladium.membershipList.getMembershipIndex(i).getDiscount());
+                                "  Discount:          " + Palladium.membershipList.getMembershipIndex(i).getDiscount());
 
-                        System.out.println("  Membership ID:    "
+                        System.out.println("  Membership ID:     "
                                 + Palladium.membershipList.getMembershipIndex(i).getMembershipNumber());
 
                         System.out.println("_________________________________________");
@@ -1652,7 +1652,7 @@ public class Palladium {
                         System.out.println("");
                         System.out.println("  Name:          " + Palladium.couponList.getCouponIndex(i).getName());
                         System.out.println("  Retailer:      " + Palladium.couponList.getCouponIndex(i).getRetailer());
-                        System.out.println("  Discount:      " + Palladium.couponList.getCouponIndex(i).getDiscount());
+                        System.out.println("  Discount:      " + Palladium.couponList.getCouponIndex(i).getDiscount()*100 +"%");
                         System.out.println(
                                 "  Expiry Date:   " + Palladium.couponList.getCouponIndex(i).getExpiryDate().toString());
                         System.out.println("_________________________________________");

@@ -77,6 +77,7 @@ public class SubscriptionList {
 		try {
 			subscriptions.add(newSubscription);
 			length++;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -87,6 +88,8 @@ public class SubscriptionList {
 	public boolean removeSubscription(int index) {
 		try {
 			subscriptions.remove(index);
+			length--;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -104,7 +107,7 @@ public class SubscriptionList {
 	public void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-			out.write(length);
+			out.write(""+length);
 			out.newLine();
 			for (int i = 0; i < length; i++) {
 				out.write(subscriptions.get(i).toString());
@@ -128,7 +131,7 @@ public class SubscriptionList {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(directory));
 			
-			length = Integer.parseInt(in.readLine());
+			length = Integer.parseInt(in.readLine())-1;
 			for (int i = 0; i < length; i++) {
 				
 				parsedName = in.readLine();

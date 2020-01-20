@@ -19,7 +19,7 @@ public class NotificationList {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input;
 			while ((input = in.readLine()) != null) {
-				length = Integer.parseInt(input);
+				length = Integer.parseInt(input)-1;
 				for (int i = 0; i < length; i++) {
 					parsedNotification = new Notification(in.readLine(), Boolean.parseBoolean(in.readLine()),
 							new DateTime(in.readLine()), in.readLine());
@@ -41,6 +41,7 @@ public class NotificationList {
 		try {
 			this.notifications.add(new_notification);
 			length++;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -59,6 +60,7 @@ public class NotificationList {
 		try {
 			this.notifications.remove(index);
 			length--;
+			updateFile();
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -69,12 +71,13 @@ public class NotificationList {
 		for (int i = 0; i < this.notifications.size(); i++) {
 			this.notifications.remove(i);
 		}
+		updateFile();
 	}
 
 	private void updateFile() {
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-			out.write(length);
+			out.write(""+length);
 			out.newLine();
 			for (int i = 0; i < length; i++) {
 				out.write(notifications.get(i).toString());

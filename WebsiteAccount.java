@@ -8,7 +8,9 @@ public class WebsiteAccount {
         this.password = password;
         this.website = website;
     }
-
+    public String toString(){
+        return username+"\n"+password+"\n"+website;
+    }
     public String getUsername() {
         return username;
     }

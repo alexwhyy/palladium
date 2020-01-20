@@ -13,7 +13,30 @@ public class Search{
    Purpose: searches an ArrayList for all matches and returns an ArrayList containing them 
    Description: passes in String to search with and ArrayList to search through
    */
-   public static ArrayList<Product> searchProduct(String query, ArrayList<Product> catalog){   
+   public static ArrayList<Product> searchProductK(String query,  ArrayList<Product> catalog){
+      ArrayList<Product> returnList = new ArrayList<Product>();
+      int queryLength = query.length();
+      int productLength;
+      query = query.toLowerCase();
+      String productName;
+      for(int i = 0 ; i < catalog.size(); i++ ){
+         productName = catalog.get(i).name.toLowerCase();
+         productLength = productName.length();
+         for(int j = 0 ; j <= productLength-queryLength; j ++){
+            int k;
+            for(k = 0 ; k < queryLength ; k ++){
+               if (productName.charAt(j + k) != query.charAt(k))
+                  break;
+            }
+            if (k == queryLength){
+               returnList.add(catalog.get(i));
+            }
+
+         }
+      }
+      return returnList;
+   }
+   public static ArrayList<Product> searchProduct(String query, ArrayList<Product> catalog){
       ArrayList<Product> returnList = new ArrayList<Product>();   //list that will be returned
       char queryArray[] = new char[query.length()];               //char array made using query
       query = query.toLowerCase();                                //query list initalization
@@ -23,7 +46,7 @@ public class Search{
       
       for(int i = 0; i < catalog.size(); i++){                    //loops through all catalog entries
       
-         char catalogArray[] = new char[catalog.get(i).name.length()]; 
+         char catalogArray[] = new char[catalog.get(i).name.length()];
          String currentEntry = catalog.get(i).name.toLowerCase();
          for(int j = 0; j < currentEntry.length(); j++){
             catalogArray[j] = currentEntry.charAt(j);

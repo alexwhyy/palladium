@@ -16,7 +16,7 @@ public class WebsiteAccountList {
             BufferedReader in = new BufferedReader(new FileReader(this.filePath));
             String input;
             while ((input = in.readLine()) != null) {
-                length = Integer.parseInt(input);
+                length = Integer.parseInt(input)-1;
                 for (int i = 0; i < length; i++) {
                     parsedWebsiteAccount = new WebsiteAccount(in.readLine(),in.readLine(),in.readLine());
                     websiteAccounts.add(parsedWebsiteAccount);
@@ -46,6 +46,7 @@ public class WebsiteAccountList {
         try {
             websiteAccounts.add(new_websiteAccount);
             this.length++;
+            updateFile();
             return true;
         } catch (Exception e) {
             return false;
@@ -56,6 +57,7 @@ public class WebsiteAccountList {
         try {
             this.websiteAccounts.remove(index);
             length--;
+            updateFile();
             return true;
         } catch (Exception e) {
             return false;
@@ -65,7 +67,7 @@ public class WebsiteAccountList {
     public void updateFile() {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-            out.write(length);
+            out.write(""+length);
             out.newLine();
             for (int i = 0; i < length; i++) {
                 out.write(this.websiteAccounts.get(i).toString());

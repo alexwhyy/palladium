@@ -21,7 +21,7 @@ public class CreditCardList {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(this.filePath));
 			String input = in.readLine();
-				length = Integer.parseInt(input);
+				length = Integer.parseInt(input)-1;
 				for (int i = 0; i < length; i++) {
 					parsedCreditCard = new CreditCard(in.readLine(), Integer.parseInt(in.readLine()),
 							Integer.parseInt(in.readLine()), new DateTime(in.readLine()));

@@ -58,7 +58,7 @@ public class Catalog extends SavedProducts {
     void updateFile() {
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(filePath));
-            out.write(length);
+            out.write(""+length);
             out.newLine();
             for (int i = 0; i < length; i++) {
                 out.write(catalog.get(i).toString(false));
