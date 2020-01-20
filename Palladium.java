@@ -963,7 +963,7 @@ public class Palladium {
             case 2:
                 System.out.println("Please enter the ID of the product");
                 input = Palladium.getIntInput();
-                wishList.addProduct(catalog.getProductId(input));
+                wishList.addProduct(catalog.getProductWithId(input));
                 break;
             case 3:
                 System.out.println("Please enter the Index of the product");
@@ -1017,10 +1017,10 @@ public class Palladium {
                     System.out.println("");
                     System.out.println("  Product #" + (i + 1));
                     System.out.println("");
-                    System.out.println("  Name:          " + Palladium.catalog.getProductIndex(i).getName());
-                    System.out.println("  Price:         " + Palladium.catalog.getProductIndex(i).getPrice());
-                    System.out.println("  Retailer:      " + Palladium.catalog.getProductIndex(i).getRetailer());
-                    System.out.println("  ID:            " + Palladium.catalog.getProductIndex(i).getId());
+                    System.out.println("  Name:          " + Palladium.catalog.getProductWithIndex(i).getName());
+                    System.out.println("  Price:         " + Palladium.catalog.getProductWithIndex(i).getPrice());
+                    System.out.println("  Retailer:      " + Palladium.catalog.getProductWithIndex(i).getRetailer());
+                    System.out.println("  ID:            " + Palladium.catalog.getProductWithIndex(i).getId());
                     System.out.println("_________________________________________");
                     System.out.println();
 
@@ -1057,12 +1057,12 @@ public class Palladium {
             case 3:
                 System.out.println("Please enter the ID of the product");
                 id = Palladium.getIntInput();
-                wishList.addProduct(catalog.getProductId(id));
+                wishList.addProduct(catalog.getProductWithId(id));
                 break;
             case 4:
                 System.out.println("Please enter the ID of the product");
                 id = Palladium.getIntInput();
-                shoppingCart.addProduct(catalog.getProductId(id));
+                shoppingCart.addProduct(catalog.getProductWithId(id));
                 break;
             }
         } while (userChoice != Palladium.QUIT_KEY);
